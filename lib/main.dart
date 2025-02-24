@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grad/screens/Home_page.dart';
@@ -8,28 +9,42 @@ import 'package:grad/screens/Welcome_page.dart';
 
 import 'Controller/dependency_injection.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
-  DependecyInjection().init();
 
+  try {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: "AIzaSyDL7IHHpPSRQYMNv_sS1VjEXuqj21krHl0",
+        appId: '1:387242201034:android:fbcc31c38a436adb3ec933',
+        messagingSenderId: '387242201034',
+        projectId: "grad-2ac70",
+      ),
+    );
+
+    DependecyInjection().init(); // Initialize dependencies after Firebase
+
+    runApp(const MyApp());
+  } catch (e) {
+    print("🔥 Firebase Initialization Error: $e");
+  }
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: HomePage.id,
-        routes: {
-          HomePage.id: (conext) => HomePage(),
-          SignupPage.id: (context) => SignupPage(),
-          LoginPage.id: (context) => LoginPage(),
-          WelcomePage.id: (context) => WelcomePage(),
-          MainPage.id: (context) => MainPage(),
-        });
+      debugShowCheckedModeBanner: false,
+      initialRoute: HomePage.id,
+      routes: {
+        HomePage.id: (conext) => HomePage(),
+        SignupPage.id: (context) => SignupPage(),
+        LoginPage.id: (context) => LoginPage(),
+        WelcomePage.id: (context) => WelcomePage(),
+        MainPage.id: (context) => MainPage(),
+      }
+    );
   }
 }

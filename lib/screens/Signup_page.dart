@@ -1,9 +1,11 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
+import '../Controller/auth.dart';
 import 'Login_page.dart';
 
 
@@ -16,12 +18,15 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final auth = FirebaseAuth.instance;
   String? selectedGender;
   TextEditingController dateController = TextEditingController();
   TextEditingController userController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   bool passwordVisibility = true;
+  late String email;
+  late String password;
 
 
   @override
@@ -132,6 +137,9 @@ class _SignupPageState extends State<SignupPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextField(
+                        onChanged: (value) {
+                          email = value;
+                        },
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
@@ -147,6 +155,9 @@ class _SignupPageState extends State<SignupPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextField(
+                        onChanged: (value) {
+                          password = value;
+                        },
                         controller: passController,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.lock,color: Colors.grey,),
@@ -217,8 +228,8 @@ class _SignupPageState extends State<SignupPage> {
                         text: 'Sign Up',
                         color: AppColor.mainColor,
                         txtcolor: Colors.white,
-                        onPressed: () {
-                          Navigator.pushNamed(context, SignupPage.id);
+                        onPressed: () async {
+                         await Auth().signup(email: email, password: password);
                         },
                         context: context
                     ),
@@ -281,5 +292,8 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
+
+
 }
+
 
