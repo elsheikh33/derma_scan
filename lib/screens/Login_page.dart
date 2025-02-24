@@ -1,0 +1,257 @@
+
+import 'package:flutter/material.dart';
+
+import '../Constants/Colors.dart';
+import '../Constants/Design.dart';
+import 'Signup_page.dart';
+import 'Welcome_page.dart';
+
+
+bool passwordVisibility = true;
+TextEditingController emailController = TextEditingController();
+TextEditingController passController = TextEditingController();
+
+class LoginPage extends StatefulWidget {
+  static const String id = "Login_page";
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
+  Widget build(BuildContext context) {
+    var w = MediaQuery.of(context).size.width;
+    var h = MediaQuery.of(context).size.height;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
+                children: [
+
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Image.asset(
+                      'assets/BG1.png',
+                      color: AppColor.BGImageColor,
+                    ),
+                  ),
+                  Positioned(
+                    top: 20,
+                    left: 20,
+                    child: CustomBackArrow(),
+                  ),
+
+                  // Top-right image
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Image.asset(
+                      'assets/BG2.png',
+                      color: AppColor.BGImageColor,
+                    ),
+                  ),
+
+                  // Bottom-left image
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    child: Image.asset(
+                      'assets/BG4.png',
+                      color: AppColor.BGImageColor,
+                    ),
+                  ),
+
+                  // Bottom-right image
+                  Positioned(
+                    bottom: -5,
+                    right: 0,
+                    child: Image.asset(
+                      'assets/BG3.png',
+                      color: AppColor.BGImageColor,
+                    ),
+                  ),
+                  SizedBox(
+                    width: w,
+                    height: h * 0.40,
+                    child: const Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 20.0),
+                        child: Text(
+                          'Welcome Back!',
+                          style: TextStyle(
+                              fontSize: 26, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20), 
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width - 40, 
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: MaterialButton(
+                            height: 50,
+                              color: const Color(0xFF3758ff),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Row(children: [
+                                  Icon(Icons.facebook_rounded,color: Colors.white,),
+                                  SizedBox(width: 30,),
+                                  Text('CONTINUE WITH FACEBOOK',style: TextStyle(color: Colors.white),),
+                                ],),
+                              ),
+                              
+                              onPressed: () {
+                                print('hello');
+                              }),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+
+              // Form Fields
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: MaterialButton(
+                          height: 50,
+                          color: Colors.white,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                          ),
+                          child:  Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Row(children: [
+                              Image.asset('assets/Google.png'),
+                              SizedBox(width: 30,),
+                              Text('CONTINUE WITH GOOGLE',style: TextStyle(color: Colors.black),),
+                            ],),
+                          ),
+
+                          onPressed: () {
+                            print('hello');
+                          }),
+                    ),
+                    SizedBox(height: 20,),
+                    Center(child: Text('OR LOG IN WITH EMAIL',style: TextStyle(fontWeight: FontWeight.bold),),),
+                    SizedBox(height: 20,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: TextField(
+                        controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: AppColor.TxtFieldColor,
+                          label: Text('Email'),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: TextField(
+                        controller: passController,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(
+                            Icons.lock,
+                            color: Colors.grey,
+                          ),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                passwordVisibility = !passwordVisibility;
+                              });
+                            },
+                            icon: Icon(
+                              passwordVisibility
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          filled: true,
+                          fillColor: AppColor.TxtFieldColor,
+                          label: const Text('Password'),
+                          border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                        ),
+                        obscureText: passwordVisibility,
+                      ),
+                    ),
+
+                    // Sign Up Button
+                    const SizedBox(height: 10),
+                    customButton(
+                        text: 'Login',
+                        color: AppColor.mainColor,
+                        txtcolor: Colors.white,
+                        onPressed: () {
+                          Navigator.pushNamed(context, WelcomePage.id);
+                        },
+                        context: context),
+
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10, top: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "I Don't HAVE AN ACCOUNT? ",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, SignupPage.id);
+                            },
+                            child: const Text(
+                              "Sign up",
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
