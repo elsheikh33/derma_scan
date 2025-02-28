@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:grad/screens/Home_page.dart';
 import 'package:grad/screens/Login_page.dart';
 import 'package:grad/screens/Main_page.dart';
+import 'package:grad/screens/Profile_page.dart';
 import 'package:grad/screens/Signup_page.dart';
 import 'package:grad/screens/Welcome_page.dart';
 
@@ -37,13 +38,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomePage.id,
+      initialRoute: ProfilePage.id,
       routes: {
         HomePage.id: (conext) => HomePage(),
         SignupPage.id: (context) => SignupPage(),
         LoginPage.id: (context) => LoginPage(),
         WelcomePage.id: (context) => WelcomePage(),
         MainPage.id: (context) => MainPage(),
+        ProfilePage.id:(context) => ProfilePage()
       }
     );
   }
