@@ -14,7 +14,7 @@ class EczemaPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/Eczemaimage.png', // Make sure this image is in your assets folder
+              'assets/Eczemaimage.png',
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,

@@ -14,7 +14,7 @@ class WartsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/Wartsimage.png', // Ensure this image is in your assets folder
+              'assets/Wartsimage.png',
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,

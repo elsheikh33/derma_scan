@@ -14,7 +14,7 @@ class PsoriasisPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/Psoriasisimage.png', // Make sure this image is in your assets folder
+              'assets/Psoriasisimage.png',
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,

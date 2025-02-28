@@ -14,7 +14,7 @@ class AcnePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/Acneimage.png', // Make sure this image is in your assets folder
+              'assets/Acneimage.png',
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,

@@ -14,7 +14,7 @@ class UrticariaPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/Urticariaimage.png', // Make sure this image is in your assets folder
+              'assets/Urticariaimage.png',
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,

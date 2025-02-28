@@ -14,7 +14,7 @@ class VitiligoPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/Vitiligoimage.png', // Ensure this image is in your assets folder
+              'assets/Vitiligoimage.png',
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,
