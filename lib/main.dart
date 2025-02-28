@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: ProfilePage.id,
+      initialRoute:HomePage.id,
       routes: {
         HomePage.id: (conext) => HomePage(),
         SignupPage.id: (context) => SignupPage(),
