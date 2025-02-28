@@ -8,6 +8,7 @@ import 'package:grad/DiseasesDescription/PsoriasisDisease.dart';
 import 'package:grad/DiseasesDescription/urticariaDisease.dart';
 import 'package:grad/DiseasesDescription/vitiligoDisease.dart';
 import 'package:grad/DiseasesDescription/wartsDisease.dart';
+import 'package:grad/screens/Detect_page.dart';
 import 'package:grad/screens/Home_page.dart';
 import 'package:grad/screens/Login_page.dart';
 import 'package:grad/screens/Main_page.dart';
@@ -45,14 +46,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:MainPage.id,
+      initialRoute:DetectPage.id,
       routes: {
-        HomePage.id: (conext) => HomePage(),
+        HomePage.id: (context) => HomePage(),
         SignupPage.id: (context) => SignupPage(),
         LoginPage.id: (context) => LoginPage(),
         WelcomePage.id: (context) => WelcomePage(),
         MainPage.id: (context) => MainPage(),
         ProfilePage.id:(context) => ProfilePage(),
+        DetectPage.id:(context)=>DetectPage(),
         'herpes_zoster': (context) => HerpesPage(),
         'acne': (context) => AcnePage(),
         'psoriasis': (context) => PsoriasisPage(),

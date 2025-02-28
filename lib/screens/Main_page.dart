@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grad/screens/Detect_page.dart';
 import 'package:grad/screens/Profile_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -125,7 +126,7 @@ class _MainScreenState extends State<MainPage> {
   List<Widget> tabs = [
     DiseaseGridView(),
     Center(child: Text('Locator Page')),
-    Center(child: Text('AI Detect Page')),
+    DetectPage(),
     Center(child: Text('History Page')),
     ProfilePage(),
   ];
@@ -213,7 +214,7 @@ class DiseaseGridView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
+                                color: Color.fromRGBO(0, 0, 0, 0.15),
                                 spreadRadius: 2,
                                 blurRadius: 5,
                                 offset: Offset(0, 3),
