@@ -5,7 +5,7 @@ import 'dart:io';
 class DetectPage extends StatefulWidget {
   static const String id = 'Detect_page';
   @override
-  _DetectPageState createState() => _DetectPageState();
+  State<DetectPage> createState() => _DetectPageState();
 }
 
 class _DetectPageState extends State<DetectPage> {
