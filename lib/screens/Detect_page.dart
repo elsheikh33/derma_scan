@@ -41,7 +41,7 @@ class _DetectPageState extends State<DetectPage> {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage(''), // Add this asset
+                    backgroundImage: AssetImage('assets/profilePic.jpeg'), // Add this asset
                     radius: 25,
                   ),
                   SizedBox(width: 10),
