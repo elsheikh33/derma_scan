@@ -41,7 +41,7 @@ class _DetectPageState extends State<DetectPage> {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage('assets/profilePic.jpeg'), // Add this asset
+                    backgroundImage: AssetImage('assets/profilePicS.png'), // Add this asset
                     radius: 25,
                   ),
                   SizedBox(width: 10),
@@ -55,58 +55,82 @@ class _DetectPageState extends State<DetectPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               // Title
               Text(
-                'Answer the following questions to help us give you a precise report',
+                'Please answer the following questions to help us give you a precise report!',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: 21,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-              SizedBox(height: 30),
+              textAlign: TextAlign.center,),
+              SizedBox(height: 10),
               // DropDown 1 - Symptoms
+              const Text(
+                'What symptoms are you experiencing?',
+                style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
+              ),
               _buildDropdown(
-                label: 'What symptoms are you experiencing?',
+                label: '',
                 value: symptom,
                 items: ['Redness', 'Swelling', 'Itchiness', 'Pain'],
                 onChanged: (value) => setState(() => symptom = value),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               // DropDown 2 - Duration
+              const Text(
+                'How long have you been experiencing these symptoms?',
+                style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
+              ),
               _buildDropdown(
-                label: 'How long have you been experiencing these symptoms?',
+                label: '',
                 value: duration,
                 items: ['1-3 days', '1 week', '2 weeks', 'More than a month'],
                 onChanged: (value) => setState(() => duration = value),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               // DropDown 3 - Itchiness
+              const Text(
+                'Is there itchiness?',
+                style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
+              ),
               _buildDropdown(
-                label: 'Is there itchiness?',
+                label: '',
                 value: itchiness,
                 items: ['Yes', 'No'],
                 onChanged: (value) => setState(() => itchiness = value),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               // DropDown 4 - Pain Level
+              const Text(
+                'Pain level [1-10]',
+                style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
+              ),
               _buildDropdown(
-                label: 'Pain level [1-10]',
+                label: '',
                 value: painLevel,
                 items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
                 onChanged: (value) => setState(() => painLevel = value),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               // DropDown 5 - Progression
+              const Text(
+                'Is it progressive or regressive?',
+                style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
+              ),
               _buildDropdown(
-                label: 'Is it progressive or regressive?',
+                label: '',
                 value: progress,
                 items: ['Progressive', 'Regressive'],
                 onChanged: (value) => setState(() => progress = value),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               // Image Picker
+              const Text(
+                'upload photo please',
+                style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
+              ),
               GestureDetector(
                 onTap: _pickImage,
                 child: Container(
@@ -130,7 +154,7 @@ class _DetectPageState extends State<DetectPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               // Detect Now Button
               ElevatedButton(
                 onPressed: () {
