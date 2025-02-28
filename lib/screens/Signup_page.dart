@@ -1,6 +1,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grad/screens/Welcome_page.dart';
 import 'package:intl/intl.dart';
 
 import '../Constants/Colors.dart';
@@ -25,8 +26,16 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   bool passwordVisibility = true;
-  late String email;
-  late String password;
+@override
+  void dispose() {
+dateController.dispose();
+userController.dispose();
+emailController.dispose();
+passController.dispose();
+
+    // TODO: implement dispose
+    super.dispose();
+  }
 
 
   @override
@@ -42,14 +51,7 @@ class _SignupPageState extends State<SignupPage> {
             children: [
               Stack(
                 children: [
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: Image.asset(
-                      'assets/BG1.png',
-                      color: AppColor.BGImageColor,
-                    ),
-                  ),
+                  BGImage(imageName: 'assets/BG1.png',top: 0,left: 0,),
                   Positioned(
                     top: 20,
                     left: 20,
@@ -57,34 +59,14 @@ class _SignupPageState extends State<SignupPage> {
                   ),
 
                   // Top-right image
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Image.asset(
-                      'assets/BG2.png',
-                      color: AppColor.BGImageColor,
-                    ),
-                  ),
+                  // Top-right image
+                  BGImage(imageName: 'assets/BG2.png',top: 0,right: 0,),
 
                   // Bottom-left image
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    child: Image.asset(
-                      'assets/BG4.png',
-                      color: AppColor.BGImageColor,
-                    ),
-                  ),
+                  BGImage(imageName: 'assets/BG4.png',bottom: 0, left: 0,),
 
                   // Bottom-right image
-                  Positioned(
-                    bottom: -5,
-                    right: 0,
-                    child: Image.asset(
-                      'assets/BG3.png',
-                      color: AppColor.BGImageColor,
-                    ),
-                  ),
+                  BGImage(imageName: 'assets/BG3.png',bottom: -5,right: 0,),
                   Container(
                     width: w,
                     height: h * 0.40,
@@ -138,7 +120,7 @@ class _SignupPageState extends State<SignupPage> {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextField(
                         onChanged: (value) {
-                          email = value;
+
                         },
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -156,7 +138,7 @@ class _SignupPageState extends State<SignupPage> {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextField(
                         onChanged: (value) {
-                          password = value;
+
                         },
                         controller: passController,
                         decoration: InputDecoration(
@@ -229,7 +211,14 @@ class _SignupPageState extends State<SignupPage> {
                         color: AppColor.mainColor,
                         txtcolor: Colors.white,
                         onPressed: () async {
-                         await Auth().signup(email: email, password: password);
+                         await Auth().signup(email: emailController.text.trim(), password: passController.text.trim());
+                         await Auth().addUserDetails(
+                           emailController.text.trim(),
+                             userController.text.trim(),
+                             DateFormat('yyyy-MM-dd').parse(dateController.text.trim()),
+                             selectedGender!
+                         );
+                         Navigator.pushNamed(context, WelcomePage.id);
                         },
                         context: context
                     ),

@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:grad/Controller/auth.dart';
 
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
@@ -15,11 +17,20 @@ class LoginPage extends StatefulWidget {
   static const String id = "Login_page";
   const LoginPage({super.key});
 
+
   @override
   State<LoginPage> createState() => _LoginPageState();
+
 }
 
 class _LoginPageState extends State<LoginPage> {
+  @override
+  void dispose() {
+    emailController.dispose();
+    passController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
@@ -33,14 +44,7 @@ class _LoginPageState extends State<LoginPage> {
               Stack(
                 children: [
 
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: Image.asset(
-                      'assets/BG1.png',
-                      color: AppColor.BGImageColor,
-                    ),
-                  ),
+                  BGImage(imageName: 'assets/BG1.png',top: 0,left: 0,),
                   Positioned(
                     top: 20,
                     left: 20,
@@ -48,34 +52,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   // Top-right image
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Image.asset(
-                      'assets/BG2.png',
-                      color: AppColor.BGImageColor,
-                    ),
-                  ),
+                  BGImage(imageName: 'assets/BG2.png',top: 0,right: 0,),
 
                   // Bottom-left image
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    child: Image.asset(
-                      'assets/BG4.png',
-                      color: AppColor.BGImageColor,
-                    ),
-                  ),
+                  BGImage(imageName: 'assets/BG4.png',bottom: 0, left: 0,),
 
                   // Bottom-right image
-                  Positioned(
-                    bottom: -5,
-                    right: 0,
-                    child: Image.asset(
-                      'assets/BG3.png',
-                      color: AppColor.BGImageColor,
-                    ),
-                  ),
+                  BGImage(imageName: 'assets/BG3.png',bottom: -5,right: 0,),
                   SizedBox(
                     width: w,
                     height: h * 0.40,
@@ -213,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: AppColor.mainColor,
                         txtcolor: Colors.white,
                         onPressed: () {
-                          Navigator.pushNamed(context, WelcomePage.id);
+                          Auth().Login(context, emailController.text.trim(), passController.text.trim());
                         },
                         context: context),
 

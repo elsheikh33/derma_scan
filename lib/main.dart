@@ -7,7 +7,7 @@ import 'package:grad/screens/Main_page.dart';
 import 'package:grad/screens/Signup_page.dart';
 import 'package:grad/screens/Welcome_page.dart';
 
-import 'Controller/dependency_injection.dart';
+import 'config/dependency_injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'Colors.dart';
+
 Widget customButton({
   required String text,
   required Color color,
@@ -94,4 +96,35 @@ class CustomBackArrow extends StatelessWidget {
     );
   }
 }
+class BGImage extends StatelessWidget {
+  String imageName;
+  double? top;
+  double? left;
+  double? right;
+  double? bottom;
+
+  BGImage({
+    required this.imageName,
+     this.top,
+     this.bottom,
+    this.right,
+    this.left
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: top,
+      left: left,
+      right: right,
+      bottom: bottom,
+
+      child: Image.asset(
+        imageName,
+        color: AppColor.BGImageColor,
+      ),
+    );
+  }
+}
+
 
