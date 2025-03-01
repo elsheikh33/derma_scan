@@ -109,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Row(
                 children: [
                   const Text(
-                    'ssmo\'s Profile',
+                    'semo\'s Profile',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -145,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
 
-//======= =====================================
+//============================================
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
