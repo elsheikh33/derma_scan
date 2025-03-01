@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'Colors.dart';
 
@@ -122,6 +123,72 @@ class BGImage extends StatelessWidget {
       child: Image.asset(
         imageName,
         color: AppColor.BGImageColor,
+      ),
+    );
+  }
+}
+
+Future<void> selectDate(BuildContext context, TextEditingController controller) async {
+  DateTime? picked = await showDatePicker(
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate: DateTime(1900),
+    lastDate: DateTime(2100),
+  );
+
+  if (picked != null) {
+    controller.text = DateFormat('yyyy-MM-dd').format(picked); // Correct format
+  }
+}
+
+
+
+class CustomTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String label;
+  final TextInputType? keyboardType;
+  final bool obscureText;
+  final Widget? suffixIcon;
+  final Widget? icon;
+  final bool readOnly;
+  final VoidCallback? onTap;
+   final bool? isEditing;
+
+  const CustomTextField({
+    Key? key,
+    this.isEditing,
+    required this.controller,
+    required this.label,
+    this.keyboardType,
+    this.obscureText = false,
+    this.suffixIcon,
+    this.icon,
+    this.readOnly = false,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextField(
+
+        controller: controller,
+        keyboardType: keyboardType,
+        obscureText: obscureText,
+        enabled: isEditing,
+        readOnly: readOnly,
+        onTap: onTap,
+        decoration: InputDecoration(
+          prefixIcon: icon,
+          filled: true,
+          fillColor: AppColor.TxtFieldColor,
+          labelText: label,
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          suffixIcon: suffixIcon,
+        ),
       ),
     );
   }

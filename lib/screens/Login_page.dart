@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grad/Controller/auth.dart';
-
+import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
+import '../config/Provider/auth_provider.dart';
 import 'Signup_page.dart';
 import 'Welcome_page.dart';
 
@@ -33,6 +33,8 @@ class _LoginPageState extends State<LoginPage> {
   }
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -196,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: AppColor.mainColor,
                         txtcolor: Colors.white,
                         onPressed: () {
-                          Auth().Login(context, emailController.text.trim(), passController.text.trim());
+                          authProvider.login(context, emailController.text.trim(), passController.text.trim());
                         },
                         context: context),
 

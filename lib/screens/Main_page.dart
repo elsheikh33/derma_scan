@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grad/Constants/Colors.dart';
 import 'package:grad/screens/Detect_page.dart';
 import 'package:grad/screens/Profile_page.dart';
 
@@ -66,12 +67,10 @@ class _MainScreenState extends State<MainPage> {
             margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              image: const DecorationImage(
-                image: AssetImage('assets/background.png'), // Add this asset
-                fit: BoxFit.cover,
+
               ),
             ),
-          ),
+
           const SizedBox(height: 10),
           Expanded(
             child: DiseaseGridView(),
@@ -82,13 +81,17 @@ class _MainScreenState extends State<MainPage> {
         index: selectedIndex - 1, // Minus 1 because Home is not here
         children: [
           Center(child: Text('Locator Page')),
-          Center(child: Text('AI Detect Page')),
+          DetectPage(),
           Center(child: Text('History Page')),
           ProfilePage(), // Full Profile Page
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
+        showUnselectedLabels: true,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: AppColor.mainColor,
+
+
         currentIndex: selectedIndex,
         onTap: (index) {
           setState(() {
@@ -97,7 +100,7 @@ class _MainScreenState extends State<MainPage> {
         },
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Color(0xFF8E97FD),
+            backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/homeIcon.png')),
             label: 'Home',
           ),
@@ -107,7 +110,7 @@ class _MainScreenState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/detectIcon.png')),
-            label: 'AI DETECT',
+            label: 'DETECT',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/HistoryIcon.png')),
@@ -122,13 +125,7 @@ class _MainScreenState extends State<MainPage> {
     );
   }
 
-  List<Widget> tabs = [
-    DiseaseGridView(),
-    Center(child: Text('Locator Page')),
-    DetectPage(),
-    Center(child: Text('History Page')),
-    ProfilePage(),
-  ];
+
 }
 
 class DiseaseGridView extends StatelessWidget {

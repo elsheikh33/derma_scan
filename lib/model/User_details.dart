@@ -1,25 +1,36 @@
 class UserDetails {
-  final String? uid;
-  final String name;
+  final String uid;
+  final String username;
   final String email;
-  final String? password;
   final String? birthdate;
+  final String gender;
 
   UserDetails({
-    this.uid,
-    required this.name,
+    required this.uid,  // Make UID required
+    required this.username,
     required this.email,
-    this.password,
     this.birthdate,
+    required this.gender,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
-      'name': name,
+      'name': username,
       'email': email,
-      'password': password,
       'birthdate': birthdate,
+      'gender': gender,
     };
   }
+
+  factory UserDetails.fromMap(Map<String, dynamic> map) {
+    return UserDetails(
+      uid: map['uid'],
+      username: map['username'],
+      email: map['email'],
+      birthdate: map['date_of_birth']?.toString(),  // Ensure it converts Timestamp correctly
+      gender: map['gender'],
+    );
+  }
+
 }

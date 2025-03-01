@@ -1,14 +1,11 @@
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grad/screens/Welcome_page.dart';
 import 'package:intl/intl.dart';
-
+import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
-import '../Controller/auth.dart';
+import '../config/Provider/auth_provider.dart';
 import 'Login_page.dart';
-
+import 'Welcome_page.dart';
 
 class SignupPage extends StatefulWidget {
   static const String id = "Signup_page";
@@ -19,29 +16,25 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  final auth = FirebaseAuth.instance;
   String? selectedGender;
   TextEditingController dateController = TextEditingController();
   TextEditingController userController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   bool passwordVisibility = true;
-@override
-  void dispose() {
-dateController.dispose();
-userController.dispose();
-emailController.dispose();
-passController.dispose();
 
-    // TODO: implement dispose
+  @override
+  void dispose() {
+    dateController.dispose();
+    userController.dispose();
+    emailController.dispose();
+    passController.dispose();
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    var w = MediaQuery.of(context).size.width;
-    var h = MediaQuery.of(context).size.height;
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -51,25 +44,18 @@ passController.dispose();
             children: [
               Stack(
                 children: [
-                  BGImage(imageName: 'assets/BG1.png',top: 0,left: 0,),
+                  BGImage(imageName: 'assets/BG1.png', top: 0, left: 0),
                   Positioned(
                     top: 20,
                     left: 20,
                     child: CustomBackArrow(),
                   ),
-
-                  // Top-right image
-                  // Top-right image
-                  BGImage(imageName: 'assets/BG2.png',top: 0,right: 0,),
-
-                  // Bottom-left image
-                  BGImage(imageName: 'assets/BG4.png',bottom: 0, left: 0,),
-
-                  // Bottom-right image
-                  BGImage(imageName: 'assets/BG3.png',bottom: -5,right: 0,),
+                  BGImage(imageName: 'assets/BG2.png', top: 0, right: 0),
+                  BGImage(imageName: 'assets/BG4.png', bottom: 0, left: 0),
+                  BGImage(imageName: 'assets/BG3.png', bottom: -5, right: 0),
                   Container(
-                    width: w,
-                    height: h * 0.40,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.40,
                     child: const Center(
                       child: Padding(
                         padding: EdgeInsets.only(top: 20.0),
@@ -88,167 +74,102 @@ passController.dispose();
                         width: MediaQuery.of(context).size.width - 40, // Ensures same width
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextField(
-                            controller: userController,
-                            decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: AppColor.TxtFieldColor,
-                              label: Text('Username'),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10))
-                              ),
-                            ),
-                          ),
+                          child: CustomTextField(controller: userController, label: 'Username'),
                         ),
                       ),
                     ),
                   )
 
-
-
-
                 ],
               ),
 
-              // Form Fields
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextField(
-                        onChanged: (value) {
-
-                        },
-                        controller: emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: AppColor.TxtFieldColor,
-                          label: Text('Email'),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10))
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextField(
-                        onChanged: (value) {
-
-                        },
-                        controller: passController,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock,color: Colors.grey,),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                passwordVisibility = !passwordVisibility;
-                              });
-                            },
-                            icon: Icon(
-                              passwordVisibility
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,color: Colors.grey,
-                            ),
-                          ),
-                          filled: true,
-                          fillColor: AppColor.TxtFieldColor,
-                          label: const Text('Password'),
-                          border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10))
-                          ),
-                        ),
-                        obscureText: passwordVisibility,
-                      ),
-                    ),
-
-                    // Date of Birth Field with Date Picker
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextField(
-                        controller: dateController,
-                        readOnly: true,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: AppColor.TxtFieldColor,
-                          labelText: "Date of Birth",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10))
-                          ),
-                          suffixIcon: Icon(Icons.calendar_today), // Calendar icon
-                        ),
-                        onTap: () => _selectDate(context), // Open date picker
-                      ),
-                    ),
-
-                    // Gender Dropdown
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: CustomDropdown(
-                        selectedValue: selectedGender,
-                        items: [
-                          {"value": "M", "label": "Male"},
-                          {"value": "F", "label": "Female"},
-                        ],
-                        title: "Gender",
-                        fillColor: AppColor.TxtFieldColor,
-                        onChanged: (value) {
+                    CustomTextField(controller: emailController, label: 'Email'),
+                    CustomTextField(
+                      controller: passController,
+                      label: 'Password',
+                      obscureText: passwordVisibility,
+                      suffixIcon: IconButton(
+                        onPressed: () {
                           setState(() {
-                            selectedGender = value;
+                            passwordVisibility = !passwordVisibility;
                           });
                         },
+                        icon: Icon(passwordVisibility ? Icons.visibility_off : Icons.visibility, color: Colors.grey),
                       ),
                     ),
+                    TextField(
+                      controller: dateController,
+                      readOnly: true,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: AppColor.TxtFieldColor,
+                        labelText: "Date of Birth",
+                        border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                        suffixIcon: Icon(Icons.calendar_today),
+                      ),
+                      onTap: () => selectDate(context, dateController),
+                    ),
+                    CustomDropdown(
+                      selectedValue: selectedGender,
+                      items: [
+                        {"value": "M", "label": "Male"},
+                        {"value": "F", "label": "Female"},
+                      ],
+                      title: "Gender",
+                      fillColor: AppColor.TxtFieldColor,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedGender = value;
+                        });
+                      },
+                    ),
 
-                    // Sign Up Button
                     const SizedBox(height: 10),
                     customButton(
-                        text: 'Sign Up',
-                        color: AppColor.mainColor,
-                        txtcolor: Colors.white,
-                        onPressed: () async {
-                         await Auth().signup(email: emailController.text.trim(), password: passController.text.trim());
-                         await Auth().addUserDetails(
-                           emailController.text.trim(),
-                             userController.text.trim(),
-                             DateFormat('yyyy-MM-dd').parse(dateController.text.trim()),
-                             selectedGender!
-                         );
-                         Navigator.pushNamed(context, WelcomePage.id);
-                        },
-                        context: context
+                      text: 'Sign Up',
+                      color: AppColor.mainColor,
+                      txtcolor: Colors.white,
+                      onPressed: () async {
+                        try {
+                          await authProvider.signup(
+                            context: context,
+                            email: emailController.text.trim(),
+                            password: passController.text.trim(),
+                            birthdate: DateFormat('yyyy-MM-dd').parse(dateController.text.trim()),
+                            gender: selectedGender!,
+                            userName: userController.text.trim(),
+                          );
+
+                          Navigator.pushNamed(context, WelcomePage.id);
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Error: ${e.toString()}")),
+                          );
+                        }
+                      },
+                      context: context,
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10,top: 5),
+                      padding: const EdgeInsets.only(bottom: 10, top: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "ALREADY HAVE AN ACCOUNT? ",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                            ),
-                          ),
+                          const Text("ALREADY HAVE AN ACCOUNT? ", style: TextStyle(color: Colors.black, fontSize: 12)),
                           GestureDetector(
                             onTap: () {
                               Navigator.pushNamed(context, LoginPage.id);
                             },
                             child: const Text(
                               "LOG IN",
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
+                              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 12),
                             ),
                           ),
-
                         ],
                       ),
                     ),
@@ -261,28 +182,4 @@ passController.dispose();
       ),
     );
   }
-
-
-
-  // Function to open date picker
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime(2000),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-
-    if (pickedDate != null) {
-      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate); // Format date
-      setState(() {
-        dateController.text = formattedDate; // Update text field
-      });
-    }
-  }
-
-
-
 }
-
-

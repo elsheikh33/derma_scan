@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
+import '../config/Provider/auth_provider.dart';
 import 'Main_page.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -15,9 +15,14 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  @override
+
   String? selectedGender;
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final username = authProvider.userDetails?.username ?? "User";
+
     return SafeArea(
         child: Scaffold(
       backgroundColor: AppColor.mainColor,
@@ -33,7 +38,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'SEMO',
+                      '$username',
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
@@ -48,7 +53,7 @@ class _WelcomePageState extends State<WelcomePage> {
             SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.only(top: 8),
-              child: Center(child: Text('Hi Semo, Welcome',style: TextStyle(color: Color(0xFFFFBF53),fontSize: 30,fontWeight: FontWeight.bold),),),
+              child: Center(child: Text('Hi $username, Welcome',style: TextStyle(color: Color(0xFFFFBF53),fontSize: 30,fontWeight: FontWeight.bold),),),
             ),
             Center(child: Text('Help us know more about you',style: TextStyle(color: Color(0xFFFFBF53),fontSize: 24,fontWeight: FontWeight.w300),),),
             SizedBox(height: 30,),

@@ -15,8 +15,9 @@ import 'package:grad/screens/Main_page.dart';
 import 'package:grad/screens/Profile_page.dart';
 import 'package:grad/screens/Signup_page.dart';
 import 'package:grad/screens/Welcome_page.dart';
-
-import 'config/dependency_injection.dart';
+import 'package:provider/provider.dart';
+import 'Controller/dependency_injection.dart';
+import 'config/Provider/auth_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,14 @@ void main() async {
 
     DependecyInjection().init(); // Initialize dependencies after Firebase
 
-    runApp(const MyApp());
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ],
+        child: MyApp(),
+      ),
+    );
   } catch (e) {
     print("🔥 Firebase Initialization Error: $e");
   }
@@ -46,7 +54,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:MainPage.id,
+      initialRoute:HomePage.id,
       routes: {
         HomePage.id: (context) => HomePage(),
         SignupPage.id: (context) => SignupPage(),
