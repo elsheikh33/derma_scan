@@ -25,13 +25,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
-  void dispose() {
-    emailController.dispose();
-    passController.dispose();
-    // TODO: implement dispose
-    super.dispose();
-  }
-  @override
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
 
@@ -199,6 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                         txtcolor: Colors.white,
                         onPressed: () {
                           authProvider.login(context, emailController.text.trim(), passController.text.trim());
+                          passController.clear();
                         },
                         context: context),
 

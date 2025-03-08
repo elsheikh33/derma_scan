@@ -14,6 +14,7 @@ import 'package:grad/screens/Login_page.dart';
 import 'package:grad/screens/Main_page.dart';
 import 'package:grad/screens/Profile_page.dart';
 import 'package:grad/screens/Signup_page.dart';
+import 'package:grad/screens/Splash_screen.dart';
 import 'package:grad/screens/Welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'Controller/dependency_injection.dart';
@@ -54,8 +55,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:HomePage.id,
+
       routes: {
+        '/': (context) => const SplashScreen(),
         HomePage.id: (context) => HomePage(),
         SignupPage.id: (context) => SignupPage(),
         LoginPage.id: (context) => LoginPage(),

@@ -35,6 +35,7 @@ class CustomDropdown extends StatelessWidget {
   final String title;
   final Color fillColor;
   final Function(String?) onChanged;
+  final bool? isEditing;
 
   const CustomDropdown({
     super.key,
@@ -43,6 +44,7 @@ class CustomDropdown extends StatelessWidget {
     required this.title,
     required this.fillColor,
     required this.onChanged,
+    this.isEditing,
   });
 
   @override
@@ -50,6 +52,7 @@ class CustomDropdown extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: DropdownButtonFormField<String>(
+        key: ValueKey(isEditing),
         value: selectedValue,
         items: items.map((item) {
           return DropdownMenuItem(
@@ -57,19 +60,38 @@ class CustomDropdown extends StatelessWidget {
             child: Text(item["label"]!),
           );
         }).toList(),
-        onChanged: onChanged,
+        onChanged: isEditing == true ? onChanged : null,
         decoration: InputDecoration(
           filled: true,
           fillColor: fillColor,
           labelText: title,
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+          border: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: isEditing == true ? Colors.black : Colors.grey,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: isEditing == true ? Colors.black : Colors.grey,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: isEditing == true ? Colors.black : Colors.blue,
+              width: 2,
+            ),
           ),
         ),
+        disabledHint: Text(selectedValue ?? "Select"),
       ),
     );
   }
 }
+
+
 class CustomBackArrow extends StatelessWidget {
   const CustomBackArrow({
     super.key,

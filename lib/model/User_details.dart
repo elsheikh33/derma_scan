@@ -4,6 +4,8 @@ class UserDetails {
   final String email;
   final String? birthdate;
   final String gender;
+  final String? skinType;
+  final String? allergies;
 
   UserDetails({
     required this.uid,  // Make UID required
@@ -11,6 +13,8 @@ class UserDetails {
     required this.email,
     this.birthdate,
     required this.gender,
+    this.allergies,
+    this.skinType
   });
 
   Map<String, dynamic> toMap() {
@@ -28,8 +32,10 @@ class UserDetails {
       uid: map['uid'],
       username: map['username'],
       email: map['email'],
-      birthdate: map['date_of_birth']?.toString(),  // Ensure it converts Timestamp correctly
+      birthdate: map['date_of_birth']?.toString(),
       gender: map['gender'],
+      skinType: map['skinType'],  // Ensure these are mapped
+      allergies: map['allergies'],
     );
   }
 

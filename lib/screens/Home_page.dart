@@ -24,19 +24,24 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 15),
               child: Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'DERMA',
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                child: Hero(
+                  tag: 'logo',
+                  child: SizedBox(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          'DERMA',
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                        Image.asset('assets/logo.png'),
+                        const Text(
+                          'SCAN',
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                      ],
                     ),
-                    Image.asset('assets/logo.png'),
-                    const Text(
-                      'SCAN',
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

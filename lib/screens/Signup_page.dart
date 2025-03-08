@@ -23,14 +23,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController passController = TextEditingController();
   bool passwordVisibility = true;
 
-  @override
-  void dispose() {
-    dateController.dispose();
-    userController.dispose();
-    emailController.dispose();
-    passController.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -102,31 +95,37 @@ class _SignupPageState extends State<SignupPage> {
                         icon: Icon(passwordVisibility ? Icons.visibility_off : Icons.visibility, color: Colors.grey),
                       ),
                     ),
-                    TextField(
-                      controller: dateController,
-                      readOnly: true,
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: AppColor.TxtFieldColor,
-                        labelText: "Date of Birth",
-                        border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                        suffixIcon: Icon(Icons.calendar_today),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: TextField(
+                        controller: dateController,
+                        readOnly: true,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: AppColor.TxtFieldColor,
+                          labelText: "Date of Birth",
+                          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                          suffixIcon: Icon(Icons.calendar_today),
+                        ),
+                        onTap: () => selectDate(context, dateController),
                       ),
-                      onTap: () => selectDate(context, dateController),
                     ),
-                    CustomDropdown(
-                      selectedValue: selectedGender,
-                      items: [
-                        {"value": "M", "label": "Male"},
-                        {"value": "F", "label": "Female"},
-                      ],
-                      title: "Gender",
-                      fillColor: AppColor.TxtFieldColor,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedGender = value;
-                        });
-                      },
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: CustomDropdown(
+                        selectedValue: selectedGender,
+                        items: [
+                          {"value": "M", "label": "Male"},
+                          {"value": "F", "label": "Female"},
+                        ],
+                        title: "Gender",
+                        fillColor: AppColor.TxtFieldColor,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedGender = value;
+                          });
+                        },
+                      ),
                     ),
 
                     const SizedBox(height: 10),
@@ -146,6 +145,11 @@ class _SignupPageState extends State<SignupPage> {
                           );
 
                           Navigator.pushNamed(context, WelcomePage.id);
+                          emailController.clear();
+                          passController.clear();
+                          dateController.clear();
+                          selectedGender = null;
+                          userController.clear();
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text("Error: ${e.toString()}")),

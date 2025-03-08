@@ -83,7 +83,7 @@ class _MainScreenState extends State<MainPage> {
           Center(child: Text('Locator Page')),
           DetectPage(),
           Center(child: Text('History Page')),
-          ProfilePage(), // Full Profile Page
+          ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -105,18 +105,22 @@ class _MainScreenState extends State<MainPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/locatorIcon.png')),
             label: 'Locator',
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/detectIcon.png')),
             label: 'DETECT',
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/HistoryIcon.png')),
             label: 'History',
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/profileIcon.png')),
             label: 'Profile',
           ),
@@ -143,7 +147,7 @@ class DiseaseGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.only(left: 10,right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

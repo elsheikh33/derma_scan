@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:grad/screens/Login_page.dart';
+import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
+import '../config/Provider/auth_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String id = 'Profile_page';
@@ -12,21 +15,41 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool isEditing = false;
-  bool passwordVisibility = true;
+  late TextEditingController usernameController;
+  late TextEditingController emailController;
+  late TextEditingController dobController;
 
-  // Controllers for TextFields
-  final TextEditingController usernameController = TextEditingController(text: "semo");
-  final TextEditingController emailController = TextEditingController(text: "zedansemo@gmail.com");
-  final TextEditingController passwordController = TextEditingController(text: "******");
-  final TextEditingController dobController = TextEditingController(text: "11/1/2003");
+  String? selectedGender;
+  String? selectedSkinType;
+  String? selectedAllergies;
 
-  // Dropdown Values (real vals mn el signup)
-  String genderValue = 'F';
-  String skinTypeValue = 'Oily';
+  @override
+  void initState() {
+    super.initState();
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
+    var userDetails = authProvider.userDetails;
 
+    // Initialize controllers with user data
+    usernameController = TextEditingController(text: userDetails?.username);
+    emailController = TextEditingController(text: userDetails?.email);
+    dobController = TextEditingController(text: userDetails?.birthdate);
+    selectedGender = userDetails?.gender;
+    selectedSkinType = userDetails?.skinType;
+    selectedAllergies = userDetails?.allergies;
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    emailController.dispose();
+    dobController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
+    String username = authProvider.userDetails?.username ?? "User";
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -40,6 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+
                       const Text(
                         'DERMA',
                         style: TextStyle(
@@ -61,13 +85,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-        //======================================================
+              //======================================================
               Padding(
                 padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
                 child: Row(
                   children: [
-                    const Text(
-                      'ssmo\'s Profile',
+                    Text(
+                      '$username\'s Profile',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
@@ -83,144 +107,163 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         padding: const EdgeInsets.all(10),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        if (isEditing) {
+                          await authProvider.saveUserDetails(
+                            context: context,
+                            username: usernameController.text,
+                            email: emailController.text,
+                            birthdate: dobController.text,
+                            gender:
+                                selectedGender ?? "", // Ensure it's not null
+                            skinType: selectedSkinType ?? "",
+                            allergies: selectedAllergies ?? "",
+                          );
+                        }
                         setState(() {
                           isEditing = !isEditing;
-                          if (!isEditing) {
-                            // Save logic
-                            print("Saved: Username: ${usernameController.text}");
-                            print("Email: ${emailController.text}");
-                            print("Password: ${passwordController.text}");
-                            print("DOB: ${dobController.text}");
-                            print("Gender: $genderValue");
-                            print("Skin Type: $skinTypeValue");
-                          }
                         });
                       },
+
                       child: Text(isEditing ? "Save" : "Edit"),
                     ),
                   ],
                 ),
               ),
-        
-        //======= =====================================
+
+              //======= =====================================
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
-                  spacing:10,
+                  spacing: 10,
                   children: [
-                    CustomTextField(isEditing: isEditing, controller: usernameController, label: 'Username'),
-                    CustomTextField(isEditing: isEditing, controller: emailController, label: 'Email'),
-                    CustomTextField(controller: passwordController, label: 'Password',obscureText: passwordVisibility,suffixIcon:IconButton(
-                      onPressed: () {
+                    CustomTextField(
+                      isEditing: isEditing,
+                      controller: usernameController,
+                      label: 'Username',
+                    ),
+                    CustomTextField(
+                      isEditing: isEditing,
+                      controller: emailController,
+                      label: 'Email',
+                    ),
+                    TextField(
+                      controller: dobController,
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        enabled: isEditing,
+                        filled: true,
+                        fillColor: AppColor.TxtFieldColor,
+                        labelText: "Date of Birth",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        suffixIcon: Icon(Icons.calendar_today),
+                      ),
+                      onTap: () => selectDate(context, dobController),
+                    ),
+
+                    const SizedBox(height: 3),
+                    CustomDropdown(
+                      isEditing: isEditing,
+                      selectedValue: selectedGender,
+                      items: [
+                        {"value": "M", "label": "Male"},
+                        {"value": "F", "label": "Female"},
+                      ],
+                      title: "Gender",
+                      fillColor: AppColor.TxtFieldColor,
+                      onChanged: (value) {
                         setState(() {
-                          passwordVisibility = !passwordVisibility;
+                          selectedGender = value;
                         });
                       },
-                      icon: Icon(
-                        passwordVisibility
-                            ? Icons.visibility_off
-                            : Icons.visibility,color: Colors.grey,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: CustomDropdown(
+                        isEditing: isEditing,
+                        selectedValue: selectedSkinType,
+                        items: [
+                          {"value": "oily", "label": "Oily"},
+                          {"value": "dry", "label": "Dry"},
+                          {"value": "combination", "label": "Combination"},
+                        ],
+                        title: "Skin Type",
+                        fillColor: AppColor.TxtFieldColor,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedSkinType = value;
+                          });
+                        },
                       ),
-                    ),isEditing: isEditing,),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: CustomDropdown(
+                        isEditing: isEditing,
+                        selectedValue: selectedAllergies,
+                        items: [
+                          {"value": "none", "label": "None"},
+                          {"value": "nuts", "label": "Nuts"},
+                          {"value": "pollen", "label": "Pollen"},
+                          {"value": "dust", "label": "Dust"},
+                        ],
+                        title: "Allergies",
+                        fillColor: AppColor.TxtFieldColor,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedAllergies = value;
+                          });
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text("Logout"),
+                                content: const Text("Are you sure you want to logout?"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text("Cancel"),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      authProvider.logout(context);
+                                      Navigator.pushReplacementNamed(context,LoginPage.id);
+                                    },
+                                    child: const Text(
+                                      "Logout",
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: const Center(
+                          child: Text(
+                            "Logout",
+                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
 
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Date of Birth',
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                        ),
-                        const SizedBox(height: 5),
-                        TextField(
-                          controller: dobController,
-                          enabled: isEditing,
-                          onTap: isEditing ? () => selectDate(context,dobController) : null,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: AppColor.TxtFieldColor,
-                            suffixIcon: const Icon(Icons.calendar_today),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 3),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Gender',
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: AppColor.TxtFieldColor,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.grey),
-                          ),
-                          child: DropdownButton<String>(
-                            value: genderValue,
-                            onChanged: isEditing
-                                ? (String? newValue) {
-                              setState(() {
-                                genderValue = newValue!;
-                              });
-                            }
-                                : null,
-                            items: <String>['M', 'F', 'Other']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            underline: Container(),
-                            isExpanded: true,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 3),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Skin Type',
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: AppColor.TxtFieldColor,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.grey),
-                          ),
-                          child: DropdownButton<String>(
-                            value: skinTypeValue,
-                            onChanged: isEditing
-                                ? (String? newValue) {
-                              setState(() {
-                                skinTypeValue = newValue!;
-                              });
-                            }
-                                : null,
-                            items: <String>['Oily', 'Dry', 'Combination', 'Sensitive', 'Normal']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            underline: Container(),
-                            isExpanded: true,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
