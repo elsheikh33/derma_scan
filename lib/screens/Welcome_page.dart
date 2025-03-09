@@ -95,6 +95,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         selectedSkinType = value;
                       });
                     },
+                    isEditing: true,
                   ),
                 ),
                 Padding(
@@ -114,6 +115,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         selectedAllergies = value;
                       });
                     },
+                    isEditing: true,
                   ),
                 ),
                 Spacer(),

@@ -125,6 +125,7 @@ class _SignupPageState extends State<SignupPage> {
                             selectedGender = value;
                           });
                         },
+                        isEditing: true,
                       ),
                     ),
 
