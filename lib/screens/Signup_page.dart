@@ -113,6 +113,7 @@ class _SignupPageState extends State<SignupPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: CustomDropdown(
+                        isEditing: true,
                         selectedValue: selectedGender,
                         items: [
                           {"value": "M", "label": "Male"},
@@ -125,7 +126,6 @@ class _SignupPageState extends State<SignupPage> {
                             selectedGender = value;
                           });
                         },
-                        isEditing: true,
                       ),
                     ),
 
@@ -144,8 +144,6 @@ class _SignupPageState extends State<SignupPage> {
                             gender: selectedGender!,
                             userName: userController.text.trim(),
                           );
-
-                         // Navigator.pushNamed(context, WelcomePage.id);
                           emailController.clear();
                           passController.clear();
                           dateController.clear();

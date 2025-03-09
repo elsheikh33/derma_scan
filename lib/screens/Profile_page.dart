@@ -35,22 +35,20 @@ class _ProfilePageState extends State<ProfilePage> {
     dobController = TextEditingController(text: userDetails?.birthdate);
     selectedGender = userDetails?.gender;
 
-    if(userDetails!.skinType!.isEmpty|| userDetails!.skinType!.isEmpty){
-      selectedSkinType =" ";
-      selectedAllergies = " ";
-    }else {
+    if (userDetails?.skinType == null || userDetails?.skinType == "none") {
+      selectedSkinType = null;
+    } else {
       selectedSkinType = userDetails?.skinType;
+    }
+
+    if (userDetails?.allergies == null || userDetails?.allergies == "none") {
+      selectedAllergies = null;
+    } else {
       selectedAllergies = userDetails?.allergies;
     }
+
   }
 
-  @override
-  // void dispose() {
-  //   usernameController.dispose();
-  //   emailController.dispose();
-  //   dobController.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -189,27 +187,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding: const EdgeInsets.all(1.0),
                       child: CustomDropdown(
                         isEditing: isEditing,
-                        selectedValue: selectedSkinType,
-                        items: [
-                          {"value": "none", "label": "None"},
-                          {"value": "oily", "label": "Oily"},
-                          {"value": "dry", "label": "Dry"},
-                          {"value": "combination", "label": "Combination"},
-                        ],
-                        title: "Skin Type",
-                        fillColor: AppColor.TxtFieldColor,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedSkinType = value;
-                          });
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: CustomDropdown(
-                        isEditing: isEditing,
-                        selectedValue: selectedAllergies,
+                        selectedValue: (selectedAllergies != null &&
+                            ["none", "nuts", "pollen", "dust"].contains(selectedAllergies))
+                            ? selectedAllergies
+                            : "none", // Default to "none"
                         items: [
                           {"value": "none", "label": "None"},
                           {"value": "nuts", "label": "Nuts"},
@@ -224,6 +205,32 @@ class _ProfilePageState extends State<ProfilePage> {
                           });
                         },
                       ),
+
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: CustomDropdown(
+                        isEditing: isEditing,
+                        selectedValue: (selectedSkinType != null &&
+                            ["none", "oily", "dry", "combination"].contains(selectedSkinType))
+                            ? selectedSkinType
+                            : "none", // Default to "none"
+                        items: [
+                          {"value": "none", "label": "None"},
+                          {"value": "oily", "label": "Oily"},
+                          {"value": "dry", "label": "Dry"},
+                          {"value": "combination", "label": "Combination"},
+                        ],
+                        title: "Skin Type",
+                        fillColor: AppColor.TxtFieldColor,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedSkinType = value;
+                          });
+                        },
+                      ),
+
+
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),

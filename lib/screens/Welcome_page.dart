@@ -50,10 +50,11 @@ class _WelcomePageState extends State<WelcomePage> {
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         onTap: () {
-                          selectedSkinType ="none";
-                          selectedAllergies = "none ";
-                          Navigator.pushReplacementNamed(context, MainPage.id);
-                        },
+                            selectedSkinType = null;
+                            selectedAllergies = null;
+                            Navigator.pushReplacementNamed(context, MainPage.id);
+                          },
+
                       )
                     ],
                   ),
@@ -84,6 +85,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomDropdown(
+                    isEditing: true,
                     selectedValue: selectedSkinType,
                     items: [
                       {"value": "oily", "label": "Oily"},
@@ -97,12 +99,12 @@ class _WelcomePageState extends State<WelcomePage> {
                         selectedSkinType = value;
                       });
                     },
-                    isEditing: true,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomDropdown(
+                    isEditing: true,
                     selectedValue: selectedAllergies,
                     items: [
                       {"value": "none", "label": "None"},
@@ -117,7 +119,6 @@ class _WelcomePageState extends State<WelcomePage> {
                         selectedAllergies = value;
                       });
                     },
-                    isEditing: true,
                   ),
                 ),
                 Spacer(),

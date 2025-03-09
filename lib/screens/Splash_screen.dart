@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
 
           Positioned(
-            bottom: h * 0.1, // 10% from bottom
+            bottom: h * 0.1,
             left: 0,
             right: 0,
             child: Center(
@@ -73,7 +73,6 @@ class _SplashScreenState extends State<SplashScreen> {
                       fontWeight: FontWeight.w900,
                       color: Colors.black,
                     ),
-
                   ),
                 ],
                repeatForever: true,
