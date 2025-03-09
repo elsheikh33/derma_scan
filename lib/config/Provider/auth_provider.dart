@@ -150,7 +150,7 @@ class AuthProvider extends ChangeNotifier {
       case 'weak-password':
         return 'The password provided is too weak.';
       default:
-        return 'Username or Password is incorrect. Please try again.';
+        return 'Error occurred, Please try again.';
     }
   }
 
