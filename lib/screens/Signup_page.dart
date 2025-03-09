@@ -145,7 +145,7 @@ class _SignupPageState extends State<SignupPage> {
                             userName: userController.text.trim(),
                           );
 
-                          Navigator.pushNamed(context, WelcomePage.id);
+                         // Navigator.pushNamed(context, WelcomePage.id);
                           emailController.clear();
                           passController.clear();
                           dateController.clear();

@@ -39,19 +39,19 @@ class _SplashScreenState extends State<SplashScreen> {
                   'DERMA',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: 28,
                     color: Colors.black,
                   ),
                 ),
                 Image.asset(
                   'assets/logo.png',
-                  width: w * 0.4,
+                 width: w * 0.1,
                 ),
                 const Text(
                   'SCAN',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: 28,
                     color: Colors.black,
                   ),
                 ),
@@ -69,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   TypewriterAnimatedText(
                     'Loading...',
                     textStyle: const TextStyle(
-                      fontSize: 30.0,
+                      fontSize: 20,
                       fontWeight: FontWeight.w900,
                       color: Colors.black,
                     ),

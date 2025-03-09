@@ -50,6 +50,8 @@ class _WelcomePageState extends State<WelcomePage> {
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         onTap: () {
+                          selectedSkinType ="none";
+                          selectedAllergies = "none ";
                           Navigator.pushReplacementNamed(context, MainPage.id);
                         },
                       )

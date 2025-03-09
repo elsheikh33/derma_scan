@@ -47,16 +47,16 @@ class _DetectPageState extends State<DetectPage> {
 
               Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/profilePicS.png'), // Add this asset
-                    radius: 25,
-                  ),
+                  // CircleAvatar(
+                  //   backgroundImage: AssetImage('assets/profilePicS.png'), // Add this asset
+                  //   radius: 25,
+                  // ),
                   SizedBox(width: 10),
                   Text(
-                    '$username',
+                    'HI, $username ',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+                      color: Colors.black,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

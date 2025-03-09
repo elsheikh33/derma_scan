@@ -93,7 +93,7 @@ class AuthProvider extends ChangeNotifier {
       if (_user != null) {
         await fetchUserDetails();
         if (_userDetails != null) {
-          if (_userDetails!.skinType != null && _userDetails!.allergies != null ) {
+          if (_userDetails!.skinType!.isNotEmpty  && _userDetails!.allergies!.isNotEmpty ) {
             Navigator.pushNamed(context, MainPage.id);
           } else {
             Navigator.pushNamed(context, WelcomePage.id);
