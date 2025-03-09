@@ -34,17 +34,23 @@ class _ProfilePageState extends State<ProfilePage> {
     emailController = TextEditingController(text: userDetails?.email);
     dobController = TextEditingController(text: userDetails?.birthdate);
     selectedGender = userDetails?.gender;
-    selectedSkinType = userDetails?.skinType;
-    selectedAllergies = userDetails?.allergies;
+
+    if(userDetails!.skinType!.isEmpty|| userDetails!.skinType!.isEmpty){
+      selectedSkinType =" ";
+      selectedAllergies = " ";
+    }else {
+      selectedSkinType = userDetails?.skinType;
+      selectedAllergies = userDetails?.allergies;
+    }
   }
 
   @override
-  void dispose() {
-    usernameController.dispose();
-    emailController.dispose();
-    dobController.dispose();
-    super.dispose();
-  }
+  // void dispose() {
+  //   usernameController.dispose();
+  //   emailController.dispose();
+  //   dobController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -185,6 +191,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         isEditing: isEditing,
                         selectedValue: selectedSkinType,
                         items: [
+                          {"value": "none", "label": "None"},
                           {"value": "oily", "label": "Oily"},
                           {"value": "dry", "label": "Dry"},
                           {"value": "combination", "label": "Combination"},
@@ -222,7 +229,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),

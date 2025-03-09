@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:provider/provider.dart';
+
+import '../config/Provider/auth_provider.dart';
+
 class DetectPage extends StatefulWidget {
   static const String id = 'Detect_page';
   @override
@@ -29,6 +33,9 @@ class _DetectPageState extends State<DetectPage> {
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final username = authProvider.userDetails?.username ?? "User";
+
     return Scaffold(
       backgroundColor: Color(0xFF8E97FD),
       body: SafeArea(
@@ -40,16 +47,16 @@ class _DetectPageState extends State<DetectPage> {
 
               Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/profilePicS.png'), // Add this asset
-                    radius: 25,
-                  ),
+                  // CircleAvatar(
+                  //   backgroundImage: AssetImage('assets/profilePicS.png'), // Add this asset
+                  //   radius: 25,
+                  // ),
                   SizedBox(width: 10),
                   Text(
-                    'semo',
+                    'HI, $username ',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+                      color: Colors.black,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
