@@ -151,7 +151,7 @@ class _SignupPageState extends State<SignupPage> {
                           userController.clear();
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Error: ${e.toString()}")),
+                            SnackBar(content: Text("Error: Please fill in all fields")),
                           );
                         }
                       },
