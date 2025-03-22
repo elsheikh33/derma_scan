@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad/Constants/Colors.dart';
 import 'package:grad/screens/Detect_page.dart';
+import 'package:grad/screens/Locator_page.dart';
 import 'package:grad/screens/Profile_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -80,7 +81,7 @@ class _MainScreenState extends State<MainPage> {
           : IndexedStack(  // Full Page Replacement for Other Tabs
         index: selectedIndex - 1, // Minus 1 because Home is not here
         children: [
-          Center(child: Text('Locator Page')),
+          LocatorPage(),
           DetectPage(),
           Center(child: Text('History Page')),
           ProfilePage(),
