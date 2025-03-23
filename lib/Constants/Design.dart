@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Colors.dart';
 
@@ -216,4 +217,51 @@ class CustomTextField extends StatelessWidget {
   }
 }
 
+class locCard extends StatelessWidget {
+  final int index;
+  final List<Map<String, dynamic>> _hospitals;
+
+  locCard({
+    super.key,
+    required List<Map<String, dynamic>> hospitals,
+    required this.index,
+  }) : _hospitals = hospitals;
+
+
+  void _openGoogleMaps(double lat, double lng) async {
+    final Uri url = Uri.parse("https://www.google.com/maps/search/?api=1&query=$lat,$lng");
+
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw Exception("❌ Could not launch Google Maps.");
+    }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        double lat = _hospitals[index]['lat'];
+        double lng = _hospitals[index]['lng'];
+        _openGoogleMaps(lat, lng);
+      },
+      child: Card(
+        color: const Color(0xffD9D9D9),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset('assets/Map.png'),
+              ),
+            ),
+            Text("🏥 ${_hospitals[index]['name']}"),
+            Text("📍 Distance: ${_hospitals[index]['distance']} km"),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
