@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
+import 'package:tflite/tflite.dart';
 import 'package:provider/provider.dart';
 
 import '../config/Provider/auth_provider.dart';
@@ -165,7 +165,7 @@ class _DetectPageState extends State<DetectPage> {
               // Detect Now Button
               ElevatedButton(
                 onPressed: () {
-                  // Implement Detection Logic Here
+                  _runModelOnImage();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey.shade200,
@@ -220,4 +220,52 @@ class _DetectPageState extends State<DetectPage> {
       ),
     );
   }
+  @override
+  void initState() {
+    super.initState();
+    loadModel();
+  }
+
+  Future<void> loadModel() async {
+    await Tflite.loadModel(
+      model: "assets/model.tflite",
+      //labels: "assets/labels.txt", // remove this line if you don't have a labels.txt
+    );
+  }
+  Future<void> _runModelOnImage() async {
+    if (_image == null) return;
+
+    final recognitions = await Tflite.runModelOnImage(
+      path: _image!.path,
+      imageMean: 127.5,
+      imageStd: 127.5,
+      numResults: 1,
+      threshold: 0.5,
+    );
+
+    if (recognitions != null && recognitions.isNotEmpty) {
+      final result = recognitions[0]["label"];
+      _showResultDialog(result);
+    } else {
+      _showResultDialog("No result detected");
+    }
+  }
+
+  void _showResultDialog(String result) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text("Prediction Result"),
+        content: Text("Model Output: $result"),
+        actions: [
+          TextButton(
+            child: Text("OK"),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+
 }
