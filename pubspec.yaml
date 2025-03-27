@@ -42,7 +42,12 @@ dependencies:
   http: ^1.2.1
   geolocator: ^13.0.1
   url_launcher: ^6.3.1
-  tflite: ^1.1.2
+  #tflite: ^1.1.2
+ # tflite_flutter: ^0.10.4
+  #tflite_flutter_helper: ^0.3.1
+  camera: ^0.10.5+5
+  image: ^4.0.17
+  #tflite_v2: ^1.0.0
 
 
   flutter:
