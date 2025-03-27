@@ -10,14 +10,12 @@ import 'package:grad/DiseasesDescription/vitiligoDisease.dart';
 import 'package:grad/DiseasesDescription/wartsDisease.dart';
 import 'package:grad/screens/Detect_page.dart';
 import 'package:grad/screens/Home_page.dart';
-import 'package:grad/screens/Locator_page.dart';
 import 'package:grad/screens/Login_page.dart';
 import 'package:grad/screens/Main_page.dart';
 import 'package:grad/screens/Profile_page.dart';
 import 'package:grad/screens/Signup_page.dart';
 import 'package:grad/screens/Splash_screen.dart';
 import 'package:grad/screens/Welcome_page.dart';
-import 'package:grad/Controller/services.dart';
 import 'package:provider/provider.dart';
 import 'Controller/dependency_injection.dart';
 import 'config/Provider/auth_provider.dart';
@@ -60,7 +58,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       routes: {
-        '/': (context) => const LocatorPage(),
+        '/': (context) => const SplashScreen(),
         HomePage.id: (context) => HomePage(),
         SignupPage.id: (context) => SignupPage(),
         LoginPage.id: (context) => LoginPage(),
