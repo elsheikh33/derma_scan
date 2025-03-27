@@ -18,6 +18,9 @@ import 'package:grad/screens/Splash_screen.dart';
 import 'package:grad/screens/Welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'Controller/dependency_injection.dart';
+import 'DiseasesDescription/AtopicDermatitisPage.dart';
+import 'DiseasesDescription/BasalCellCarcinomaPage.dart';
+import 'DiseasesDescription/MelanomaPage.dart';
 import 'config/Provider/auth_provider.dart';
 
 void main() async {
@@ -73,6 +76,9 @@ class MyApp extends StatelessWidget {
         'warts': (context) => WartsPage(),
         'urticaria': (context) => UrticariaPage(),
         'vitiligo': (context) => VitiligoPage(),
+        'atopic_dermatitis': (context) => AtopicDermatitisPage(),
+        'basal_cell_carcinoma': (context) => BasalCellCarcinomaPage(),
+        'melanoma': (context) => MelanomaPage(),
       }
     );
   }

@@ -143,6 +143,10 @@ class DiseaseGridView extends StatelessWidget {
     {'name': 'Bruise', 'image': 'assets/Bruiseimage.png'},
     {'name': 'Acne', 'image': 'assets/Acneimage.png'},
     {'name': 'Vitiligo', 'image': 'assets/Vitiligoimage.png'},
+    {'name': 'Dermatitis', 'image': 'assets/atopic_dermatitis.png'},
+    {'name': 'Basal Cell', 'image': 'assets/BasalCellCarcinomaImage.png'},
+    {'name': 'Melanoma', 'image': 'assets/melanomaImage.png'},
+
   ];
 
   @override
@@ -197,6 +201,15 @@ class DiseaseGridView extends StatelessWidget {
                         break;
                       case 'Vitiligo':
                         routeName = 'vitiligo';
+                        break;
+                      case 'Atopic Dermatitis':
+                        routeName = 'atopic_dermatitis';
+                        break;
+                      case 'BasalCellCarcinoma':
+                        routeName = 'basal_cell_carcinoma';
+                        break;
+                      case 'Melanoma':
+                        routeName = 'melanoma';
                         break;
                       default:
                         routeName = '';
