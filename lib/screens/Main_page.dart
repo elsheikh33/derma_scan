@@ -202,10 +202,10 @@ class DiseaseGridView extends StatelessWidget {
                       case 'Vitiligo':
                         routeName = 'vitiligo';
                         break;
-                      case 'Atopic Dermatitis':
+                      case 'Dermatitis':
                         routeName = 'atopic_dermatitis';
                         break;
-                      case 'BasalCellCarcinoma':
+                      case 'Basal Cell':
                         routeName = 'basal_cell_carcinoma';
                         break;
                       case 'Melanoma':
