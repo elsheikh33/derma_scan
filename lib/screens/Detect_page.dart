@@ -55,7 +55,7 @@ class _DetectPageState extends State<DetectPage> {
                   // ),
                   SizedBox(width: 10),
                   Text(
-                    'HI, $username ',
+                    'Hi, $username ',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,
