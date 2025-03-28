@@ -89,7 +89,11 @@ Structure with clear titles and avoid markdown formatting.
 
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
-        final result = data['choices'][0]['message']['content'];
+        String result = data['choices'][0]['message']['content'];
+
+        // Remove markdown-style formatting (like **bold**)
+        result = result.replaceAll('**', '');
+
         setState(() {
           responseText = result;
           isLoading = false;
@@ -115,8 +119,11 @@ Structure with clear titles and avoid markdown formatting.
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("${widget.detectedDisease[0].toUpperCase()}${widget.detectedDisease.substring(1)} Detected!"),
-        backgroundColor: Colors.orangeAccent,
+        title: Text(
+          "${widget.detectedDisease[0].toUpperCase()}${widget.detectedDisease.substring(1)} Detected!",
+        ),
+        backgroundColor: Color(0xFF8E97FD), // custom AppBar color
+        foregroundColor: Colors.white,
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator())
@@ -137,7 +144,37 @@ Structure with clear titles and avoid markdown formatting.
             const SizedBox(height: 20),
             Text(
               responseText ?? 'No data available',
-              style: const TextStyle(fontSize: 16, height: 1.5),
+              style: const TextStyle(
+                fontSize: 16,
+                height: 1.6,
+                //fontWeight: FontWeight.bold,
+                color: Colors.black87,
+                fontFamily: 'Roboto',
+              ),
+            ),
+            const SizedBox(height: 30),
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, 'Locator_page');
+                },
+                icon: Icon(Icons.place, color: Colors.white),
+                label: Text(
+                  'Find Nearest Clinic',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF8E97FD),
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

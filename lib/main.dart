@@ -8,7 +8,6 @@ import 'package:grad/DiseasesDescription/PsoriasisDisease.dart';
 import 'package:grad/DiseasesDescription/urticariaDisease.dart';
 import 'package:grad/DiseasesDescription/vitiligoDisease.dart';
 import 'package:grad/DiseasesDescription/wartsDisease.dart';
-import 'package:grad/screens/DetectNow_page.dart';
 import 'package:grad/screens/Detect_page.dart';
 import 'package:grad/screens/Home_page.dart';
 import 'package:grad/screens/Login_page.dart';
@@ -24,8 +23,6 @@ import 'DiseasesDescription/BasalCellCarcinomaPage.dart';
 import 'DiseasesDescription/BruisePage.dart';
 import 'DiseasesDescription/MelanomaPage.dart';
 import 'config/Provider/auth_provider.dart';
-import 'package:grad/screens/DetectNow_page.dart';
-
 
 
 void main() async {
