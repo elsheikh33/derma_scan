@@ -14,7 +14,7 @@ class BruisePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/Bruiseimage.png',
+              'assets/BruiseImage.png',
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,

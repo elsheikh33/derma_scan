@@ -64,16 +64,6 @@ class _MainScreenState extends State<MainPage> {
             ),
           ),
           const SizedBox(height: 10),
-          Container(
-            height: 120,
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-
-              ),
-            ),
-
-          const SizedBox(height: 10),
           Expanded(
             child: DiseaseGridView(),
           ),
@@ -139,7 +129,7 @@ class DiseaseGridView extends StatelessWidget {
     {'name': 'Herpes Zoster', 'image': 'assets/herpsIamge.png'},
     {'name': 'Psoriasis', 'image': 'assets/PsoriasisImage.png'},
     {'name': 'Eczema', 'image': 'assets/eczemaImage.png'},
-    {'name': 'Warts', 'image': 'assets/Wartsimage.png'},
+    {'name': 'Warts', 'image': 'assets/wartsImage.png'},
     {'name': 'Urticaria', 'image': 'assets/UrticariaImage.png'},
     {'name': 'Bruise', 'image': 'assets/BruiseImage.png'},
     {'name': 'Acne', 'image': 'assets/acneImage.png'},
