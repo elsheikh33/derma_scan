@@ -112,7 +112,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       {"value": "nuts", "label": "Nuts"},
                       {"value": "pollen", "label": "Pollen"},
                       {"value": "dust", "label": "Dust"},
-                      {"value": "others", "label": "Others"},
+                     // {"value": "others", "label": "Others"},
                     ],
                     title: "Allergies",
                     fillColor: AppColor.TxtFieldColor,

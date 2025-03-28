@@ -24,7 +24,8 @@ import 'DiseasesDescription/BasalCellCarcinomaPage.dart';
 import 'DiseasesDescription/BruisePage.dart';
 import 'DiseasesDescription/MelanomaPage.dart';
 import 'config/Provider/auth_provider.dart';
-import 'DetectNow_page.dart';
+import 'package:grad/screens/DetectNow_page.dart';
+
 
 
 void main() async {
@@ -65,7 +66,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       routes: {
-        '/': (context) => const MainPage(),
+        '/': (context) => const SplashScreen(),
         HomePage.id: (context) => HomePage(),
         SignupPage.id: (context) => SignupPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -73,7 +74,7 @@ class MyApp extends StatelessWidget {
         MainPage.id: (context) => MainPage(),
         ProfilePage.id:(context) => ProfilePage(),
         DetectPage.id:(context)=>DetectPage(),
-        DetectNow_page.id:(context)=>DetectNow_page(),
+        //DetectNow_page.id:(context)=>DetectNow_page(),
         'herpes_zoster': (context) => HerpesPage(),
         'acne': (context) => AcnePage(),
         'psoriasis': (context) => PsoriasisPage(),
