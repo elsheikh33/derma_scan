@@ -20,6 +20,7 @@ import 'package:provider/provider.dart';
 import 'Controller/dependency_injection.dart';
 import 'DiseasesDescription/AtopicDermatitisPage.dart';
 import 'DiseasesDescription/BasalCellCarcinomaPage.dart';
+import 'DiseasesDescription/BruisePage.dart';
 import 'DiseasesDescription/MelanomaPage.dart';
 import 'config/Provider/auth_provider.dart';
 
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         'herpes_zoster': (context) => HerpesPage(),
         'acne': (context) => AcnePage(),
         'psoriasis': (context) => PsoriasisPage(),
+        'bruise':(context)=>BruisePage(),
         'eczema': (context) => EczemaPage(),
         'warts': (context) => WartsPage(),
         'urticaria': (context) => UrticariaPage(),
