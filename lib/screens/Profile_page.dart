@@ -103,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       const Spacer(),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -127,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   },
                                   child: const Text(
                                     "Logout",
-                                    style: TextStyle(color: Colors.red),
+                                    style: TextStyle(color: Colors.black),
                                   ),
                                 ),
                               ],

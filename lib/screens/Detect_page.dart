@@ -46,19 +46,18 @@ class _DetectPageState extends State<DetectPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Row(
                 children: [
-                  // CircleAvatar(
-                  //   backgroundImage: AssetImage('assets/profilePicS.png'), // Add this asset
-                  //   radius: 25,
-                  // ),
+                  CircleAvatar(
+                    backgroundImage: AssetImage('assets/ProfilePic.png'), // Add this asset
+                    radius: 18,
+                  ),
                   SizedBox(width: 10),
                   Text(
                     'Hi, $username ',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 30,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -69,7 +68,7 @@ class _DetectPageState extends State<DetectPage> {
               Text(
                 'Please answer the following questions to help us give you a precise report!',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.amber,
                   fontSize: 21,
                   fontWeight: FontWeight.bold,
                 ),
@@ -179,7 +178,7 @@ class _DetectPageState extends State<DetectPage> {
                 child: Text(
                   'DETECT NOW',
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),

@@ -35,8 +35,8 @@ class _MainScreenState extends State<MainPage> {
                     ),
                   ),
                   Image.asset(
-                    'assets/logo.png',
-                    width: 40,
+                    'assets/logoo.png',
+                    width: 28,
                   ),
                   const Text(
                     'SCAN',
@@ -141,7 +141,7 @@ class DiseaseGridView extends StatelessWidget {
     {'name': 'Warts', 'image': 'assets/Wartsimage.png'},
     {'name': 'Urticaria', 'image': 'assets/Urticariaimage.png'},
     {'name': 'Bruise', 'image': 'assets/Bruiseimage.png'},
-    {'name': 'Acne', 'image': 'assets/Acneimage.png'},
+    {'name': 'Acne', 'image': 'assets/acneImage.png'},
     {'name': 'Vitiligo', 'image': 'assets/Vitiligoimage.png'},
     {'name': 'Dermatitis', 'image': 'assets/atopic_dermatitis.png'},
     {'name': 'Basal Cell', 'image': 'assets/BasalCellCarcinomaImage.png'},
