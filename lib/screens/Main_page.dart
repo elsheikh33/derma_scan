@@ -136,8 +136,8 @@ class _MainScreenState extends State<MainPage> {
 
 class DiseaseGridView extends StatelessWidget {
   final List<Map<String, String>> diseases = [
-    {'name': 'Herpes Zoster', 'image': 'assets/Herpsimage.png'},
-    {'name': 'Psoriasis', 'image': 'assets/Psoriasisimage.png'},
+    {'name': 'Herpes Zoster', 'image': 'assets/herpsIamge.png'},
+    {'name': 'Psoriasis', 'image': 'assets/PsoriasisImage.png'},
     {'name': 'Eczema', 'image': 'assets/eczemaImage.png'},
     {'name': 'Warts', 'image': 'assets/Wartsimage.png'},
     {'name': 'Urticaria', 'image': 'assets/UrticariaImage.png'},
