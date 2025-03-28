@@ -63,7 +63,7 @@ class _LocatorPageState extends State<LocatorPage> {
                           fontSize: 24,
                         ),
                       ),
-                      Image.asset('assets/logo.png', width: 40),
+                      Image.asset('assets/logoo.png', width: 28),
                       const Text(
                         'SCAN',
                         style: TextStyle(

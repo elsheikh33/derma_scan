@@ -103,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       const Spacer(),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -127,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   },
                                   child: const Text(
                                     "Logout",
-                                    style: TextStyle(color: Colors.red),
+                                    style: TextStyle(color: Colors.black),
                                   ),
                                 ),
                               ],
@@ -208,6 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             {"value": "nuts", "label": "Nuts"},
                             {"value": "pollen", "label": "Pollen"},
                             {"value": "dust", "label": "Dust"},
+                            {"value": "others", "label": "Others"},
                           ],
                           title: "Allergies",
                           fillColor: AppColor.TxtFieldColor,

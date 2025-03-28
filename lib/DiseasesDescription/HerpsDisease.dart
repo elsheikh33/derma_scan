@@ -14,7 +14,7 @@ class HerpesPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/Herpsimage.png',
+              'assets/herpsIamge.png',
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,
