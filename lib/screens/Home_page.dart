@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                           'DERMA',
                           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
                         ),
-                        Image.asset('assets/logo.png'),
+                        Image.asset('assets/logoo.png',width: 20,height: 20,),
                         const Text(
                           'SCAN',
                           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),

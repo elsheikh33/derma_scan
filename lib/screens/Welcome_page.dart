@@ -76,9 +76,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: Text(
                     'Help us know more about you',
                     style: TextStyle(
-                        color: Color(0xFFFFBF53),
-                        fontSize: 24,
-                        fontWeight: FontWeight.w300),
+                        color: Color(0xFFFFB73E),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400),
                   ),
                 ),
                 SizedBox(height: 30),
@@ -88,6 +88,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     isEditing: true,
                     selectedValue: selectedSkinType,
                     items: [
+                      {"value": "none", "label": "None"},
                       {"value": "oily", "label": "Oily"},
                       {"value": "dry", "label": "Dry"},
                       {"value": "combination", "label": "Combination"},
@@ -111,6 +112,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       {"value": "nuts", "label": "Nuts"},
                       {"value": "pollen", "label": "Pollen"},
                       {"value": "dust", "label": "Dust"},
+                      {"value": "others", "label": "Others"},
                     ],
                     title: "Allergies",
                     fillColor: AppColor.TxtFieldColor,

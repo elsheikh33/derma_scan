@@ -208,6 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             {"value": "nuts", "label": "Nuts"},
                             {"value": "pollen", "label": "Pollen"},
                             {"value": "dust", "label": "Dust"},
+                            {"value": "others", "label": "Others"},
                           ],
                           title: "Allergies",
                           fillColor: AppColor.TxtFieldColor,
