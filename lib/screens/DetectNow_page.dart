@@ -1,24 +1,25 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class DetectNowPage extends StatefulWidget {
+class DetectNow_page extends StatefulWidget {
   static const String id = 'DetectNow_page';
   //const DetectNowPage({super.key});
   final String detectedDisease;
   final Map<String, String?> userInputs;
 
-  const DetectNowPage({
+  const DetectNow_page({
     super.key,
     required this.detectedDisease,
     required this.userInputs,
   });
 
   @override
-  State<DetectNowPage> createState() => _DetectNowPageState();
+  State<DetectNow_page> createState() => _DetectNowPageState();
 }
 
-class _DetectNowPageState extends State<DetectNowPage> {
+class _DetectNowPageState extends State<DetectNow_page> {
   String? responseText;
   bool isLoading = true;
 
