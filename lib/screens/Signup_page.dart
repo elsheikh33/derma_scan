@@ -5,7 +5,6 @@ import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
 import '../config/Provider/auth_provider.dart';
 import 'Login_page.dart';
-import 'Welcome_page.dart';
 
 class SignupPage extends StatefulWidget {
   static const String id = "Signup_page";
@@ -151,7 +150,7 @@ class _SignupPageState extends State<SignupPage> {
                           userController.clear();
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Error: ${e.toString()}")),
+                            SnackBar(content: Text("Error: Please fill in all fields")),
                           );
                         }
                       },

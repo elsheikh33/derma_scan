@@ -10,16 +10,18 @@ import 'package:grad/DiseasesDescription/vitiligoDisease.dart';
 import 'package:grad/DiseasesDescription/wartsDisease.dart';
 import 'package:grad/screens/Detect_page.dart';
 import 'package:grad/screens/Home_page.dart';
-import 'package:grad/screens/Locator_page.dart';
 import 'package:grad/screens/Login_page.dart';
 import 'package:grad/screens/Main_page.dart';
 import 'package:grad/screens/Profile_page.dart';
 import 'package:grad/screens/Signup_page.dart';
 import 'package:grad/screens/Splash_screen.dart';
 import 'package:grad/screens/Welcome_page.dart';
-import 'package:grad/Controller/services.dart';
 import 'package:provider/provider.dart';
 import 'Controller/dependency_injection.dart';
+import 'DiseasesDescription/AtopicDermatitisPage.dart';
+import 'DiseasesDescription/BasalCellCarcinomaPage.dart';
+import 'DiseasesDescription/BruisePage.dart';
+import 'DiseasesDescription/MelanomaPage.dart';
 import 'config/Provider/auth_provider.dart';
 
 void main() async {
@@ -60,7 +62,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       routes: {
-        '/': (context) => const LocatorPage(),
+        '/': (context) => const SplashScreen(),
         HomePage.id: (context) => HomePage(),
         SignupPage.id: (context) => SignupPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -71,10 +73,14 @@ class MyApp extends StatelessWidget {
         'herpes_zoster': (context) => HerpesPage(),
         'acne': (context) => AcnePage(),
         'psoriasis': (context) => PsoriasisPage(),
+        'bruise':(context)=>BruisePage(),
         'eczema': (context) => EczemaPage(),
         'warts': (context) => WartsPage(),
         'urticaria': (context) => UrticariaPage(),
         'vitiligo': (context) => VitiligoPage(),
+        'atopic_dermatitis': (context) => AtopicDermatitisPage(),
+        'basal_cell_carcinoma': (context) => BasalCellCarcinomaPage(),
+        'melanoma': (context) => MelanomaPage(),
       }
     );
   }

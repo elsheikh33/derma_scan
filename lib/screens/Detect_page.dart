@@ -8,6 +8,8 @@ import '../config/Provider/auth_provider.dart';
 
 class DetectPage extends StatefulWidget {
   static const String id = 'Detect_page';
+  const DetectPage({super.key});
+
   @override
   State<DetectPage> createState() => _DetectPageState();
 }
@@ -53,7 +55,7 @@ class _DetectPageState extends State<DetectPage> {
                   // ),
                   SizedBox(width: 10),
                   Text(
-                    'HI, $username ',
+                    'Hi, $username ',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,
@@ -71,7 +73,7 @@ class _DetectPageState extends State<DetectPage> {
                   fontSize: 21,
                   fontWeight: FontWeight.bold,
                 ),
-              textAlign: TextAlign.center,),
+                textAlign: TextAlign.center,),
               SizedBox(height: 10),
               // DropDown 1 - Symptoms
               const Text(
@@ -198,7 +200,7 @@ class _DetectPageState extends State<DetectPage> {
     required Function(String?) onChanged,
   }) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),

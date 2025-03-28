@@ -1,12 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
 import '../config/Provider/auth_provider.dart';
 import 'Signup_page.dart';
-import 'Welcome_page.dart';
 
 
 bool passwordVisibility = true;
