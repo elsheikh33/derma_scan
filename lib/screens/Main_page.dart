@@ -140,7 +140,7 @@ class DiseaseGridView extends StatelessWidget {
     {'name': 'Eczema', 'image': 'assets/Eczemaimage.png'},
     {'name': 'Warts', 'image': 'assets/Wartsimage.png'},
     {'name': 'Urticaria', 'image': 'assets/Urticariaimage.png'},
-    {'name': 'Bruise', 'image': 'assets/Bruiseimage.png'},
+    {'name': 'Bruise', 'image': 'assets/BruiseImage.png'},
     {'name': 'Acne', 'image': 'assets/acneImage.png'},
     {'name': 'Vitiligo', 'image': 'assets/Vitiligoimage.png'},
     {'name': 'Dermatitis', 'image': 'assets/atopic_dermatitis.png'},
