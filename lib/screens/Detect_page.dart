@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'DetectNow_page.dart';
 
 import 'package:provider/provider.dart';
 
@@ -166,7 +167,23 @@ class _DetectPageState extends State<DetectPage> {
               // Detect Now Button
               ElevatedButton(
                 onPressed: () {
-                  // Implement Detection Logic Here
+                  const detectedDisease = 'eczema'; // placeholder for AI
+                  final userInputs = {
+                    'symptom': symptom,
+                    'duration': duration,
+                    'itchiness': itchiness,
+                    'painLevel': painLevel,
+                    'progress': progress,
+                  };
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetectNow_page(
+                        detectedDisease: detectedDisease,
+                        userInputs: userInputs,
+                      ),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey.shade200,

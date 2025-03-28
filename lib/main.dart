@@ -8,6 +8,7 @@ import 'package:grad/DiseasesDescription/PsoriasisDisease.dart';
 import 'package:grad/DiseasesDescription/urticariaDisease.dart';
 import 'package:grad/DiseasesDescription/vitiligoDisease.dart';
 import 'package:grad/DiseasesDescription/wartsDisease.dart';
+import 'package:grad/screens/DetectNow_page.dart';
 import 'package:grad/screens/Detect_page.dart';
 import 'package:grad/screens/Home_page.dart';
 import 'package:grad/screens/Login_page.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
         MainPage.id: (context) => MainPage(),
         ProfilePage.id:(context) => ProfilePage(),
         DetectPage.id:(context)=>DetectPage(),
+        DetectNow_page.id:(context)=>DetectNowPage(),
         'herpes_zoster': (context) => HerpesPage(),
         'acne': (context) => AcnePage(),
         'psoriasis': (context) => PsoriasisPage(),
