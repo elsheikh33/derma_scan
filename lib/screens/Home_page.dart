@@ -52,9 +52,9 @@ class HomePage extends StatelessWidget {
               height: h * 0.55,
               fit: BoxFit.cover,
             ),
-            const Center(child: Text('Your Skin,\nOur Science',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),)),
+            const Center(child: Text('Your Skin , Our Science',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),)),
             const SizedBox(height: 5),
-            const Center(child: Text('Thousand of people are using DermaScan  \n                   for Skin Detection',style: TextStyle(color: Colors.grey,),)),
+            const Center(child: Text('Thousand of people are using DermaScan\n                   for Skin Detection',style: TextStyle(color: Colors.grey,),)),
             const SizedBox(height: 5),
             customButton(
                 text: 'Sign Up',

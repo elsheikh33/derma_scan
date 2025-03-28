@@ -6,6 +6,7 @@ import 'package:grad/screens/Profile_page.dart';
 
 class MainPage extends StatefulWidget {
   static const String id = 'main_page';
+  const MainPage({super.key});
   @override
   State<MainPage> createState() => _MainScreenState();
 }
