@@ -5,6 +5,7 @@ import '../Constants/Design.dart';
 
 class LocatorPage extends StatefulWidget {
   const LocatorPage({super.key});
+  static const String id = "Locator_page";
 
   @override
   State<LocatorPage> createState() => _LocatorPageState();

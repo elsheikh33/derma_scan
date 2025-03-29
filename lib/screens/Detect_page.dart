@@ -181,6 +181,7 @@ class _DetectPageState extends State<DetectPage> {
                       builder: (context) => DetectNow_page(
                         detectedDisease: detectedDisease,
                         userInputs: userInputs,
+                        uploadedImage: _image,
                       ),
                     ),
                   );
