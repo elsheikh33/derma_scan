@@ -44,12 +44,12 @@ Details:
 - Pain level: ${widget.userInputs['painLevel']}
 - Progress: ${widget.userInputs['progress']}
 
-Now write a full detection report that includes:
+Now write a full detection report acting like a dermatologist that includes:
 1. Description of the condition.
-2. Precautions until doctor visit.
-3. Suggested Remedies categorized into:
+2. Suggested Remedies categorized into:
    - Critical
    - Non-Critical
+3. Precautions until doctor visit.   
 
 Structure with clear titles and avoid markdown formatting.
 ''';

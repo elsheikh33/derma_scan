@@ -31,7 +31,7 @@ class LocationService {
   Future<List<Map<String, dynamic>>> fetchNearbyHospitals(double userLat, double userLng) async {
     const String apiKey = 'AIzaSyB5HOp-hLoK9VyHNbA6E6uXtg-UH61PQmo';
     final String url =
-        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$userLat,$userLng&rankby=distance&keyword=hospital&key=$apiKey';
+        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$userLat,$userLng&rankby=distance&keyword=dermatologist&key=$apiKey';
 
     final response = await http.get(Uri.parse(url));
 
