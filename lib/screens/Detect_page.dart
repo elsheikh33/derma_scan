@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'DetectNow_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 
 import 'package:provider/provider.dart';
 
@@ -23,6 +26,7 @@ class _DetectPageState extends State<DetectPage> {
   String? progress;
   File? _image;
 
+
   final ImagePicker _picker = ImagePicker();
 
   Future<void> _pickImage() async {
@@ -33,6 +37,27 @@ class _DetectPageState extends State<DetectPage> {
       });
     }
   }
+
+  Future<Map<String, dynamic>?> detectDisease(File imageFile) async {
+    final uri = Uri.parse('http://192.168.100.119:8000/detect/');
+    final request = http.MultipartRequest('POST', uri)
+      ..files.add(await http.MultipartFile.fromPath('file', imageFile.path));
+
+    final response = await request.send();
+    final responseData = await response.stream.bytesToString();
+
+    if (response.statusCode == 200) {
+      final result = jsonDecode(responseData);
+      return {
+        'disease': result['disease'],
+        'imageBase64': result['image']
+      };
+    } else {
+      print('❌ Failed to detect: ${response.statusCode}');
+      return null;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -166,8 +191,22 @@ class _DetectPageState extends State<DetectPage> {
               SizedBox(height: 20),
               // Detect Now Button
               ElevatedButton(
-                onPressed: () {
-                  const detectedDisease = 'eczema'; // placeholder for AI
+                onPressed: () async {
+                  if (_image == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Please select an image first")),
+                    );
+                    return;
+                  }
+
+                  final result = await detectDisease(_image!);
+                  if (result == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Detection failed. Please try again.")),
+                    );
+                    return;
+                  }
+
                   final userInputs = {
                     'symptom': symptom,
                     'duration': duration,
@@ -175,13 +214,15 @@ class _DetectPageState extends State<DetectPage> {
                     'painLevel': painLevel,
                     'progress': progress,
                   };
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => DetectNow_page(
-                        detectedDisease: detectedDisease,
+                        detectedDisease: result['disease'],
                         userInputs: userInputs,
-                        uploadedImage: _image,
+                        uploadedImage: _image!, // ✅ add this
+                        annotatedImageBase64: result['imageBase64'],
                       ),
                     ),
                   );
