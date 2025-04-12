@@ -9,12 +9,15 @@ class DetectNow_page extends StatefulWidget {
   final String detectedDisease;
   final Map<String, String?> userInputs;
   final File? uploadedImage;
+  final String? annotatedImageBase64;
+
 
   const DetectNow_page({
     super.key,
     required this.detectedDisease,
     required this.userInputs,
     required this.uploadedImage,
+    required this.annotatedImageBase64,
   });
 
   @override
@@ -52,6 +55,7 @@ Now write a full detection report acting like a dermatologist that includes:
 3. Precautions until doctor visit.   
 
 Structure with clear titles and avoid markdown formatting.
+and don't write the word(detection report) at the beginning 
 ''';
 
     try {
@@ -127,15 +131,20 @@ Structure with clear titles and avoid markdown formatting.
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (widget.uploadedImage != null)
+            if (widget.annotatedImageBase64 != null && widget.annotatedImageBase64!.isNotEmpty)
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.file(
-                  widget.uploadedImage!,
+                child: Image.memory(
+                  base64Decode(widget.annotatedImageBase64!),
                   height: 180,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
+              )
+            else
+              const Text(
+                'No annotated image available',
+                style: TextStyle(color: Colors.red),
               ),
             const SizedBox(height: 20),
             Text(
