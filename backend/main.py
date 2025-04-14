@@ -65,6 +65,10 @@ async def detect_image(file: UploadFile = File(...)):
         "disease": label_name,
         "image": img_base64
     })
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
 #I USED THIS FOR TESTING YA SHEIK!!! DONT UNCOMMENT
 
 # import requests
