@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:grad/screens/Home_page.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -115,7 +116,7 @@ class CustomBackArrow extends StatelessWidget {
       child: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, HomePage.id);
           }),
     );
   }
@@ -264,4 +265,36 @@ class locCard extends StatelessWidget {
     );
   }
 }
+
+Widget defaultClickableContainer({
+  required String text,
+  required double dw,
+  required Function() onpress,
+  String? text2,
+  bool? isEditing,  // Add this to control when it's clickable
+}) {
+  return InkWell(
+    onTap: isEditing == true ? onpress : null,  // Only allow tap if isEditing is true
+    child: Container(
+      width: dw,
+      height: 50,
+      padding: const EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black,width: 1),
+        color: isEditing == true ? Colors.white : Colors.grey[100], // Change color based on isEditing
+        borderRadius: BorderRadius.circular(6.0),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text,
+            style: TextStyle(color: Colors.black, fontSize: 13),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 

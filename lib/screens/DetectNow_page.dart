@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:grad/screens/Locator_page.dart';
 import 'package:http/http.dart' as http;
 
 class DetectNow_page extends StatefulWidget {
@@ -160,7 +161,7 @@ and don't write the word(detection report) at the beginning
             Center(
               child: ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, 'Locator_page');
+                  Navigator.pushReplacementNamed(context, LocatorPage.id);
                 },
                 icon: Icon(Icons.place, color: Colors.white),
                 label: Text(

@@ -1,0 +1,226 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class LanguageProvider extends ChangeNotifier{
+  int defLan = 0;
+
+  LanguageProvider(){
+    _loadLanguage();
+  }
+
+  void changeLan({required int lan}) async {
+    print("Language changed to: $lan"); // Debugging line
+    defLan = lan;
+    notifyListeners();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt("defLan", defLan);
+  }
+
+
+  Future<void> _loadLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    defLan = prefs.getInt("defLan") ?? 1;
+    notifyListeners();
+  }
+
+  String getTexts(String txt) {
+    if (defLan == 0) {
+      return textsAr[txt] ?? txt;
+    } else if (defLan == 1) {
+      return textsEn[txt] ?? txt;
+    }
+    return txt;
+  }
+
+  Map<String, String> textsAr = {
+    "Save" : "يحفظ",
+    "english": "English",
+    "catchLineHome": "بشرتك، علمنا",
+    "arabic": "عربي",
+    "phraseHome": "آلاف الأشخاص يستخدمون DermaScan\\n                   للكشف عن البشرة",
+    "signUp": "التسجيل",
+    "accountCheckHome": "هل لديك حساب بالفعل؟",
+    "logIn": "تسجيل الدخول",
+    "createAcc": "أنشئ حسابك",
+    "Username": "اسم المستخدم",
+    "Email": "البريد الإلكتروني",
+    "Password": "كلمة المرور",
+    "Date of Birth": "تاريخ الميلاد",
+    "Male": "ذكر",
+    "Female": "أنثى",
+    "Gender": "النوع",
+    "errorM1": "خطأ: يرجى إدخال جميع المعلومات",
+    "hi": "مرحبًا",
+    "questionTitle": "يرجى الإجابة على الأسئلة التالية لمساعدتنا في تقديم تقرير دقيق!",
+    "welcomeBack": "مرحبًا بعودتك!",
+    "ContWithFaceBook": "المتابعة باستخدام فيسبوك",
+    "ContWithGoogle": "المتابعة باستخدام جوجل",
+    "ContWithMail": "أو تسجيل الدخول عبر البريد الإلكتروني",
+    "noAccount": "ليس لديك حساب؟",
+    "nearestLocation": "أقرب المواقع",
+    "loading": "جارٍ التحميل...",
+    "mainTitle": "يمكننا أن نتعلم كيف تكشف بشرتنا عن قصتها اليومية، مما يساعدنا على التعرف على العلامات التي تظهر عليها.",
+    "homeToggle": "الرئيسية",
+    "locatorToggle": "الموقع",
+    "detectToggle": "الفحص",
+    "historyToggle": "السجل",
+    "profileToggle": "الملف الشخصي",
+    "HerpesZosterTitle": "الهربس النطاقي",
+    "PsoriasisTitle": "الصدفية",
+    "EczemaTitle": "الإكزيما",
+    "WartsTitle": "الثآليل",
+    "UrticariaTitle": "الشرى",
+    "BruiseTitle": "الكدمات",
+    "AcneTitle": "حب الشباب",
+    "VitiligoTitle": "البهاق",
+    "DermatitisTitle": "التهاب الجلد",
+    "BasalCellTitle": "سرطان الخلايا القاعدية",
+    "MelanomaTitle": "الميلانوما",
+    "questionReport": "يرجى الإجابة على الأسئلة التالية لمساعدتنا في تقديم تقرير دقيق!",
+    "questionSymptom": "ما الأعراض التي تعاني منها؟",
+    "rednessSymptom": "احمرار",
+    "swellingSymptom": "تورم",
+    "ItchinessSymptom": "حكة",
+    "PainSymptom": "ألم",
+    "questionHowLong": "منذ متى تعاني من هذه الأعراض؟",
+    "daysList": "1-3 أيام",
+    "week1List": "أسبوع واحد",
+    "week2List": "أسبوعان",
+    "monthList": "أكثر من شهر",
+    "questionItch": "هل هناك حكة؟",
+    "Agree": "نعم",
+    "Disagree": "لا",
+    "painList1": "١",
+    "painList2": "٢",
+    "painList3": "٣",
+    "painList4": "٤",
+    "painList5": "٥",
+    "painList6": "٦",
+    "painList7": "٧",
+    "painList8": "٨",
+    "painList9": "٩",
+    "painList10": "١٠",
+    "question_progressive": "هل الحالة تتطور أم تتراجع؟",
+    "progressiveList": "تطور",
+    "RegressiveList": "تراجع",
+    "upload_photo": "يرجى تحميل صورة",
+    "choose_photo": "اختر من الصور",
+    "selected_photo": "تم اختيار الصورة",
+    "detect_button": "اكتشف الآن",
+    "logOut": "تسجيل الخروج",
+    "checkMssg": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    "cancel": "إلغاء",
+    "Help_question": "ساعدنا في معرفة المزيد عنك",
+    "None_question": "لا شيء",
+    "Oily_question": "دهني",
+    "Dry_question": "جاف",
+    "Combination_question": "مختلط",
+    "skin_type": "نوع البشرة",
+    "Nuts": "المكسرات",
+    "Pollen": "حبوب اللقاح",
+    "Dust": "الغبار",
+    "Others": "أخرى",
+    "Allergies": "الحساسية",
+    "findNearestButton": "اعثر على أقرب عيادة",
+    "waitText": "الرجاء الانتظار يتم إنشاء تقرير بشرتك...",
+  "Language": "لغة",
+
+
+
+};
+
+
+  Map<String, String> textsEn = {
+    "Save" : "Save",
+    "Edit" : "Edit",
+    "catchLineHome": "Your Skin , Our Science",
+    "phraseHome": "Thousand of people are using DermaScan\\n                   for Skin Detection",
+    "signUp": "Sign Up",
+    "accountCheckHome": "ALREADY HAVE AN ACCOUNT?",
+    "logIn": "LOG IN",
+    "createAcc": "Create Your Account",
+    "Username": "Username",
+    "Email": "Email",
+    "Password": "Password",
+    "Date of Birth": "Date of Birth",
+    "Male": "Male",
+    "Female": "Female",
+    "Gender": "Gender",
+    "Language": "Language",
+    "errorM1": "Error: Please fill in all fields",
+    "hi": "HI",
+    "questionTitle":"Please answer the following questions to help us give you a precise report!",
+    "welcomeBack": "Welcome Back!",
+    "ContWithFaceBook": "CONTINUE WITH FACEBOOK",
+    "ContWithGoogle": "CONTINUE WITH GOOGLE",
+    "ContWithMail": "OR LOG IN WITH EMAIL",
+    "noAccount": "I Don't HAVE AN ACCOUNT?",
+    "nearestLocation": "Nearest Locations",
+    "loading":"Loading...",
+    "mainTitle": "We can learn to understand how our skin reveals its everyday story, helping us recognize the signs it shows us.",
+    "homeToggle": "Home",
+    "locatorToggle": "Locator",
+    "detectToggle": "DETECT",
+    "historyToggle": "History",
+    "profileToggle": "Profile",
+    "HerpesZosterTitle": "Herpes Zoster",
+    "PsoriasisTitle":"Psoriasis",
+    "EczemaTitle": "Eczema",
+    "WartsTitle": "Warts",
+    "UrticariaTitle": "Urticaria",
+    "BruiseTitle": "Bruise",
+    "AcneTitle": "Acne",
+    "VitiligoTitle": "Vitiligo",
+    "DermatitisTitle":"Dermatitis",
+    "BasalCellTitle":"Basal Cell",
+    "MelanomaTitle":"Melanoma",
+    "questionReport": "Please answer the following questions to help us give you a precise report!",
+    "questionSymptom": "What symptoms are you experiencing?",
+    "rednessSymptom": "Redness",
+    "swellingSymptom": "Swelling",
+    "ItchinessSymptom": "Itchiness",
+    "PainSymptom": "Pain",
+    "questionHowLong": "How long have you been experiencing these symptoms?",
+    "daysList": "1-3 days",
+    "week1List": "1 week",
+    "week2List": "2 weeks",
+    "monthList": "More than a month",
+    "questionItch": "Is there itchiness?",
+    "Agree": "Yes",
+    "Disagree": "No",
+    "painList1": "1",
+    "painList2": "2",
+    "painList3": "3",
+    "painList4": "4",
+    "painList5": "5",
+    "painList6": "6",
+    "painList7": "7",
+    "painList8": "8",
+    "painList9": "9",
+    "painList10": "10",
+    "question_progressive": "Is it progressive or regressive?",
+    "progressiveList": "Progressive",
+    "RegressiveList": "Regressive",
+    "upload_photo": "upload photo please",
+    "choose_photo": "Choose from photos",
+    "selected_photo": "Photo Selected",
+    "detect_button": "DETECT NOW",
+    "logOut": "Logout",
+    "checkMssg": "Are you sure you want to logout?",
+    "cancel": "Cancel",
+    "Help_question": "Help us know more about you",
+    "None_question": "None",
+    "Oily_question": "Oily",
+    "Dry_question": "Dry",
+    "Combination_question": "Combination",
+    "skin_type":"Skin Type",
+    "Nuts":"Nuts",
+    "Pollen": "Pollen",
+    "Dust": "Dust",
+    "Others": "Others",
+    "Allergies": "Allergies",
+    "findNearestButton": "Find Nearest Clinic",
+    "waitText": "Generating your skin report..."
+
+  };
+}
