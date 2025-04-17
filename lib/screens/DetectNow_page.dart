@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:grad/screens/Locator_page.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+import '../config/Provider/language_provider.dart';
 
 class DetectNow_page extends StatefulWidget {
   static const String id = 'DetectNow_page';
@@ -100,6 +103,8 @@ and don't write the word(detection report) at the beginning
 
   @override
   Widget build(BuildContext context) {
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

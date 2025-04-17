@@ -124,6 +124,9 @@ class LanguageProvider extends ChangeNotifier{
     "findNearestButton": "اعثر على أقرب عيادة",
     "waitText": "الرجاء الانتظار يتم إنشاء تقرير بشرتك...",
   "Language": "لغة",
+    "Skip":"تخطى >",
+  "get started": "البدء"
+
 
 
 
@@ -220,7 +223,9 @@ class LanguageProvider extends ChangeNotifier{
     "Others": "Others",
     "Allergies": "Allergies",
     "findNearestButton": "Find Nearest Clinic",
-    "waitText": "Generating your skin report..."
+    "waitText": "Generating your skin report...",
+    "Skip":"SKIP >",
+    "get started": "get started"
 
   };
 }

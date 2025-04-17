@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
 import '../config/Provider/auth_provider.dart';
+import '../config/Provider/language_provider.dart';
 import 'Signup_page.dart';
 
 
@@ -25,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
 
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
@@ -55,11 +57,11 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: w,
                     height: h * 0.40,
-                    child: const Center(
+                    child:  Center(
                       child: Padding(
                         padding: EdgeInsets.only(top: 20.0),
                         child: Text(
-                          'Welcome Back!',
+                          lan.getTexts("welcomeBack"),
                           style: TextStyle(
                               fontSize: 26, fontWeight: FontWeight.bold),
                         ),
@@ -83,12 +85,12 @@ class _LoginPageState extends State<LoginPage> {
                                   Radius.circular(20),
                                 ),
                               ),
-                              child: const Padding(
+                              child:  Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Row(children: [
                                   Icon(Icons.facebook_rounded,color: Colors.white,),
                                   SizedBox(width: 30,),
-                                  Text('CONTINUE WITH FACEBOOK',style: TextStyle(color: Colors.white),),
+                                  Text(lan.getTexts("ContWithFaceBook"),style: TextStyle(color: Colors.white),),
                                 ],),
                               ),
                               
@@ -123,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Row(children: [
                               Image.asset('assets/Google.png'),
                               SizedBox(width: 30,),
-                              Text('CONTINUE WITH GOOGLE',style: TextStyle(color: Colors.black),),
+                              Text(lan.getTexts("ContWithGoogle"),style: TextStyle(color: Colors.black),),
                             ],),
                           ),
 
@@ -132,17 +134,17 @@ class _LoginPageState extends State<LoginPage> {
                           }),
                     ),
                     SizedBox(height: 20,),
-                    Center(child: Text('OR LOG IN WITH EMAIL',style: TextStyle(fontWeight: FontWeight.bold),),),
+                    Center(child: Text(lan.getTexts("ContWithMail"),style: TextStyle(fontWeight: FontWeight.bold),),),
                     SizedBox(height: 20,),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextField(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           filled: true,
                           fillColor: AppColor.TxtFieldColor,
-                          label: Text('Email'),
+                          label: Text(lan.getTexts("Email")),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
@@ -173,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           filled: true,
                           fillColor: AppColor.TxtFieldColor,
-                          label: const Text('Password'),
+                          label:  Text(lan.getTexts("Password")),
                           border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
@@ -185,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                     // Sign Up Button
                     const SizedBox(height: 10),
                     customButton(
-                        text: 'Login',
+                        text: lan.getTexts("logIn"),
                         color: AppColor.mainColor,
                         txtcolor: Colors.white,
                         onPressed: () {
@@ -199,8 +201,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "I Don't HAVE AN ACCOUNT? ",
+                           Text(
+                            lan.getTexts("noAccount"),
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 12,
@@ -210,8 +212,8 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: () {
                               Navigator.pushNamed(context, SignupPage.id);
                             },
-                            child: const Text(
-                              "Sign up",
+                            child:  Text(
+                              lan.getTexts("signUp"),
                               style: TextStyle(
                                 color: Colors.blue,
                                 fontWeight: FontWeight.bold,
