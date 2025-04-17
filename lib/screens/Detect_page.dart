@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import '../config/Provider/language_provider.dart';
 import 'DetectNow_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -64,6 +65,7 @@ class _DetectPageState extends State<DetectPage> {
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
     final username = authProvider.userDetails?.username ?? "User";
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
 
     return Scaffold(
       backgroundColor: Color(0xFF8E97FD),

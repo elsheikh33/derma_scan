@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
 import '../config/Provider/auth_provider.dart';
+import '../config/Provider/language_provider.dart';
 import 'Main_page.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
     final username = authProvider.userDetails?.username ?? "User";
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
 
     return SafeArea(
         child: Scaffold(
@@ -45,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       Spacer(),
                       InkWell(
                         child: Text(
-                          'SKIP >',
+                          lan.getTexts("Skip"),
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
@@ -64,7 +66,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   padding: const EdgeInsets.only(top: 8),
                   child: Center(
                     child: Text(
-                      'Hi $username, Welcome',
+                      '${lan.getTexts("Hi")}, $username',
                       style: TextStyle(
                           color: Color(0xFFFFBF53),
                           fontSize: 30,
@@ -74,7 +76,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
                 Center(
                   child: Text(
-                    'Help us know more about you',
+                    lan.getTexts("Help_question"),
                     style: TextStyle(
                         color: Color(0xFFFFB73E),
                         fontSize: 20,
@@ -88,12 +90,12 @@ class _WelcomePageState extends State<WelcomePage> {
                     isEditing: true,
                     selectedValue: selectedSkinType,
                     items: [
-                      {"value": "none", "label": "None"},
-                      {"value": "oily", "label": "Oily"},
-                      {"value": "dry", "label": "Dry"},
-                      {"value": "combination", "label": "Combination"},
+                      {"value": "none", "label": lan.getTexts("None_question")},
+                      {"value": "oily", "label": lan.getTexts("Oily_question")},
+                      {"value": "dry", "label": lan.getTexts("Dry_question")},
+                      {"value": "combination", "label": lan.getTexts("Combination_question")},
                     ],
-                    title: "Skin Type",
+                    title: lan.getTexts("skin_type"),
                     fillColor: AppColor.TxtFieldColor,
                     onChanged: (value) {
                       setState(() {
@@ -108,13 +110,13 @@ class _WelcomePageState extends State<WelcomePage> {
                     isEditing: true,
                     selectedValue: selectedAllergies,
                     items: [
-                      {"value": "none", "label": "None"},
-                      {"value": "nuts", "label": "Nuts"},
-                      {"value": "pollen", "label": "Pollen"},
-                      {"value": "dust", "label": "Dust"},
+                      {"value": "none", "label": lan.getTexts("None_question")},
+                      {"value": "nuts", "label": lan.getTexts("Nuts")},
+                      {"value": "pollen", "label": lan.getTexts("Pollen")},
+                      {"value": "dust", "label": lan.getTexts("Dust")},
                      // {"value": "others", "label": "Others"},
                     ],
-                    title: "Allergies",
+                    title: lan.getTexts("Allergies"),
                     fillColor: AppColor.TxtFieldColor,
                     onChanged: (value) {
                       setState(() {
@@ -127,7 +129,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: customButton(
-                    text: 'Get Started',
+                    text: lan.getTexts("get started"),
                     color: AppColor.TxtFieldColor,
                     txtcolor: Colors.black,
                     onPressed: () async {

@@ -1,6 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:grad/screens/Home_page.dart';
+import 'package:provider/provider.dart';
+
+import '../config/Provider/language_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,6 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -67,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: AnimatedTextKit(
                 animatedTexts: [
                   TypewriterAnimatedText(
-                    'Loading...',
+                    lan.getTexts("loading"),
                     textStyle: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w900,

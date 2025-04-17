@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 import '../Controller/services.dart';
 import '../Constants/Design.dart';
+import '../config/Provider/language_provider.dart';
 
 class LocatorPage extends StatefulWidget {
   const LocatorPage({super.key});
@@ -43,6 +45,8 @@ class _LocatorPageState extends State<LocatorPage> {
 
   @override
   Widget build(BuildContext context) {
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,

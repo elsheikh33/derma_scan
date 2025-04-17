@@ -26,6 +26,7 @@ import 'DiseasesDescription/BasalCellCarcinomaPage.dart';
 import 'DiseasesDescription/BruisePage.dart';
 import 'DiseasesDescription/MelanomaPage.dart';
 import 'config/Provider/auth_provider.dart';
+import 'config/Provider/language_provider.dart';
 
 
 void main() async {
@@ -48,6 +49,10 @@ void main() async {
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AuthProvider()),
+          ChangeNotifierProvider<LanguageProvider>(
+            create: (ctx) => LanguageProvider(),
+
+          ),
         ],
         child: MyApp(),
       ),
@@ -66,7 +71,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       routes: {
-        '/': (context) => const SplashScreen(),
+        '/': (context) => SplashScreen(),
         HomePage.id: (context) => HomePage(),
         SignupPage.id: (context) => SignupPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -75,7 +80,6 @@ class MyApp extends StatelessWidget {
         ProfilePage.id:(context) => ProfilePage(),
         DetectPage.id:(context)=>DetectPage(),
         LocatorPage.id:(context)=>LocatorPage(),
-        HistoryPage.id:(context)=>HistoryPage(),
         'herpes_zoster': (context) => HerpesPage(),
         'acne': (context) => AcnePage(),
         'psoriasis': (context) => PsoriasisPage(),

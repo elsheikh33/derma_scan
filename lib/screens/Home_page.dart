@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
+import '../config/Provider/language_provider.dart';
 import 'Login_page.dart';
 import 'Signup_page.dart';
 
@@ -14,6 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -52,12 +55,12 @@ class HomePage extends StatelessWidget {
               height: h * 0.55,
               fit: BoxFit.cover,
             ),
-            const Center(child: Text('Your Skin , Our Science',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),)),
-            const SizedBox(height: 5),
-            const Center(child: Text('Thousand of people are using DermaScan\n                   for Skin Detection',style: TextStyle(color: Colors.grey,),)),
-            const SizedBox(height: 5),
-            customButton(
-                text: 'Sign Up',
+             Center(child: Text(lan.getTexts("catchLineHome"),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),)),
+             const SizedBox(height: 5),
+             Center(child: Text(lan.getTexts("phraseHome"),style: TextStyle(color: Colors.grey,),)),
+             const SizedBox(height: 5),
+             customButton(
+                text: lan.getTexts("signUp"),
                 color: AppColor.mainColor,
                 txtcolor: Colors.white,
                 onPressed: () {
@@ -70,8 +73,8 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "ALREADY HAVE AN ACCOUNT? ",
+                 Text(
+                  lan.getTexts("accountCheckHome"),
                   style: TextStyle(
                     color: Colors.black, // Normal text color
                     fontSize: 12,
@@ -81,8 +84,8 @@ class HomePage extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, LoginPage.id);
                   },
-                  child: const Text(
-                    "LOG IN",
+                  child:  Text(
+                    lan.getTexts("logIn"),
                     style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,

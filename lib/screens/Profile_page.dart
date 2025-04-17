@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
 import '../config/Provider/auth_provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String id = 'Profile_page';
@@ -52,6 +53,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
     String username = authProvider.userDetails?.username ?? "User";
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
+    var dw =MediaQuery.of(context).size.width ;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -249,6 +252,28 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Padding(
+                        padding: const EdgeInsets.all(1.0),
+                        child: CustomDropdown(
+                          isEditing: isEditing,
+                          selectedValue: lan.defLan == 0 ? "Arabic" : "English", // Current language selection
+                          items: [
+                            {"value": "Arabic", "label": lan.getTexts("arabic")},
+                            {"value": "English", "label": lan.getTexts("english")},
+                          ],
+                          title: "Language",
+                          fillColor: AppColor.TxtFieldColor,
+                          onChanged: (value) {
+                            if (value == "Arabic") {
+                              Provider.of<LanguageProvider>(context, listen: false).changeLan(lan: 0);
+                            } else {
+                              Provider.of<LanguageProvider>(context, listen: false).changeLan(lan: 1);
+                            }
+                          },
+                        ),
+                      ),
+
+
+                      Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: 20,
                           horizontal: 20,
@@ -281,7 +306,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               });
                             },
 
-                            child: Text(isEditing ? "Save" : "Edit",style: TextStyle(color: Colors.white,),),
+                            child: Text(isEditing ? lan.getTexts("Save") : lan.getTexts("Edit"),style: TextStyle(color: Colors.white,),),
                           ),
                         ),
                       ),

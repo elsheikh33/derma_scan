@@ -4,6 +4,9 @@ import 'package:grad/screens/Detect_page.dart';
 import 'package:grad/screens/History_page.dart';
 import 'package:grad/screens/Locator_page.dart';
 import 'package:grad/screens/Profile_page.dart';
+import 'package:provider/provider.dart';
+
+import '../config/Provider/language_provider.dart';
 
 class MainPage extends StatefulWidget {
   static const String id = 'main_page';
@@ -17,6 +20,8 @@ class _MainScreenState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: selectedIndex == 0
@@ -53,10 +58,10 @@ class _MainScreenState extends State<MainPage> {
             ),
           ),
           const SizedBox(height: 20),
-          const Padding(
+           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              'We can learn to understand how our skin reveals its everyday story, helping us recognize the signs it shows us.',
+              lan.getTexts("mainTitle"),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.grey,
@@ -95,27 +100,27 @@ class _MainScreenState extends State<MainPage> {
           BottomNavigationBarItem(
             backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/homeIcon.png')),
-            label: 'Home',
+            label: lan.getTexts("homeToggle"),
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/locatorIcon.png')),
-            label: 'Locator',
+            label: lan.getTexts("locatorToggle"),
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/detectIcon.png')),
-            label: 'DETECT',
+            label: lan.getTexts("detectToggle"),
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/HistoryIcon.png')),
-            label: 'History',
+            label: lan.getTexts("historyToggle"),
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.white,
             icon: ImageIcon(AssetImage('assets/profileIcon.png')),
-            label: 'Profile',
+            label: lan.getTexts("profileToggle"),
           ),
         ],
       ),

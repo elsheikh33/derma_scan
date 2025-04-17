@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
 import '../config/Provider/auth_provider.dart';
+import '../config/Provider/language_provider.dart';
 import 'Login_page.dart';
 
 class SignupPage extends StatefulWidget {
@@ -27,6 +28,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -48,11 +50,11 @@ class _SignupPageState extends State<SignupPage> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 0.40,
-                    child: const Center(
+                    child:  Center(
                       child: Padding(
                         padding: EdgeInsets.only(top: 20.0),
                         child: Text(
-                          'Create Your Account',
+                          lan.getTexts("createAcc"),
                           style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -66,7 +68,7 @@ class _SignupPageState extends State<SignupPage> {
                         width: MediaQuery.of(context).size.width - 40, // Ensures same width
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: CustomTextField(controller: userController, label: 'Username'),
+                          child: CustomTextField(controller: userController, label: lan.getTexts("Username")),
                         ),
                       ),
                     ),
@@ -80,10 +82,10 @@ class _SignupPageState extends State<SignupPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomTextField(controller: emailController, label: 'Email'),
+                    CustomTextField(controller: emailController, label: lan.getTexts('Email')),
                     CustomTextField(
                       controller: passController,
-                      label: 'Password',
+                      label: lan.getTexts('Password'),
                       obscureText: passwordVisibility,
                       suffixIcon: IconButton(
                         onPressed: () {
@@ -99,10 +101,10 @@ class _SignupPageState extends State<SignupPage> {
                       child: TextField(
                         controller: dateController,
                         readOnly: true,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           filled: true,
                           fillColor: AppColor.TxtFieldColor,
-                          labelText: "Date of Birth",
+                          labelText: lan.getTexts("Date of Birth"),
                           border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                           suffixIcon: Icon(Icons.calendar_today),
                         ),
@@ -115,8 +117,8 @@ class _SignupPageState extends State<SignupPage> {
                         isEditing: true,
                         selectedValue: selectedGender,
                         items: [
-                          {"value": "M", "label": "Male"},
-                          {"value": "F", "label": "Female"},
+                          {"value": "M", "label": lan.getTexts("Male")},
+                          {"value": "F", "label": lan.getTexts("Female")},
                         ],
                         title: "Gender",
                         fillColor: AppColor.TxtFieldColor,
@@ -130,7 +132,7 @@ class _SignupPageState extends State<SignupPage> {
 
                     const SizedBox(height: 10),
                     customButton(
-                      text: 'Sign Up',
+                      text: lan.getTexts("signUp"),
                       color: AppColor.mainColor,
                       txtcolor: Colors.white,
                       onPressed: () async {
@@ -150,7 +152,7 @@ class _SignupPageState extends State<SignupPage> {
                           userController.clear();
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Error: Please fill in all fields")),
+                            SnackBar(content: Text(lan.getTexts("errorM1"))),
                           );
                         }
                       },
@@ -162,13 +164,13 @@ class _SignupPageState extends State<SignupPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("ALREADY HAVE AN ACCOUNT? ", style: TextStyle(color: Colors.black, fontSize: 12)),
+                           Text(lan.getTexts("accountCheckHome"), style: TextStyle(color: Colors.black, fontSize: 12)),
                           GestureDetector(
                             onTap: () {
                               Navigator.pushNamed(context, LoginPage.id);
                             },
-                            child: const Text(
-                              "LOG IN",
+                            child:  Text(
+                              lan.getTexts("logIn"),
                               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 12),
                             ),
                           ),
