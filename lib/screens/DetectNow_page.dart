@@ -54,6 +54,7 @@ Now write a full detection report acting like a dermatologist that includes:
    - Non-Critical
 3. Precautions until doctor visit.   
 
+
 Structure with clear titles and avoid markdown formatting.
 and don't write the word(detection report) at the beginning 
 ''';

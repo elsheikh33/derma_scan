@@ -39,7 +39,8 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   Future<Map<String, dynamic>?> detectDisease(File imageFile) async {
-    final uri = Uri.parse('http://192.168.100.119:8000/detect/');
+    //final uri = Uri.parse('https://553b-35-231-181-48.ngrok-free.app/detect/');//link public colab
+    final uri = Uri.parse('http://192.168.100.119:8000/detect/'); //link locally
     final request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('file', imageFile.path));
 
