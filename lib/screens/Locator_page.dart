@@ -85,7 +85,7 @@ class _LocatorPageState extends State<LocatorPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Nearest Locations',
+                  lan.getTexts("nearLoc"),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 25,
