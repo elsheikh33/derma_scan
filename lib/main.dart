@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grad/DiseasesDescription/AcneDisease.dart';
+import 'package:grad/DiseasesDescription/CancerDisease.dart';
 import 'package:grad/DiseasesDescription/EczemaDisease.dart';
 import 'package:grad/DiseasesDescription/HerpsDisease.dart';
 import 'package:grad/DiseasesDescription/PsoriasisDisease.dart';
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
         'atopic_dermatitis': (context) => AtopicDermatitisPage(),
         'basal_cell_carcinoma': (context) => BasalCellCarcinomaPage(),
         'melanoma': (context) => MelanomaPage(),
+        'cancer':(context)=>CancerPage()
       }
     );
   }

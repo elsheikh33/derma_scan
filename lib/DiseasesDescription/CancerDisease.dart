@@ -14,7 +14,7 @@ class CancerPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/cancerImage.png', // Replace with your image path
+              'assets/CancerDisease.png',
               height: 250,
               width: double.infinity,
               fit: BoxFit.cover,
