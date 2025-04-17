@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad/Constants/Colors.dart';
 import 'package:grad/screens/Detect_page.dart';
+import 'package:grad/screens/History_page.dart';
 import 'package:grad/screens/Locator_page.dart';
 import 'package:grad/screens/Profile_page.dart';
 import 'package:provider/provider.dart';
@@ -79,7 +80,7 @@ class _MainScreenState extends State<MainPage> {
         children: [
           LocatorPage(),
           DetectPage(),
-          Center(child: Text('History Page')),
+          HistoryPage(),
           ProfilePage(),
         ],
       ),
@@ -142,7 +143,7 @@ class DiseaseGridView extends StatelessWidget {
     {'name': 'Dermatitis', 'image': 'assets/atopic_dermatitis.png'},
     {'name': 'Basal Cell', 'image': 'assets/BasalCellCarcinomaImage.png'},
     {'name': 'Melanoma', 'image': 'assets/melanomaImage.png'},
-
+    {'name': 'Cancer', 'image': 'assets/CancerDisease.png'},
   ];
 
   @override
@@ -206,6 +207,9 @@ class DiseaseGridView extends StatelessWidget {
                         break;
                       case 'Melanoma':
                         routeName = 'melanoma';
+                        break;
+                      case 'Cancer':
+                        routeName = 'cancer';
                         break;
                       default:
                         routeName = '';

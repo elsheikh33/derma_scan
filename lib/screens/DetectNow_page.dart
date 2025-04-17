@@ -58,6 +58,7 @@ Now write a full detection report acting like a dermatologist that includes:
    - Non-Critical
 3. Precautions until doctor visit.   
 
+
 Structure with clear titles and avoid markdown formatting.
 and don't write the word(detection report) at the beginning 
 ''';
@@ -142,7 +143,7 @@ and don't write the word(detection report) at the beginning
                 borderRadius: BorderRadius.circular(20),
                 child: Image.memory(
                   base64Decode(widget.annotatedImageBase64!),
-                  height: 180,
+                  height: 350,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),

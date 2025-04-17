@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grad/DiseasesDescription/AcneDisease.dart';
+import 'package:grad/DiseasesDescription/CancerDisease.dart';
 import 'package:grad/DiseasesDescription/EczemaDisease.dart';
 import 'package:grad/DiseasesDescription/HerpsDisease.dart';
 import 'package:grad/DiseasesDescription/PsoriasisDisease.dart';
@@ -9,6 +10,7 @@ import 'package:grad/DiseasesDescription/urticariaDisease.dart';
 import 'package:grad/DiseasesDescription/vitiligoDisease.dart';
 import 'package:grad/DiseasesDescription/wartsDisease.dart';
 import 'package:grad/screens/Detect_page.dart';
+import 'package:grad/screens/History_page.dart';
 import 'package:grad/screens/Home_page.dart';
 import 'package:grad/screens/Locator_page.dart';
 import 'package:grad/screens/Login_page.dart';
@@ -78,7 +80,6 @@ class MyApp extends StatelessWidget {
         ProfilePage.id:(context) => ProfilePage(),
         DetectPage.id:(context)=>DetectPage(),
         LocatorPage.id:(context)=>LocatorPage(),
-        //DetectNow_page.id:(context)=>DetectNow_page(),
         'herpes_zoster': (context) => HerpesPage(),
         'acne': (context) => AcnePage(),
         'psoriasis': (context) => PsoriasisPage(),
@@ -90,6 +91,7 @@ class MyApp extends StatelessWidget {
         'atopic_dermatitis': (context) => AtopicDermatitisPage(),
         'basal_cell_carcinoma': (context) => BasalCellCarcinomaPage(),
         'melanoma': (context) => MelanomaPage(),
+        'cancer':(context)=>CancerPage()
       }
     );
   }
