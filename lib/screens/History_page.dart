@@ -1,91 +1,192 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-//import 'DetectionReportPage.dart'; // we'll create this next
+import 'package:grad/Constants/Colors.dart';
+import 'package:provider/provider.dart';
 
-class HistoryPage extends StatelessWidget {
-  static const String id = 'History_page';
+import '../config/Provider/auth_provider.dart';
 
-  final List<Map<String, dynamic>> dummyHistory = [
-    {
-      'disease': 'Eczema',
-      'date': '2025-04-10',
-      'imageBase64': '', // placeholder (optional for now)
-      'report': 'Eczema is a skin condition that causes inflammation. Critical: Use corticosteroid cream. Non-Critical: Moisturize regularly. Avoid hot showers.'
-    },
-    {
-      'disease': 'Acne',
-      'date': '2025-03-22',
-      'imageBase64': '',
-      'report': 'Acne is caused by clogged pores. Critical: Use prescribed topical treatments. Non-Critical: Avoid oily products. Maintain face hygiene.'
-    }
-  ];
+class HistoryPage extends StatefulWidget {
+  static const String id = "History_page";
+
+  @override
+  State<HistoryPage> createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends State<HistoryPage> {
+  late TextEditingController usernameController;
+
+  State<HistoryPage> createState() => _HistoryPageState();
+
+  void initState() {
+    super.initState();
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
+    var userDetails = authProvider.userDetails;
+
+    // Initialize controllers with user data
+    usernameController = TextEditingController(text: userDetails?.username);
+     }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
-      appBar: AppBar(
-        title: Text("History"),
-        backgroundColor: Color(0xFF8E97FD),
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: dummyHistory.length,
-        itemBuilder: (context, index) {
-          final item = dummyHistory[index];
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
+    String username = authProvider.userDetails?.username ?? "User";
+    final mockDetections = [
+      {
+        'disease': 'Eczema',
+        'date': '30/3/2025',
+        'color': Color(0xFF8E97FD),
+        'image': 'assets/eczemaImage.png',
+      },
+      {
+        'disease': 'Acne',
+        'date': '14/4/2025',
+        'color': Color(0xFFFFC288),
+        'image': 'assets/acneImage.png',
+      },
+    ];
 
-          return Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            child: Padding(
-              padding: const EdgeInsets.all(12),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F5F5),
+      body: SafeArea(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'DERMA',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Image.asset('assets/logo.png'),
+                    const Text(
+                      'SCAN',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+             Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
               child: Row(
                 children: [
-                  CircleAvatar(
-                    radius: 28,
-                    backgroundColor: Colors.grey[300],
-                    child: Text(
-                      item['disease'][0],
-                      style: TextStyle(fontSize: 24, color: Colors.black54),
+                  Text(
+                    '$username\'s Profile',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 20,
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(item['disease'], style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 4),
-                        Text(item['date'], style: TextStyle(color: Colors.grey)),
-                      ],
-                    ),
-                  ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       // MaterialPageRoute(
-                  //       //   builder: (_) => DetectionReportPage(
-                  //       //     disease: item['disease'],
-                  //       //     date: item['date'],
-                  //       //     imageBase64: item['imageBase64'],
-                  //       //     report: item['report'],
-                  //       //   ),
-                  //       // ),
-                  //     );
-                  //   },
-                  //   style: ElevatedButton.styleFrom(
-                  //     backgroundColor: Color(0xFF8E97FD),
-                  //     foregroundColor: Colors.white,
-                  //   ),
-                  //   child: Text("View"),
-                  // ),
                 ],
               ),
             ),
-          );
-        },
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 4),
+              child: Row(
+                children: [
+                  Text(
+                    'VIEW YOUR PREVIOUS DETECTIONS',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
+
+            // Grid
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: GridView.builder(
+                  itemCount: mockDetections.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    childAspectRatio: 0.65,
+                  ),
+                  itemBuilder: (context, index) {
+                    final item = mockDetections[index];
+                    return Container(
+                      decoration: BoxDecoration(
+                        color:AppColor.mainColor,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(
+                                item['image'] as String,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            item['disease'] as String,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            item['date'] as String,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          const SizedBox(height: 8),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                textStyle: const TextStyle(fontSize: 14),
+                              ),
+                              child: const Text("View"),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+        ]
+        ),
       ),
     );
   }
 }
+
+

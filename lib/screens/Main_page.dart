@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad/Constants/Colors.dart';
 import 'package:grad/screens/Detect_page.dart';
+import 'package:grad/screens/History_page.dart';
 import 'package:grad/screens/Locator_page.dart';
 import 'package:grad/screens/Profile_page.dart';
 
@@ -74,7 +75,7 @@ class _MainScreenState extends State<MainPage> {
         children: [
           LocatorPage(),
           DetectPage(),
-          Center(child: Text('History Page')),
+          HistoryPage(),
           ProfilePage(),
         ],
       ),
