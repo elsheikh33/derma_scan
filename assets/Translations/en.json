@@ -1,7 +1,7 @@
 {
   "catchLineHome": "Your Skin , Our Science",
-  "phraseHome": "Thousand of people are using DermaScan\\n                   for Skin Detection",
-  "signUp": "Sign Up",
+  "phraseHome": "Thousand of people are using DermaScan for Skin Detection",
+  "signUp": " Sign Up",
   "accountCheckHome": "ALREADY HAVE AN ACCOUNT?",
   "logIn": "LOG IN",
   "createAcc": "Create Your Account",
@@ -85,6 +85,7 @@
   "Others": "Others",
   "Allergies": "Allergies",
   "findNearestButton": "Find Nearest Clinic",
-  "waitText": "Generating your skin report..."
+  "waitText": "Generating your skin report...",
+  "nearLoc": "Nearest Locations"
 
 }

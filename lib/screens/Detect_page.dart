@@ -191,6 +191,7 @@ class _DetectPageState extends State<DetectPage> {
                   ),
                 ),
               ),
+              Text("please note that it\'s better to take a photo with the back camera and good lightning for a better detection !",style: TextStyle(fontSize: 11, color: Color(0XFF8B0000) ,fontWeight: FontWeight.bold,)),
               SizedBox(height: 20),
               // Detect Now Button
               ElevatedButton(

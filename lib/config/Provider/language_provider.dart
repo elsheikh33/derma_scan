@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageProvider extends ChangeNotifier{
-  int defLan = 0;
+  int defLan = 1;
 
   LanguageProvider(){
     _loadLanguage();
@@ -37,7 +37,7 @@ class LanguageProvider extends ChangeNotifier{
     "english": "English",
     "catchLineHome": "بشرتك، علمنا",
     "arabic": "عربي",
-    "phraseHome": "آلاف الأشخاص يستخدمون DermaScan\\n                   للكشف عن البشرة",
+    "phraseHome": "آلاف الأشخاص يستخدمون DermaScan\n                   للكشف عن البشرة",
     "signUp": "التسجيل",
     "accountCheckHome": "هل لديك حساب بالفعل؟",
     "logIn": "تسجيل الدخول",
@@ -137,7 +137,7 @@ class LanguageProvider extends ChangeNotifier{
     "Save" : "Save",
     "Edit" : "Edit",
     "catchLineHome": "Your Skin , Our Science",
-    "phraseHome": "Thousand of people are using DermaScan\\n                   for Skin Detection",
+    "phraseHome": "    Thousand of people are using DermaScan\n                       for Skin Detection",
     "signUp": "Sign Up",
     "accountCheckHome": "ALREADY HAVE AN ACCOUNT?",
     "logIn": "LOG IN",
