@@ -5,6 +5,7 @@ import 'package:grad/screens/Locator_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
+import '../config/Provider/auth_provider.dart';
 import '../config/Provider/language_provider.dart';
 
 class DetectNow_page extends StatefulWidget {
@@ -82,15 +83,19 @@ and don't write the word(detection report) at the beginning
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
         String result = data['choices'][0]['message']['content'];
-        result = result.replaceAll('**', ''); // clean markdown
+        result = result.replaceAll('**', '');
+
+        // Save to history
+        final authProvider = Provider.of<AuthProvider>(context, listen: false);
+        await authProvider.saveDetectionHistory(
+          disease: widget.detectedDisease,
+          description: result,
+          userInputs: widget.userInputs,
+          imageBase64: widget.annotatedImageBase64,
+        );
 
         setState(() {
           responseText = result;
-          isLoading = false;
-        });
-      } else {
-        setState(() {
-          responseText = 'Failed to fetch report.';
           isLoading = false;
         });
       }
