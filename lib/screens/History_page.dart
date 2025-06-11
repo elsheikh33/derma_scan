@@ -150,13 +150,6 @@ class _HistoryPageState extends State<HistoryPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text('No detection history found'),
-                          ElevatedButton(
-                            onPressed: () => setState(() {
-                              _historyFuture = Provider.of<AuthProvider>(context, listen: false)
-                                  .getDetectionHistory();
-                            }),
-                            child: Text('Refresh'),
-                          ),
                         ],
                       ),
                     );
