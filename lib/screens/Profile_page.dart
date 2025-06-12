@@ -95,12 +95,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
                   child: Row(
                     children: [
-                      Text(
-                        '$username\'s Profile',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 20,
+                      Expanded(
+                        child: Text(
+                          '$username\'s ${lan.getTexts("profileToggle")}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       const Spacer(),
@@ -116,20 +118,20 @@ class _ProfilePageState extends State<ProfilePage> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text("Logout"),
-                              content: const Text("Are you sure you want to logout?"),
+                              title:  Text(lan.getTexts("logOut")),
+                              content:  Text(lan.getTexts("checkMssg")),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
-                                  child: const Text("Cancel"),
+                                  child:  Text(lan.getTexts("cancel")),
                                 ),
                                 TextButton(
                                   onPressed: () {
                                     authProvider.logout(context);
                                     Navigator.pushReplacementNamed(context,LoginPage.id);
                                   },
-                                  child: const Text(
-                                    "Logout",
+                                  child:  Text(
+                                    lan.getTexts("logOut"),
                                     style: TextStyle(color: Colors.black),
                                   ),
                                 ),
@@ -137,8 +139,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             );
                           },
                         );},
-      
-                        child: Text('logout',style: TextStyle(color: Colors.white),),
+
+                        child: Text(lan.getTexts("logOut"),style: TextStyle(color: Colors.white),),
                       ),
                     ],
                   ),
@@ -153,12 +155,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       CustomTextField(
                         isEditing: isEditing,
                         controller: usernameController,
-                        label: 'Username',
+                        label: lan.getTexts("Username"),
                       ),
                       CustomTextField(
                         isEditing: isEditing,
                         controller: emailController,
-                        label: 'Email',
+                        label: lan.getTexts("Email"),
                       ),
                       TextField(
                         controller: dobController,
@@ -167,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           enabled: isEditing,
                           filled: true,
                           fillColor: AppColor.TxtFieldColor,
-                          labelText: "Date of Birth",
+                          labelText: lan.getTexts("Date of Birth"),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
@@ -181,10 +183,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         isEditing: isEditing,
                         selectedValue: selectedGender,
                         items: [
-                          {"value": "M", "label": "Male"},
-                          {"value": "F", "label": "Female"},
+                          {"value": "M", "label": lan.getTexts("Male")},
+                          {"value": "F", "label":  lan.getTexts("Female")},
+
                         ],
-                        title: "Gender",
+                        title: lan.getTexts("Gender"),
                         fillColor: AppColor.TxtFieldColor,
                         onChanged: (value) {
                           setState(() {
@@ -207,13 +210,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ? selectedAllergies
                                   : "none", // Default to "none"
                           items: [
-                            {"value": "none", "label": "None"},
-                            {"value": "nuts", "label": "Nuts"},
-                            {"value": "pollen", "label": "Pollen"},
-                            {"value": "dust", "label": "Dust"},
-                            {"value": "others", "label": "Others"},
+                            {"value": "none", "label": lan.getTexts("None_question")},
+                            {"value": "nuts", "label": lan.getTexts("Nuts")},
+                            {"value": "pollen", "label": lan.getTexts("Pollen")},
+                            {"value": "dust", "label": lan.getTexts("Dust")},
+                            {"value": "others", "label": lan.getTexts("Others")},
+
                           ],
-                          title: "Allergies",
+                          title: lan.getTexts("Allergies"),
                           fillColor: AppColor.TxtFieldColor,
                           onChanged: (value) {
                             setState(() {
@@ -237,12 +241,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ? selectedSkinType
                                   : "none", // Default to "none"
                           items: [
-                            {"value": "none", "label": "None"},
-                            {"value": "oily", "label": "Oily"},
-                            {"value": "dry", "label": "Dry"},
-                            {"value": "combination", "label": "Combination"},
+                            {"value": "none", "label": lan.getTexts("None_question")},
+                            {"value": "oily", "label": lan.getTexts("Oily_question")},
+                            {"value": "dry", "label": lan.getTexts("Dry_question")},
+                            {"value": "combination", "label": lan.getTexts("Combination_question")},
                           ],
-                          title: "Skin Type",
+                          title: lan.getTexts("skin_type"),
                           fillColor: AppColor.TxtFieldColor,
                           onChanged: (value) {
                             setState(() {

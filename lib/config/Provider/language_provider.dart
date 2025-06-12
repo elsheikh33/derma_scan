@@ -34,6 +34,7 @@ class LanguageProvider extends ChangeNotifier{
 
   Map<String, String> textsAr = {
     "Save" : "يحفظ",
+    "Edit":"عدل",
     "english": "English",
     "catchLineHome": "بشرتك، علمنا",
     "arabic": "عربي",
@@ -79,6 +80,7 @@ class LanguageProvider extends ChangeNotifier{
     "questionReport": "يرجى الإجابة على الأسئلة التالية لمساعدتنا في تقديم تقرير دقيق!",
     "questionSymptom": "ما الأعراض التي تعاني منها؟",
     "rednessSymptom": "احمرار",
+    "Pain level":"مستوى الألم [١-١٠]",
     "swellingSymptom": "تورم",
     "ItchinessSymptom": "حكة",
     "PainSymptom": "ألم",
@@ -123,9 +125,15 @@ class LanguageProvider extends ChangeNotifier{
     "Allergies": "الحساسية",
     "findNearestButton": "اعثر على أقرب عيادة",
     "waitText": "الرجاء الانتظار يتم إنشاء تقرير بشرتك...",
-  "Language": "لغة",
+    "Language": "لغة",
     "Skip":"تخطى >",
-  "get started": "البدء"
+    "get started": "البدء",
+    "cameraNote": "يرجى ملاحظة أنه من الأفضل التقاط صورة بالكاميرا الخلفية والإضاءة الجيدة للحصول على اكتشاف أفضل!",
+     "VIEW YOUR PREVIOUS DETECTIONS":"عرض اكتشافاتك السابقة",
+    "No detection history found":"لم يتم العثور على سجل الكشف",
+    "Refresh":"تحديث",
+    "View":"عرض",
+    "Know more about your condition!":"اعرف المزيد عن حالتك!"
 
 
 
@@ -134,6 +142,7 @@ class LanguageProvider extends ChangeNotifier{
 
 
   Map<String, String> textsEn = {
+    "Know more about your condition!":"Know more about your condition!",
     "Save" : "Save",
     "Edit" : "Edit",
     "catchLineHome": "Your Skin , Our Science",
@@ -176,6 +185,7 @@ class LanguageProvider extends ChangeNotifier{
     "VitiligoTitle": "Vitiligo",
     "DermatitisTitle":"Dermatitis",
     "BasalCellTitle":"Basal Cell",
+    "Pain level": "Pain level [1-10]",
     "MelanomaTitle":"Melanoma",
     "questionReport": "Please answer the following questions to help us give you a precise report!",
     "questionSymptom": "What symptoms are you experiencing?",
@@ -225,7 +235,11 @@ class LanguageProvider extends ChangeNotifier{
     "findNearestButton": "Find Nearest Clinic",
     "waitText": "Generating your skin report...",
     "Skip":"SKIP >",
-    "get started": "get started"
-
+    "get started": "get started",
+    "cameraNote": "please note that it\'s better to take a photo with the back camera and good lightning for a better detection !",
+    "VIEW YOUR PREVIOUS DETECTIONS":"VIEW YOUR PREVIOUS DETECTIONS",
+    "No detection history found":"No detection history found",
+    "Refresh":"Refresh",
+    "View":"View"
   };
 }

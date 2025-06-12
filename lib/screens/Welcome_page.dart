@@ -114,7 +114,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       {"value": "nuts", "label": lan.getTexts("Nuts")},
                       {"value": "pollen", "label": lan.getTexts("Pollen")},
                       {"value": "dust", "label": lan.getTexts("Dust")},
-                     // {"value": "others", "label": "Others"},
+                     {"value": "others", "label": lan.getTexts("Others")},
                     ],
                     title: lan.getTexts("Allergies"),
                     fillColor: AppColor.TxtFieldColor,

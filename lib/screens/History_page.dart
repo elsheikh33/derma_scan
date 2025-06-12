@@ -6,6 +6,7 @@ import 'package:grad/Constants/Colors.dart';
 import 'package:provider/provider.dart';
 
 import '../config/Provider/auth_provider.dart';
+import '../config/Provider/language_provider.dart';
 import '../model/detection_history.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -30,6 +31,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
     String username = authProvider.userDetails?.username ?? "User";
 
@@ -79,7 +81,7 @@ class _HistoryPageState extends State<HistoryPage> {
               child: Row(
                 children: [
                   Text(
-                    '$username\'s History',
+                    '$username\'s ,${lan.getTexts("historyToggle")} ' ,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -89,12 +91,12 @@ class _HistoryPageState extends State<HistoryPage> {
                 ],
               ),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25, vertical: 4),
               child: Row(
                 children: [
                   Text(
-                    'VIEW YOUR PREVIOUS DETECTIONS',
+                    lan.getTexts("VIEW YOUR PREVIOUS DETECTIONS"),
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey,
@@ -113,7 +115,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         _historyFuture = Provider.of<AuthProvider>(context, listen: false)
                             .getDetectionHistory();
                       }),
-                      child: Text('Refresh'),
+                      child: Text(lan.getTexts("Refresh")),
                     ),
                 ],
               ),
@@ -123,10 +125,6 @@ class _HistoryPageState extends State<HistoryPage> {
               child: FutureBuilder<List<DetectionHistory>>(
                 future: _historyFuture,
                 builder: (context, snapshot) {
-                  // Add debug prints
-                  print('Snapshot state: ${snapshot.connectionState}');
-                  print('Snapshot data: ${snapshot.data}');
-                  print('Snapshot error: ${snapshot.error}');
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
@@ -149,7 +147,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('No detection history found'),
+                          Text(lan.getTexts("No detection history found")),
                         ],
                       ),
                     );
@@ -225,7 +223,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                     ),
                                     textStyle: const TextStyle(fontSize: 14),
                                   ),
-                                  child: const Text("View"),
+                                  child:  Text(lan.getTexts("View")),
                                 ),
                               )
                             ],
