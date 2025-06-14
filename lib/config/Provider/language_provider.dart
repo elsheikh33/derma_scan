@@ -53,7 +53,7 @@ class LanguageProvider extends ChangeNotifier{
     "errorM1": "خطأ: يرجى إدخال جميع المعلومات",
     "hi": "مرحبًا",
     "questionTitle": "يرجى الإجابة على الأسئلة التالية لمساعدتنا في تقديم تقرير دقيق!",
-    "welcomeBack": "مرحبًا بعودتك!",
+    "welcomeBack": "مرحبًا بعودتك",
     "ContWithFaceBook": "المتابعة باستخدام فيسبوك",
     "ContWithGoogle": "المتابعة باستخدام جوجل",
     "ContWithMail": "أو تسجيل الدخول عبر البريد الإلكتروني",

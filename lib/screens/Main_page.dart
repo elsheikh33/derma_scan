@@ -178,40 +178,40 @@ class DiseaseGridView extends StatelessWidget {
                   onTap: () {
                     String routeName;
                     switch (diseases[index]['name']) {
-                      case 'Herpes Zoster':
+                      case 'HerpesZosterTitle':
                         routeName = 'herpes_zoster';
                         break;
-                      case 'Psoriasis':
+                      case 'PsoriasisTitle':
                         routeName = 'psoriasis';
                         break;
-                      case 'Eczema':
+                      case 'EczemaTitle':
                         routeName = 'eczema';
                         break;
-                      case 'Warts':
+                      case 'WartsTitle':
                         routeName = 'warts';
                         break;
-                      case 'Urticaria':
+                      case 'UrticariaTitle':
                         routeName = 'urticaria';
                         break;
-                      case 'Bruise':
+                      case 'BruiseTitle':
                         routeName = 'bruise';
                         break;
-                      case 'Acne':
+                      case 'AcneTitle':
                         routeName = 'acne';
                         break;
-                      case 'Vitiligo':
+                      case 'VitiligoTitle':
                         routeName = 'vitiligo';
                         break;
-                      case 'Dermatitis':
+                      case 'DermatitisTitle':
                         routeName = 'atopic_dermatitis';
                         break;
-                      case 'Basal Cell':
+                      case 'BasalCellTitle':
                         routeName = 'basal_cell_carcinoma';
                         break;
-                      case 'Melanoma':
+                      case 'MelanomaTitle':
                         routeName = 'melanoma';
                         break;
-                      case 'Cancer':
+                      case 'CancerTitle':
                         routeName = 'cancer';
                         break;
                       default:
@@ -246,7 +246,7 @@ class DiseaseGridView extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        lan.getTexts(diseases[index]['name']!),  // ✅ This will auto-translate
+                        lan.getTexts(diseases[index]['name']!),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14,
