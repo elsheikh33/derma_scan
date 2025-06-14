@@ -41,7 +41,7 @@ class LanguageProvider extends ChangeNotifier{
     "phraseHome": "آلاف الأشخاص يستخدمون DermaScan\n                   للكشف عن البشرة",
     "signUp": "التسجيل",
     "accountCheckHome": "هل لديك حساب بالفعل؟",
-    "logIn": "تسجيل الدخول",
+    "logIn": "تسجيل الدخول ",
     "createAcc": "أنشئ حسابك",
     "Username": "اسم المستخدم",
     "Email": "البريد الإلكتروني",
