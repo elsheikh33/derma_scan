@@ -27,6 +27,7 @@ import 'DiseasesDescription/BruisePage.dart';
 import 'DiseasesDescription/MelanomaPage.dart';
 import 'config/Provider/auth_provider.dart';
 import 'config/Provider/language_provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 void main() async {
@@ -67,32 +68,50 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
+    return Consumer<LanguageProvider>(
+      builder: (context, lan, child) {
+        final isArabic = lan.defLan != 1;
 
-      routes: {
-        '/': (context) => SplashScreen(),
-        HomePage.id: (context) => HomePage(),
-        SignupPage.id: (context) => SignupPage(),
-        LoginPage.id: (context) => LoginPage(),
-        WelcomePage.id: (context) => WelcomePage(),
-        MainPage.id: (context) => MainPage(),
-        ProfilePage.id:(context) => ProfilePage(),
-        DetectPage.id:(context)=>DetectPage(),
-        LocatorPage.id:(context)=>LocatorPage(),
-        'herpes_zoster': (context) => HerpesPage(),
-        'acne': (context) => AcnePage(),
-        'psoriasis': (context) => PsoriasisPage(),
-        'bruise':(context)=>BruisePage(),
-        'eczema': (context) => EczemaPage(),
-        'warts': (context) => WartsPage(),
-        'urticaria': (context) => UrticariaPage(),
-        'vitiligo': (context) => VitiligoPage(),
-        'atopic_dermatitis': (context) => AtopicDermatitisPage(),
-        'basal_cell_carcinoma': (context) => BasalCellCarcinomaPage(),
-        'melanoma': (context) => MelanomaPage(),
-        'cancer':(context)=>CancerPage()
-      }
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          locale: isArabic ? const Locale('ar') : const Locale('en'),
+          supportedLocales: const [
+            Locale('en'),
+            Locale('ar'),
+          ],
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          // REMOVE Directionality! Flutter handles it automatically now
+          routes: {
+            '/': (context) => SplashScreen(),
+            HomePage.id: (context) => HomePage(),
+            SignupPage.id: (context) => SignupPage(),
+            LoginPage.id: (context) => LoginPage(),
+            WelcomePage.id: (context) => WelcomePage(),
+            MainPage.id: (context) => MainPage(),
+            ProfilePage.id: (context) => ProfilePage(),
+            DetectPage.id: (context) => DetectPage(),
+            LocatorPage.id: (context) => LocatorPage(),
+            'herpes_zoster': (context) => HerpesPage(),
+            'acne': (context) => AcnePage(),
+            'psoriasis': (context) => PsoriasisPage(),
+            'bruise': (context) => BruisePage(),
+            'eczema': (context) => EczemaPage(),
+            'warts': (context) => WartsPage(),
+            'urticaria': (context) => UrticariaPage(),
+            'vitiligo': (context) => VitiligoPage(),
+            'atopic_dermatitis': (context) => AtopicDermatitisPage(),
+            'basal_cell_carcinoma': (context) => BasalCellCarcinomaPage(),
+            'melanoma': (context) => MelanomaPage(),
+            'cancer': (context) => CancerPage(),
+          },
+        );
+      },
     );
   }
 }
+
+
