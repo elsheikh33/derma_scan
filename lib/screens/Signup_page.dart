@@ -120,7 +120,7 @@ class _SignupPageState extends State<SignupPage> {
                           {"value": "M", "label": lan.getTexts("Male")},
                           {"value": "F", "label": lan.getTexts("Female")},
                         ],
-                        title: "Gender",
+                        title: lan.getTexts("Gender"),
                         fillColor: AppColor.TxtFieldColor,
                         onChanged: (value) {
                           setState(() {

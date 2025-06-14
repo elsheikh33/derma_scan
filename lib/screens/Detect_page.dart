@@ -261,14 +261,14 @@ class _DetectPageState extends State<DetectPage> {
     required Function(String?) onChanged,
   }) {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          value: value,
+          value: items.contains(value) ? value : null,
           hint: Text(label, style: TextStyle(color: Colors.grey)),
           icon: Icon(Icons.arrow_drop_down, color: Colors.grey),
           isExpanded: true,
