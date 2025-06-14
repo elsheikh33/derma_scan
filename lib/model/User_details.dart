@@ -6,37 +6,42 @@ class UserDetails {
   final String gender;
   final String? skinType;
   final String? allergies;
+  final List<String> diseases; // Add diseases list
 
   UserDetails({
-    required this.uid,  // Make UID required
+    required this.uid,
     required this.username,
     required this.email,
     this.birthdate,
     required this.gender,
     this.allergies,
-    this.skinType
+    this.skinType,
+    this.diseases = const [], // Initialize as empty list
   });
 
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
-      'name': username,
+      'username': username,
       'email': email,
       'birthdate': birthdate,
       'gender': gender,
+      'skinType': skinType,
+      'allergies': allergies,
+      'diseases': diseases, // Include diseases in the map
     };
   }
 
   factory UserDetails.fromMap(Map<String, dynamic> map) {
     return UserDetails(
-      uid: map['uid'],
-      username: map['username'],
-      email: map['email'],
-      birthdate: map['date_of_birth']?.toString(),
-      gender: map['gender'],
-      skinType: map['skinType'],  // Ensure these are mapped
+      uid: map['uid'] ?? '',
+      username: map['username'] ?? '',
+      email: map['email'] ?? '',
+      birthdate: map['birthdate']?.toString(),
+      gender: map['gender'] ?? '',
+      skinType: map['skinType'],
       allergies: map['allergies'],
+      diseases: List<String>.from(map['diseases'] ?? []), // Convert to List<String>
     );
   }
-
 }

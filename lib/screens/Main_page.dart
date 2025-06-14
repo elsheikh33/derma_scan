@@ -148,13 +148,15 @@ class DiseaseGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
+
     return Padding(
       padding: const EdgeInsets.only(left: 10,right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Know more about your condition!",
+            lan.getTexts("Know more about your condition!"),
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,

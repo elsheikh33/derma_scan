@@ -1,8 +1,13 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad/Constants/Colors.dart';
 import 'package:provider/provider.dart';
 
 import '../config/Provider/auth_provider.dart';
+import '../config/Provider/language_provider.dart';
+import '../model/detection_history.dart';
 
 class HistoryPage extends StatefulWidget {
   static const String id = "History_page";
@@ -12,43 +17,36 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  late Future<List<DetectionHistory>> _historyFuture;
   late TextEditingController usernameController;
 
-  State<HistoryPage> createState() => _HistoryPageState();
-
+  @override
   void initState() {
     super.initState();
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
-    var userDetails = authProvider.userDetails;
-
-    // Initialize controllers with user data
-    usernameController = TextEditingController(text: userDetails?.username);
-     }
+    _historyFuture = authProvider.getDetectionHistory();
+    usernameController = TextEditingController(
+        text: authProvider.userDetails?.username);
+  }
 
   @override
   Widget build(BuildContext context) {
+    var lan =Provider.of<LanguageProvider>(context, listen: true);
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
     String username = authProvider.userDetails?.username ?? "User";
-    final mockDetections = [
-      {
-        'disease': 'Eczema',
-        'date': '30/3/2025',
-        'color': Color(0xFF8E97FD),
-        'image': 'assets/eczemaImage.png',
-      },
-      {
-        'disease': 'Acne',
-        'date': '14/4/2025',
-        'color': Color(0xFFFFC288),
-        'image': 'assets/acneImage.png',
-      },
-    ];
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
-      body: SafeArea(
+        backgroundColor: const Color(0xFFF5F5F5),
+    body: RefreshIndicator(
+    onRefresh: () async {
+    setState(() {
+    _historyFuture = Provider.of<AuthProvider>(context, listen: false)
+        .getDetectionHistory();
+    });
+    },
+    child: SafeArea(
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 15),
@@ -78,12 +76,12 @@ class _HistoryPageState extends State<HistoryPage> {
               ),
             ),
             const SizedBox(height: 20),
-             Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 25),
               child: Row(
                 children: [
                   Text(
-                    '$username\'s Profile',
+                    '$username\'s ,${lan.getTexts("historyToggle")} ' ,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -93,12 +91,12 @@ class _HistoryPageState extends State<HistoryPage> {
                 ],
               ),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25, vertical: 4),
               child: Row(
                 children: [
                   Text(
-                    'VIEW YOUR PREVIOUS DETECTIONS',
+                    lan.getTexts("VIEW YOUR PREVIOUS DETECTIONS"),
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey,
@@ -108,82 +106,206 @@ class _HistoryPageState extends State<HistoryPage> {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25,vertical:4 ),
+              child: Row(
+                children: [
+                    ElevatedButton(
+                      onPressed: () => setState(() {
+                        _historyFuture = Provider.of<AuthProvider>(context, listen: false)
+                            .getDetectionHistory();
+                      }),
+                      child: Text(lan.getTexts("Refresh")),
+                    ),
+                ],
+              ),
+            ),
             const SizedBox(height: 20),
-
-
-            // Grid
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: GridView.builder(
-                  itemCount: mockDetections.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 0.65,
-                  ),
-                  itemBuilder: (context, index) {
-                    final item = mockDetections[index];
-                    return Container(
-                      decoration: BoxDecoration(
-                        color:AppColor.mainColor,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      padding: const EdgeInsets.all(12),
+              child: FutureBuilder<List<DetectionHistory>>(
+                future: _historyFuture,
+                builder: (context, snapshot) {
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  if (snapshot.hasError) {
+                    return Center(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Expanded(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.asset(
-                                item['image'] as String,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            item['disease'] as String,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            item['date'] as String,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          const SizedBox(height: 8),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                backgroundColor: Colors.white,
-                                foregroundColor: Colors.black,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                textStyle: const TextStyle(fontSize: 14),
-                              ),
-                              child: const Text("View"),
-                            ),
-                          )
+                          Text('Error loading history'),
+                          Text(snapshot.error.toString()),
                         ],
                       ),
                     );
-                  },
-                ),
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(lan.getTexts("No detection history found")),
+                        ],
+                      ),
+                    );
+                  }
+
+                  final detections = snapshot.data!;
+
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: GridView.builder(
+                      itemCount: detections.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16,
+                        crossAxisSpacing: 16,
+                        childAspectRatio: 0.65,
+                      ),
+                      itemBuilder: (context, index) {
+                        final item = detections[index];
+                        final formattedDate = '${item.date.day}/${item.date.month}/${item.date.year}';
+
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: _getColorForIndex(index),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                          Expanded(
+                          child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: item.imageBase64 != null && item.imageBase64!.isNotEmpty
+                              ? Image.memory(
+                            base64Decode(item.imageBase64!),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            errorBuilder: (ctx, error, stack) => _buildPlaceholder(), // Fallback on error
+                          )
+                              : _buildPlaceholder(), // Fallback if null/empty
+                        ),
+                        ),
+
+                              const SizedBox(height: 8),
+                              Text(
+                                item.disease,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                formattedDate,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              const SizedBox(height: 8),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    _showDetailsDialog(context, item);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 8),
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: Colors.black,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    textStyle: const TextStyle(fontSize: 14),
+                                  ),
+                                  child:  Text(lan.getTexts("View")),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ),
-        ]
+          ],
         ),
+      ),
+    ),
+    );
+  }
+
+  Color _getColorForIndex(int index) {
+    final colors = [
+      Color(0xFF8E97FD),
+      Color(0xFFFFC288),
+      Color(0xFFA8D8EA),
+      Color(0xFFAA96DA),
+    ];
+    return colors[index % colors.length];
+  }
+
+  void _showDetailsDialog(BuildContext context, DetectionHistory item) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(item.disease),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (item.imageBase64 != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Image.memory(base64Decode(item.imageBase64!)),
+                ),
+              Text(
+                item.description,
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Detection Details:',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              ...item.userInputs.entries.map((e) =>
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Text('${e.key}: ${e.value ?? "Not specified"}'),
+                  )
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+  DateTime _parseFirestoreDate(dynamic date) {
+    if (date is Timestamp) { // Handle Firestore Timestamp
+      return date.toDate();
+    } else if (date is String) { // Handle ISO string (from toIso8601String())
+      return DateTime.parse(date);
+    }
+    return DateTime.now(); // Fallback
+  }
+  Widget _buildPlaceholder() {
+    return Container(
+      color: Colors.grey[200],
+      child: Center(
+        child: Icon(Icons.image, size: 50, color: Colors.grey[400]),
       ),
     );
   }

@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
             ),
              Center(child: Text(lan.getTexts("catchLineHome"),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),)),
              const SizedBox(height: 5),
-             Center(child: Text("Thousand of people are using DermaScan for Skin Detection",style: TextStyle(color: Colors.grey,fontSize: 16,),textAlign: TextAlign.center,)),
+             Center(child: Text(lan.getTexts("phraseHome"),style: TextStyle(color: Colors.grey,fontSize: 16),)),
              const SizedBox(height: 5),
              customButton(
                 text: lan.getTexts("signUp"),

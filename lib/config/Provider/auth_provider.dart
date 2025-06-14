@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import '../../model/User_details.dart';
+import '../../model/detection_history.dart';
 import '../../screens/Login_page.dart';
 import '../../screens/Main_page.dart';
 import '../../screens/Welcome_page.dart';
@@ -207,6 +208,58 @@ class AuthProvider extends ChangeNotifier {
       Fluttertoast.showToast(msg: "Profile updated successfully!");
     } catch (e) {
       Fluttertoast.showToast(msg: "Error updating profile.");
+    }
+  }
+  final CollectionReference _historyCollection =
+  FirebaseFirestore.instance.collection('DetectionHistory');
+
+  Future<void> saveDetectionHistory({
+    required String disease,
+    required String description,
+    required Map<String, String?> userInputs,
+    required String? imageBase64,
+  }) async {
+    try {
+      await _historyCollection.add({
+        'userId': _user!.uid,
+        'disease': disease,
+        'description': description,
+        'date': FieldValue.serverTimestamp(), // Use server timestamp
+        'imageBase64': imageBase64,
+        'userInputs': userInputs,
+      });
+    }
+
+     catch (e, stackTrace) {
+      print('Failed to save history: $e');
+      print(stackTrace);
+      Fluttertoast.showToast(
+        msg: "Couldn't save report to history",
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
+  }
+
+  // Add this method (place it with other "get" methods)
+  Future<List<DetectionHistory>> getDetectionHistory() async {
+    if (_user == null) return [];
+
+    try {
+      final querySnapshot = await _historyCollection
+          .where('userId', isEqualTo: _user!.uid)
+          .orderBy('date', descending: true)
+          .get();
+
+      return querySnapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        return DetectionHistory.fromMap({
+          ...data,
+          'id': doc.id, // Include document ID if needed
+        });
+      }).toList();
+    } catch (e) {
+      print('Error fetching history: $e');
+      return [];
     }
   }
 }
