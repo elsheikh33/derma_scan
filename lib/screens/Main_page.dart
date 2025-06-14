@@ -132,19 +132,20 @@ class _MainScreenState extends State<MainPage> {
 
 class DiseaseGridView extends StatelessWidget {
   final List<Map<String, String>> diseases = [
-    {'name': 'Herpes Zoster', 'image': 'assets/herpsIamge.png'},
-    {'name': 'Psoriasis', 'image': 'assets/PsoriasisImage.png'},
-    {'name': 'Eczema', 'image': 'assets/eczemaImage.png'},
-    {'name': 'Warts', 'image': 'assets/wartsImage.png'},
-    {'name': 'Urticaria', 'image': 'assets/UrticariaImage.png'},
-    {'name': 'Bruise', 'image': 'assets/BruiseImage.png'},
-    {'name': 'Acne', 'image': 'assets/acneImage.png'},
-    {'name': 'Vitiligo', 'image': 'assets/VitiligoImage.png'},
-    {'name': 'Dermatitis', 'image': 'assets/atopic_dermatitis.png'},
-    {'name': 'Basal Cell', 'image': 'assets/BasalCellCarcinomaImage.png'},
-    {'name': 'Melanoma', 'image': 'assets/melanomaImage.png'},
-    {'name': 'Cancer', 'image': 'assets/CancerDisease.png'},
+    {'name': 'HerpesZosterTitle', 'image': 'assets/herpsIamge.png'},
+    {'name': 'PsoriasisTitle', 'image': 'assets/PsoriasisImage.png'},
+    {'name': 'EczemaTitle', 'image': 'assets/eczemaImage.png'},
+    {'name': 'WartsTitle', 'image': 'assets/wartsImage.png'},
+    {'name': 'UrticariaTitle', 'image': 'assets/UrticariaImage.png'},
+    {'name': 'BruiseTitle', 'image': 'assets/BruiseImage.png'},
+    {'name': 'AcneTitle', 'image': 'assets/acneImage.png'},
+    {'name': 'VitiligoTitle', 'image': 'assets/VitiligoImage.png'},
+    {'name': 'DermatitisTitle', 'image': 'assets/atopic_dermatitis.png'},
+    {'name': 'BasalCellTitle', 'image': 'assets/BasalCellCarcinomaImage.png'},
+    {'name': 'MelanomaTitle', 'image': 'assets/melanomaImage.png'},
+    {'name': 'CancerTitle', 'image': 'assets/CancerDisease.png'},
   ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -245,7 +246,7 @@ class DiseaseGridView extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        diseases[index]['name']!,
+                        lan.getTexts(diseases[index]['name']!),  // ✅ This will auto-translate
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14,
