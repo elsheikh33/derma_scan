@@ -41,7 +41,7 @@ class LanguageProvider extends ChangeNotifier{
     "phraseHome": "آلاف الأشخاص يستخدمون DermaScan\n                   للكشف عن البشرة",
     "signUp": "التسجيل",
     "accountCheckHome": "هل لديك حساب بالفعل؟",
-    "logIn": "تسجيل الدخول ",
+    "logIn": " تسجيل الدخول ",
     "createAcc": "أنشئ حسابك",
     "Username": "اسم المستخدم",
     "Email": "البريد الإلكتروني",
@@ -53,7 +53,7 @@ class LanguageProvider extends ChangeNotifier{
     "errorM1": "خطأ: يرجى إدخال جميع المعلومات",
     "hi": "مرحبًا",
     "questionTitle": "يرجى الإجابة على الأسئلة التالية لمساعدتنا في تقديم تقرير دقيق!",
-    "welcomeBack": "مرحبًا بعودتك!",
+    "welcomeBack": "مرحبًا بعودتك",
     "ContWithFaceBook": "المتابعة باستخدام فيسبوك",
     "ContWithGoogle": "المتابعة باستخدام جوجل",
     "ContWithMail": "أو تسجيل الدخول عبر البريد الإلكتروني",
@@ -66,17 +66,18 @@ class LanguageProvider extends ChangeNotifier{
     "detectToggle": "الفحص",
     "historyToggle": "سجل",
     "profileToggle": "الملف الشخصي",
-    "HerpesZosterTitle": "الهربس النطاقي",
+    "HerpesZosterTitle": "الحزام الناري",
     "PsoriasisTitle": "الصدفية",
     "EczemaTitle": "الإكزيما",
     "WartsTitle": "الثآليل",
     "UrticariaTitle": "الشرى",
-    "BruiseTitle": "الكدمات",
+    "BruiseTitle": "كدمات",
     "AcneTitle": "حب الشباب",
     "VitiligoTitle": "البهاق",
     "DermatitisTitle": "التهاب الجلد",
-    "BasalCellTitle": "سرطان الخلايا القاعدية",
+    "BasalCellTitle": " الخلايا القاعدية",
     "MelanomaTitle": "الميلانوما",
+    "CancerTitle":"السرطان",
     "questionReport": "يرجى الإجابة على الأسئلة التالية لمساعدتنا في تقديم تقرير دقيق",
     "questionSymptom": "ما الأعراض التي تعاني منها؟",
     "rednessSymptom": "احمرار",
@@ -103,8 +104,8 @@ class LanguageProvider extends ChangeNotifier{
     "painList9": "٩",
     "painList10": "١٠",
     "question_progressive": "هل الحالة تتطور أم تتراجع؟",
-    "progressiveList": "تطور",
-    "RegressiveList": "تراجع",
+    "progressiveList": "تتطور",
+    "RegressiveList": "تتراجع",
     "upload_photo": "يرجى تحميل صورة",
     "choose_photo": "اختر من الصور",
     "selected_photo": "تم اختيار الصورة",
@@ -128,15 +129,15 @@ class LanguageProvider extends ChangeNotifier{
     "Language": "لغة",
     "Skip":"تخطى >",
     "get started": "البدء",
-    "cameraNote": "يرجى ملاحظة أنه من الأفضل التقاط صورة بالكاميرا الخلفية والإضاءة الجيدة للحصول على اكتشاف أفضل",
+    "cameraNote": "يرجى ملاحظة أنه من الأفضل التقاط صورة بالكاميرا الخلفية والإضاءة الجيدة للحصول على تشخيص أفضل",
     "VIEW YOUR PREVIOUS DETECTIONS":"عرض اكتشافاتك السابقة",
     "No detection history found":"لم يتم العثور على سجل الكشف",
     "Refresh":"تحديث",
     "View":"عرض",
     "Know more about your condition!":"اعرف المزيد عن حالتك!",
     "snackBarNoteImg":"يرجى اختيار صورة أولاً",
-    "snackBarNoteDetect":"فشل التشخيص. يرجى المحاولة مرة أخرىً"
-
+    "snackBarNoteDetect":"فشل التشخيص. يرجى المحاولة مرة أخرىً",
+    "UnchangeList":"ثابت"
 
 
 
@@ -189,6 +190,7 @@ class LanguageProvider extends ChangeNotifier{
     "BasalCellTitle":"Basal Cell",
     "Pain level": "Pain level [1-10]",
     "MelanomaTitle":"Melanoma",
+    "CancerTitle":"Cancer",
     "questionReport": "Please answer the following questions to help us give you a precise report!",
     "questionSymptom": "What symptoms are you experiencing?",
     "rednessSymptom": "Redness",
@@ -244,6 +246,7 @@ class LanguageProvider extends ChangeNotifier{
     "Refresh":"Refresh",
     "View":"View",
     "snackBarNoteImg":"Please select an image first",
-    "snackBarNoteDetect":"Detection failed. Please try again.ً"
+    "snackBarNoteDetect":"Detection failed. Please try again.ً",
+    "UnchangeList":"Unchanged"
   };
 }

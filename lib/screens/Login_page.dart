@@ -68,39 +68,39 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20), 
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width - 40, 
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: MaterialButton(
-                            height: 50,
-                              color: const Color(0xFF3758ff),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                              ),
-                              child:  Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Row(children: [
-                                  Icon(Icons.facebook_rounded,color: Colors.white,),
-                                  SizedBox(width: 30,),
-                                  Text(lan.getTexts("ContWithFaceBook"),style: TextStyle(color: Colors.white),),
-                                ],),
-                              ),
-                              
-                              onPressed: () {
-                                print('hello');
-                              }),
-                        ),
-                      ),
-                    ),
-                  )
+                  // Positioned(
+                  //   bottom: 0,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(
+                  //         horizontal: 20),
+                  //     child: SizedBox(
+                  //       width: MediaQuery.of(context).size.width - 40,
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  //         child: MaterialButton(
+                  //           height: 50,
+                  //             color: const Color(0xFF3758ff),
+                  //             shape: const RoundedRectangleBorder(
+                  //               borderRadius: BorderRadius.all(
+                  //                 Radius.circular(20),
+                  //               ),
+                  //             ),
+                  //             child:  Padding(
+                  //               padding: EdgeInsets.all(8.0),
+                  //               child: Row(children: [
+                  //                 Icon(Icons.facebook_rounded,color: Colors.white,),
+                  //                 SizedBox(width: 30,),
+                  //                 Text(lan.getTexts("ContWithFaceBook"),style: TextStyle(color: Colors.white),),
+                  //               ],),
+                  //             ),
+                  //
+                  //             onPressed: () {
+                  //               print('hello');
+                  //             }),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
 
@@ -110,32 +110,32 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: MaterialButton(
-                          height: 50,
-                          color: Colors.white,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                          ),
-                          child:  Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Row(children: [
-                              Image.asset('assets/Google.png'),
-                              SizedBox(width: 30,),
-                              Text(lan.getTexts("ContWithGoogle"),style: TextStyle(color: Colors.black),),
-                            ],),
-                          ),
-
-                          onPressed: () {
-                            print('hello');
-                          }),
-                    ),
-                    SizedBox(height: 20,),
-                    Center(child: Text(lan.getTexts("ContWithMail"),style: TextStyle(fontWeight: FontWeight.bold),),),
-                    SizedBox(height: 20,),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: MaterialButton(
+                    //       height: 50,
+                    //       color: Colors.white,
+                    //       shape: const RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.all(
+                    //           Radius.circular(20),
+                    //         ),
+                    //       ),
+                    //       child:  Padding(
+                    //         padding: EdgeInsets.all(8.0),
+                    //         child: Row(children: [
+                    //           Image.asset('assets/Google.png'),
+                    //           SizedBox(width: 30,),
+                    //           Text(lan.getTexts("ContWithGoogle"),style: TextStyle(color: Colors.black),),
+                    //         ],),
+                    //       ),
+                    //
+                    //       onPressed: () {
+                    //         print('hello');
+                    //       }),
+                    // ),
+                    // SizedBox(height: 20,),
+                    // Center(child: Text(lan.getTexts("ContWithMail"),style: TextStyle(fontWeight: FontWeight.bold),),),
+                    // SizedBox(height: 20,),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextField(

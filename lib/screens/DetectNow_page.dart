@@ -209,7 +209,7 @@ Provide a professional dermatological consultation covering:
                     Center(
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
+                          Navigator.pushNamed(
                             context,
                             LocatorPage.id,
                           );
