@@ -41,7 +41,7 @@ class LanguageProvider extends ChangeNotifier{
     "phraseHome": "آلاف الأشخاص يستخدمون DermaScan\n                   للكشف عن البشرة",
     "signUp": "التسجيل",
     "accountCheckHome": "هل لديك حساب بالفعل؟",
-    "logIn": "تسجيل الدخول ",
+    "logIn": " تسجيل الدخول ",
     "createAcc": "أنشئ حسابك",
     "Username": "اسم المستخدم",
     "Email": "البريد الإلكتروني",
@@ -103,8 +103,8 @@ class LanguageProvider extends ChangeNotifier{
     "painList9": "٩",
     "painList10": "١٠",
     "question_progressive": "هل الحالة تتطور أم تتراجع؟",
-    "progressiveList": "تطور",
-    "RegressiveList": "تراجع",
+    "progressiveList": "تتطور",
+    "RegressiveList": "تتراجع",
     "upload_photo": "يرجى تحميل صورة",
     "choose_photo": "اختر من الصور",
     "selected_photo": "تم اختيار الصورة",
@@ -135,8 +135,8 @@ class LanguageProvider extends ChangeNotifier{
     "View":"عرض",
     "Know more about your condition!":"اعرف المزيد عن حالتك!",
     "snackBarNoteImg":"يرجى اختيار صورة أولاً",
-    "snackBarNoteDetect":"فشل التشخيص. يرجى المحاولة مرة أخرىً"
-
+    "snackBarNoteDetect":"فشل التشخيص. يرجى المحاولة مرة أخرىً",
+    "UnchangeList":"ثابت"
 
 
 
@@ -244,6 +244,7 @@ class LanguageProvider extends ChangeNotifier{
     "Refresh":"Refresh",
     "View":"View",
     "snackBarNoteImg":"Please select an image first",
-    "snackBarNoteDetect":"Detection failed. Please try again.ً"
+    "snackBarNoteDetect":"Detection failed. Please try again.ً",
+    "UnchangeList":"Unchanged"
   };
 }

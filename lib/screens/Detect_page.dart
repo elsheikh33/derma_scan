@@ -183,7 +183,9 @@ class _DetectPageState extends State<DetectPage> {
                 value: progress,
                 items: [
                   lan.getTexts("progressiveList"),
-                  lan.getTexts("RegressiveList")],
+                  lan.getTexts("RegressiveList"),
+                  lan.getTexts("UnchangeList"),
+                ],
                 onChanged: (value) => setState(() => progress = value),
               ),
               SizedBox(height: 10),
