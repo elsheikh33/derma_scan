@@ -83,7 +83,7 @@ class _DetectPageState extends State<DetectPage> {
                   ),
                   SizedBox(width: 10),
                   Text(
-                    'Hi, $username ',
+                    '$username ${lan.getTexts("hi")}',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
@@ -95,7 +95,7 @@ class _DetectPageState extends State<DetectPage> {
               SizedBox(height: 10),
               // Title
               Text(
-                'Please answer the following questions to help us give you a precise report!',
+                lan.getTexts("questionReport"),
                 style: TextStyle(
                   color: Colors.amber,
                   fontSize: 21,
@@ -104,68 +104,91 @@ class _DetectPageState extends State<DetectPage> {
                 textAlign: TextAlign.center,),
               SizedBox(height: 10),
               // DropDown 1 - Symptoms
-              const Text(
-                'What symptoms are you experiencing?',
+               Text(
+                lan.getTexts("questionSymptom"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
               _buildDropdown(
                 label: '',
                 value: symptom,
-                items: ['Redness', 'Swelling', 'Itchiness', 'Pain'],
+                items: [
+                  lan.getTexts("rednessSymptom"),
+                  lan.getTexts("swellingSymptom"),
+                  lan.getTexts("ItchinessSymptom"),
+                  lan.getTexts("PainSymptom"),
+                ],
                 onChanged: (value) => setState(() => symptom = value),
               ),
               SizedBox(height: 10),
               // DropDown 2 - Duration
-              const Text(
-                'How long have you been experiencing these symptoms?',
+               Text(
+                 lan.getTexts("questionHowLong"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
               _buildDropdown(
                 label: '',
                 value: duration,
-                items: ['1-3 days', '1 week', '2 weeks', 'More than a month'],
+                items: [
+                  lan.getTexts("daysList"),
+                  lan.getTexts("week1List"),
+                  lan.getTexts("week2List"),
+                  lan.getTexts("monthList"),],
                 onChanged: (value) => setState(() => duration = value),
               ),
               SizedBox(height: 10),
               // DropDown 3 - Itchiness
-              const Text(
-                'Is there itchiness?',
+               Text(
+                lan.getTexts("questionItch"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
               _buildDropdown(
                 label: '',
                 value: itchiness,
-                items: ['Yes', 'No'],
+                items: [
+                  lan.getTexts("Agree"),
+                  lan.getTexts("Disagree")],
                 onChanged: (value) => setState(() => itchiness = value),
               ),
               SizedBox(height: 10),
               // DropDown 4 - Pain Level
-              const Text(
-                'Pain level [1-10]',
+               Text(
+                lan.getTexts("Pain level"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
               _buildDropdown(
                 label: '',
                 value: painLevel,
-                items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                items: [
+                  lan.getTexts("painList1"),
+                  lan.getTexts("painList2"),
+                  lan.getTexts("painList3"),
+                  lan.getTexts("painList4"),
+                  lan.getTexts("painList5"),
+                  lan.getTexts("painList6"),
+                  lan.getTexts("painList7"),
+                  lan.getTexts("painList8"),
+                  lan.getTexts("painList9"),
+                  lan.getTexts("painList10")],
                 onChanged: (value) => setState(() => painLevel = value),
               ),
               SizedBox(height: 10),
               // DropDown 5 - Progression
-              const Text(
-                'Is it progressive or regressive?',
+               Text(
+                 lan.getTexts("question_progressive"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
               _buildDropdown(
                 label: '',
                 value: progress,
-                items: ['Progressive', 'Regressive'],
+                items: [
+                  lan.getTexts("progressiveList"),
+                  lan.getTexts("RegressiveList")],
                 onChanged: (value) => setState(() => progress = value),
               ),
               SizedBox(height: 10),
               // Image Picker
-              const Text(
-                'upload photo please',
+               Text(
+                lan.getTexts("upload_photo"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
               GestureDetector(
@@ -183,22 +206,22 @@ class _DetectPageState extends State<DetectPage> {
                       SizedBox(height: 10),
                       Text(
                         _image == null
-                            ? 'Choose from photos'
-                            : 'Photo Selected',
+                            ? lan.getTexts("choose_photo")
+                            : lan.getTexts("selected_photo"),
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
                   ),
                 ),
               ),
-              Text("please note that it\'s better to take a photo with the back camera and good lightning for a better detection !",style: TextStyle(fontSize: 11, color: Color(0XFF8B0000) ,fontWeight: FontWeight.bold,)),
+              Text(lan.getTexts("cameraNote"),style: TextStyle(fontSize: 11, color: Color(0XFF8B0000) ,fontWeight: FontWeight.bold,)),
               SizedBox(height: 20),
               // Detect Now Button
               ElevatedButton(
                 onPressed: () async {
                   if (_image == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Please select an image first")),
+                      SnackBar(content: Text(lan.getTexts("snackBarNoteImg"))),
                     );
                     return;
                   }
@@ -206,7 +229,7 @@ class _DetectPageState extends State<DetectPage> {
                   final result = await detectDisease(_image!);
                   if (result == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Detection failed. Please try again.")),
+                      SnackBar(content: Text(lan.getTexts("snackBarNoteDetect"))),
                     );
                     return;
                   }
@@ -239,7 +262,7 @@ class _DetectPageState extends State<DetectPage> {
                   minimumSize: Size(double.infinity, 60),
                 ),
                 child: Text(
-                  'DETECT NOW',
+                  lan.getTexts("detect_button"),
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,

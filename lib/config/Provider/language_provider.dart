@@ -77,7 +77,7 @@ class LanguageProvider extends ChangeNotifier{
     "DermatitisTitle": "التهاب الجلد",
     "BasalCellTitle": "سرطان الخلايا القاعدية",
     "MelanomaTitle": "الميلانوما",
-    "questionReport": "يرجى الإجابة على الأسئلة التالية لمساعدتنا في تقديم تقرير دقيق!",
+    "questionReport": "يرجى الإجابة على الأسئلة التالية لمساعدتنا في تقديم تقرير دقيق",
     "questionSymptom": "ما الأعراض التي تعاني منها؟",
     "rednessSymptom": "احمرار",
     "Pain level":"مستوى الألم [١-١٠]",
@@ -108,7 +108,7 @@ class LanguageProvider extends ChangeNotifier{
     "upload_photo": "يرجى تحميل صورة",
     "choose_photo": "اختر من الصور",
     "selected_photo": "تم اختيار الصورة",
-    "detect_button": "اكتشف الآن",
+    "detect_button": "شخّص الآن",
     "logOut": "تسجيل الخروج",
     "checkMssg": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
     "cancel": "إلغاء",
@@ -128,12 +128,14 @@ class LanguageProvider extends ChangeNotifier{
     "Language": "لغة",
     "Skip":"تخطى >",
     "get started": "البدء",
-    "cameraNote": "يرجى ملاحظة أنه من الأفضل التقاط صورة بالكاميرا الخلفية والإضاءة الجيدة للحصول على اكتشاف أفضل!",
+    "cameraNote": "يرجى ملاحظة أنه من الأفضل التقاط صورة بالكاميرا الخلفية والإضاءة الجيدة للحصول على اكتشاف أفضل",
     "VIEW YOUR PREVIOUS DETECTIONS":"عرض اكتشافاتك السابقة",
     "No detection history found":"لم يتم العثور على سجل الكشف",
     "Refresh":"تحديث",
     "View":"عرض",
-    "Know more about your condition!":"اعرف المزيد عن حالتك!"
+    "Know more about your condition!":"اعرف المزيد عن حالتك!",
+    "snackBarNoteImg":"يرجى اختيار صورة أولاً",
+    "snackBarNoteDetect":"فشل التشخيص. يرجى المحاولة مرة أخرىً"
 
 
 
@@ -240,6 +242,8 @@ class LanguageProvider extends ChangeNotifier{
     "VIEW YOUR PREVIOUS DETECTIONS":"VIEW YOUR PREVIOUS DETECTIONS",
     "No detection history found":"No detection history found",
     "Refresh":"Refresh",
-    "View":"View"
+    "View":"View",
+    "snackBarNoteImg":"Please select an image first",
+    "snackBarNoteDetect":"Detection failed. Please try again.ً"
   };
 }
