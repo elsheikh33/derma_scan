@@ -21,6 +21,7 @@ import 'package:grad/screens/Signup_page.dart';
 import 'package:grad/screens/Splash_screen.dart';
 import 'package:grad/screens/Welcome_page.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Controller/dependency_injection.dart';
 import 'DiseasesDescription/AtopicDermatitisPage.dart';
 import 'DiseasesDescription/BasalCellCarcinomaPage.dart';
@@ -43,7 +44,8 @@ void main() async {
     );
 
     DependecyInjection().init(); // Initialize dependencies after Firebase
-
+    final prefs = await SharedPreferences.getInstance();
+    final isLoggedIn = prefs.getBool(AuthProvider.isLoggedInKey) ?? false;
     runApp(
       MultiProvider(
         providers: [
@@ -52,7 +54,7 @@ void main() async {
             create: (ctx) => LanguageProvider(),
           ),
         ],
-        child: MyApp(),
+        child: MyApp(isLoggedIn: isLoggedIn),
       ),
     );
   } catch (e) {
@@ -61,8 +63,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
 
+  const MyApp({super.key, required this.isLoggedIn});
   @override
   Widget build(BuildContext context) {
     return Consumer<LanguageProvider>(
@@ -91,6 +94,7 @@ class MyApp extends StatelessWidget {
               child: child!,
             );
           },
+          initialRoute: isLoggedIn ? MainPage.id : LoginPage.id,
           routes: {
             '/': (context) => SplashScreen(),
             HomePage.id: (context) => HomePage(),

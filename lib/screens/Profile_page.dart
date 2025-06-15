@@ -184,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         label: lan.getTexts("Username"),
                       ),
                       CustomTextField(
-                        isEditing: isEditing,
+                        isEditing: false,
                         controller: emailController,
                         label: lan.getTexts("Email"),
                       ),

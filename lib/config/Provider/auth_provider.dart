@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/User_details.dart';
 import '../../model/detection_history.dart';
 import '../../screens/Login_page.dart';
@@ -13,7 +14,9 @@ class AuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final CollectionReference _historyCollection = FirebaseFirestore.instance.collection('DetectionHistory');
-
+  static const String isLoggedInKey = 'isLoggedIn';
+  static const String userIdKey = 'userId';
+  static const String userEmailKey = 'userEmail';
   User? _user;
   UserDetails? _userDetails;
 
@@ -29,15 +32,28 @@ class AuthProvider extends ChangeNotifier {
   UserDetails? get userDetails => _userDetails;
 
   Future<void> initialize() async {
-    _auth.authStateChanges().listen((User? user) async {
-      _user = user;
-      if (user != null) {
-        await fetchUserDetails();
-      } else {
-        _userDetails = null;
-      }
+    // Check shared preferences first
+    final prefs = await SharedPreferences.getInstance();
+    final isLoggedIn = prefs.getBool(isLoggedInKey) ?? false;
+
+    if (isLoggedIn) {
+      // If shared preferences says we're logged in, verify with Firebase
+      _auth.authStateChanges().listen((User? user) async {
+        _user = user;
+        if (user != null) {
+          await fetchUserDetails();
+        } else {
+          // If Firebase says we're not logged in, clear shared preferences
+          await _clearPreferences();
+          _userDetails = null;
+        }
+        notifyListeners();
+      });
+    } else {
+      _user = null;
+      _userDetails = null;
       notifyListeners();
-    });
+    }
   }
 
   Future<void> signup({
@@ -98,6 +114,22 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+
+
+  Future<void> _saveLoginState(User user) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(isLoggedInKey, true);
+    await prefs.setString(userIdKey, user.uid);
+    await prefs.setString(userEmailKey, user.email ?? '');
+  }
+
+  Future<void> _clearPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(isLoggedInKey);
+    await prefs.remove(userIdKey);
+    await prefs.remove(userEmailKey);
+  }
+
   Future<void> login(BuildContext context, String email, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -108,6 +140,7 @@ class AuthProvider extends ChangeNotifier {
       _user = userCredential.user;
 
       if (_user != null) {
+        await _saveLoginState(_user!); // Save login state
         await fetchUserDetails();
         if (_userDetails != null) {
           if (_userDetails!.skinType!.isNotEmpty && _userDetails!.allergies!.isNotEmpty) {
@@ -126,6 +159,19 @@ class AuthProvider extends ChangeNotifier {
       Fluttertoast.showToast(msg: message);
     } catch (e) {
       Fluttertoast.showToast(msg: "An unexpected error occurred: ${e.toString()}");
+    }
+  }
+
+  Future<void> logout(BuildContext context) async {
+    try {
+      await _auth.signOut();
+      await _clearPreferences(); // Clear saved preferences
+      _user = null;
+      _userDetails = null;
+      Navigator.pushReplacementNamed(context, LoginPage.id);
+      notifyListeners();
+    } catch (e) {
+      Fluttertoast.showToast(msg: "Error during logout: ${e.toString()}");
     }
   }
 
@@ -155,17 +201,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> logout(BuildContext context) async {
-    try {
-      await _auth.signOut();
-      _user = null;
-      _userDetails = null;
-      Navigator.pushReplacementNamed(context, LoginPage.id);
-      notifyListeners();
-    } catch (e) {
-      Fluttertoast.showToast(msg: "Error during logout: ${e.toString()}");
-    }
-  }
 
   Future<void> saveUserDetails({
     required BuildContext context,

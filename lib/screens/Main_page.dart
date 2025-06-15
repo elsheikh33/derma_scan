@@ -20,75 +20,69 @@ class _MainScreenState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    var lan =Provider.of<LanguageProvider>(context, listen: true);
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: selectedIndex == 0
-          ? Column(  // Home Page Layout
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 60),
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
+      body:
+          selectedIndex == 0
+              ? Column(
+                // Home Page Layout
                 children: [
-                  const Text(
-                    'DERMA',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 24,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 60),
+                    child: Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            'DERMA',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 24,
+                            ),
+                          ),
+                          Image.asset('assets/logoo.png', width: 28),
+                          const Text(
+                            'SCAN',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  Image.asset(
-                    'assets/logoo.png',
-                    width: 28,
-                  ),
-                  const Text(
-                    'SCAN',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 24,
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Text(
+                      lan.getTexts("mainTitle"),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey, fontSize: 16),
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  Expanded(child: DiseaseGridView()),
+                ],
+              )
+              : IndexedStack(
+                // Full Page Replacement for Other Tabs
+                index: selectedIndex - 1, // Minus 1 because Home is not here
+                children: [
+                  LocatorPage(),
+                  DetectPage(),
+                  HistoryPage(),
+                  ProfilePage(),
                 ],
               ),
-            ),
-          ),
-          const SizedBox(height: 20),
-           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(
-              lan.getTexts("mainTitle"),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 16,
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Expanded(
-            child: DiseaseGridView(),
-          ),
-        ],
-      )
-          : IndexedStack(  // Full Page Replacement for Other Tabs
-        index: selectedIndex - 1, // Minus 1 because Home is not here
-        children: [
-          LocatorPage(),
-          DetectPage(),
-          HistoryPage(),
-          ProfilePage(),
-        ],
-      ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
         unselectedItemColor: Colors.grey,
         selectedItemColor: AppColor.mainColor,
-
 
         currentIndex: selectedIndex,
         onTap: (index) {
@@ -126,32 +120,30 @@ class _MainScreenState extends State<MainPage> {
       ),
     );
   }
-
-
 }
 
 class DiseaseGridView extends StatelessWidget {
   final List<Map<String, String>> diseases = [
-    {'name': 'Herpes Zoster', 'image': 'assets/herpsIamge.png'},
-    {'name': 'Psoriasis', 'image': 'assets/PsoriasisImage.png'},
-    {'name': 'Eczema', 'image': 'assets/eczemaImage.png'},
-    {'name': 'Warts', 'image': 'assets/wartsImage.png'},
-    {'name': 'Urticaria', 'image': 'assets/UrticariaImage.png'},
-    {'name': 'Bruise', 'image': 'assets/BruiseImage.png'},
-    {'name': 'Acne', 'image': 'assets/acneImage.png'},
-    {'name': 'Vitiligo', 'image': 'assets/VitiligoImage.png'},
-    {'name': 'Dermatitis', 'image': 'assets/atopic_dermatitis.png'},
-    {'name': 'Basal Cell', 'image': 'assets/BasalCellCarcinomaImage.png'},
-    {'name': 'Melanoma', 'image': 'assets/melanomaImage.png'},
-    {'name': 'Cancer', 'image': 'assets/CancerDisease.png'},
+    {'key': 'herpes_zoster', 'image': 'assets/herpsIamge.png'},
+    {'key': 'psoriasis', 'image': 'assets/PsoriasisImage.png'},
+    {'key': 'eczema', 'image': 'assets/eczemaImage.png'},
+    {'key': 'warts', 'image': 'assets/wartsImage.png'},
+    {'key': 'urticaria', 'image': 'assets/UrticariaImage.png'},
+    {'key': 'bruise', 'image': 'assets/BruiseImage.png'},
+    {'key': 'acne', 'image': 'assets/acneImage.png'},
+    {'key': 'vitiligo', 'image': 'assets/VitiligoImage.png'},
+    {'key': 'dermatitis', 'image': 'assets/atopic_dermatitis.png'},
+    {'key': 'basal_cell', 'image': 'assets/BasalCellCarcinomaImage.png'},
+    {'key': 'melanoma', 'image': 'assets/melanomaImage.png'},
+    {'key': 'cancer', 'image': 'assets/CancerDisease.png'},
   ];
 
   @override
   Widget build(BuildContext context) {
-    var lan =Provider.of<LanguageProvider>(context, listen: true);
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
 
     return Padding(
-      padding: const EdgeInsets.only(left: 10,right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -173,53 +165,11 @@ class DiseaseGridView extends StatelessWidget {
               ),
               itemCount: diseases.length,
               itemBuilder: (context, index) {
+                var lan = Provider.of<LanguageProvider>(context, listen: true);
+
                 return GestureDetector(
                   onTap: () {
-                    String routeName;
-                    switch (diseases[index]['name']) {
-                      case 'Herpes Zoster':
-                        routeName = 'herpes_zoster';
-                        break;
-                      case 'Psoriasis':
-                        routeName = 'psoriasis';
-                        break;
-                      case 'Eczema':
-                        routeName = 'eczema';
-                        break;
-                      case 'Warts':
-                        routeName = 'warts';
-                        break;
-                      case 'Urticaria':
-                        routeName = 'urticaria';
-                        break;
-                      case 'Bruise':
-                        routeName = 'bruise';
-                        break;
-                      case 'Acne':
-                        routeName = 'acne';
-                        break;
-                      case 'Vitiligo':
-                        routeName = 'vitiligo';
-                        break;
-                      case 'Dermatitis':
-                        routeName = 'atopic_dermatitis';
-                        break;
-                      case 'Basal Cell':
-                        routeName = 'basal_cell_carcinoma';
-                        break;
-                      case 'Melanoma':
-                        routeName = 'melanoma';
-                        break;
-                      case 'Cancer':
-                        routeName = 'cancer';
-                        break;
-                      default:
-                        routeName = '';
-                    }
-
-                    if (routeName.isNotEmpty) {
-                      Navigator.pushNamed(context, routeName);
-                    }
+                    Navigator.pushNamed(context, diseases[index]['key']!);
                   },
                   child: Column(
                     children: [
@@ -245,7 +195,9 @@ class DiseaseGridView extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        diseases[index]['name']!,
+                        lan.getTexts(
+                          diseases[index]['key']!,
+                        ), // Use the key to get translated text
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14,

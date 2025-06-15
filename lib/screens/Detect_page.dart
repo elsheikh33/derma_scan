@@ -166,6 +166,7 @@ class _DetectPageState extends State<DetectPage> {
                  lan.getTexts("upload_photo"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
+              // Replace the existing GestureDetector widget with this:
               GestureDetector(
                 onTap: _pickImage,
                 child: Container(
@@ -175,17 +176,24 @@ class _DetectPageState extends State<DetectPage> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Column(
+                  child: _image == null
+                      ? Column(
                     children: [
                       Icon(Icons.image, color: Colors.grey, size: 50),
                       SizedBox(height: 10),
                       Text(
-                        _image == null
-                            ?  lan.getTexts("choose_photo")
-                            :  lan.getTexts("selected_photo"),
+                        lan.getTexts("choose_photo"),
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
+                  )
+                      : ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.file(
+                      _image!,
+                      fit: BoxFit.cover,
+                      height: 200, // Adjust height as needed
+                    ),
                   ),
                 ),
               ),
