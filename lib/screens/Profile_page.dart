@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grad/screens/Login_page.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
@@ -27,25 +28,50 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    var authProvider = Provider.of<AuthProvider>(context, listen: false);
-    var userDetails = authProvider.userDetails;
+    usernameController = TextEditingController();
+    emailController = TextEditingController();
+    dobController = TextEditingController();
 
-    // Initialize controllers with user data
-    usernameController = TextEditingController(text: userDetails?.username);
-    emailController = TextEditingController(text: userDetails?.email);
-    dobController = TextEditingController(text: userDetails?.birthdate);
-    selectedGender = userDetails?.gender;
+    _loadUserData();
+  }
 
-    if (userDetails?.skinType == null || userDetails?.skinType == "none") {
-      selectedSkinType = null;
-    } else {
-      selectedSkinType = userDetails?.skinType;
+  void _loadUserData() {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final userDetails = authProvider.userDetails;
+
+    if (userDetails != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {
+          usernameController.text = userDetails.username ?? '';
+          emailController.text = userDetails.email ?? '';
+
+          // Parse the birthdate string to DateTime and format it for display
+          final DateTime? birthDate = authProvider.parseBirthdate(userDetails.birthdate);
+          dobController.text = birthDate != null
+              ? DateFormat('yyyy-MM-dd').format(birthDate)
+              : '';
+
+          print('DOB set to: ${dobController.text}');
+
+          selectedGender = userDetails.gender;
+          selectedSkinType = (userDetails.skinType == null || userDetails.skinType == "none")
+              ? null
+              : userDetails.skinType;
+          selectedAllergies = (userDetails.allergies == null || userDetails.allergies == "none")
+              ? null
+              : userDetails.allergies;
+        });
+      });
     }
+  }
 
-    if (userDetails?.allergies == null || userDetails?.allergies == "none") {
-      selectedAllergies = null;
-    } else {
-      selectedAllergies = userDetails?.allergies;
+  // Add this to listen to auth changes
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final authProvider = Provider.of<AuthProvider>(context);
+    if (authProvider.userDetails != null) {
+      _loadUserData();
     }
   }
 
@@ -174,8 +200,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           suffixIcon: Icon(Icons.calendar_today),
+                          errorText: dobController.text.isEmpty && isEditing
+                              ? 'Please select a date'
+                              : null,
                         ),
-                        onTap: () => selectDate(context, dobController),
+                        onTap: () => isEditing ? selectDate(context, dobController) : null,
                       ),
       
                       const SizedBox(height: 3),
@@ -294,13 +323,21 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             onPressed: () async {
                               if (isEditing) {
+                                // Validate the date format before saving
+                                final dateRegex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
+                                if (!dateRegex.hasMatch(dobController.text)) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Please enter a valid date in YYYY-MM-DD format')),
+                                  );
+                                  return;
+                                }
+
                                 await authProvider.saveUserDetails(
                                   context: context,
                                   username: usernameController.text,
                                   email: emailController.text,
                                   birthdate: dobController.text,
-                                  gender:
-                                      selectedGender ?? "", // Ensure it's not null
+                                  gender: selectedGender ?? "",
                                   skinType: selectedSkinType ?? "",
                                   allergies: selectedAllergies ?? "",
                                 );

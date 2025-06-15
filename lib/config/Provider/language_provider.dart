@@ -22,6 +22,9 @@ class LanguageProvider extends ChangeNotifier{
     defLan = prefs.getInt("defLan") ?? 1;
     notifyListeners();
   }
+  TextDirection get textDirection {
+    return defLan == 0 ? TextDirection.rtl : TextDirection.ltr;
+  }
 
   String getTexts(String txt) {
     if (defLan == 0) {

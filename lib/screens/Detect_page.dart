@@ -102,7 +102,6 @@ class _DetectPageState extends State<DetectPage> {
                 ),
                 textAlign: TextAlign.center,),
               SizedBox(height: 10),
-              // DropDown 1 - Symptoms
                Text(
                 lan.getTexts("questionSymptom"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),

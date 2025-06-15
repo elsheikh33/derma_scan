@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:grad/screens/Home_page.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../config/Provider/auth_provider.dart';
 import 'Colors.dart';
 
 Widget customButton({
@@ -153,15 +155,20 @@ class BGImage extends StatelessWidget {
 }
 
 Future<void> selectDate(BuildContext context, TextEditingController controller) async {
-  DateTime? picked = await showDatePicker(
+  // Get the AuthProvider instance
+  final authProvider = Provider.of<AuthProvider>(context, listen: false);
+  final DateTime? initialDate = authProvider.parseBirthdate(controller.text) ?? DateTime.now();
+
+  final DateTime? picked = await showDatePicker(
     context: context,
-    initialDate: DateTime.now(),
+    initialDate: initialDate,
     firstDate: DateTime(1900),
-    lastDate: DateTime(2100),
+    lastDate: DateTime.now(),
   );
 
   if (picked != null) {
-    controller.text = DateFormat('yyyy-MM-dd').format(picked); // Correct format
+    final formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+    controller.text = formattedDate;
   }
 }
 

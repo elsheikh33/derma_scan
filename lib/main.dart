@@ -10,6 +10,7 @@ import 'package:grad/DiseasesDescription/urticariaDisease.dart';
 import 'package:grad/DiseasesDescription/vitiligoDisease.dart';
 import 'package:grad/DiseasesDescription/wartsDisease.dart';
 import 'package:grad/screens/Detect_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:grad/screens/History_page.dart';
 import 'package:grad/screens/Home_page.dart';
 import 'package:grad/screens/Locator_page.dart';
@@ -28,10 +29,8 @@ import 'DiseasesDescription/MelanomaPage.dart';
 import 'config/Provider/auth_provider.dart';
 import 'config/Provider/language_provider.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
 
   try {
     await Firebase.initializeApp(
@@ -51,7 +50,6 @@ void main() async {
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           ChangeNotifierProvider<LanguageProvider>(
             create: (ctx) => LanguageProvider(),
-
           ),
         ],
         child: MyApp(),
@@ -67,32 +65,57 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-
-      routes: {
-        '/': (context) => SplashScreen(),
-        HomePage.id: (context) => HomePage(),
-        SignupPage.id: (context) => SignupPage(),
-        LoginPage.id: (context) => LoginPage(),
-        WelcomePage.id: (context) => WelcomePage(),
-        MainPage.id: (context) => MainPage(),
-        ProfilePage.id:(context) => ProfilePage(),
-        DetectPage.id:(context)=>DetectPage(),
-        LocatorPage.id:(context)=>LocatorPage(),
-        'herpes_zoster': (context) => HerpesPage(),
-        'acne': (context) => AcnePage(),
-        'psoriasis': (context) => PsoriasisPage(),
-        'bruise':(context)=>BruisePage(),
-        'eczema': (context) => EczemaPage(),
-        'warts': (context) => WartsPage(),
-        'urticaria': (context) => UrticariaPage(),
-        'vitiligo': (context) => VitiligoPage(),
-        'atopic_dermatitis': (context) => AtopicDermatitisPage(),
-        'basal_cell_carcinoma': (context) => BasalCellCarcinomaPage(),
-        'melanoma': (context) => MelanomaPage(),
-        'cancer':(context)=>CancerPage()
-      }
+    return Consumer<LanguageProvider>(
+      builder: (context, languageProvider, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          locale:
+              languageProvider.defLan == 0
+                  ? const Locale('ar')
+                  : const Locale('en'),
+          localizationsDelegates:  [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'), // English
+            Locale('ar'), // Arabic
+          ],
+          builder: (context, child) {
+            return Directionality(
+              textDirection:
+                  languageProvider.defLan == 0
+                      ? TextDirection.rtl
+                      : TextDirection.ltr,
+              child: child!,
+            );
+          },
+          routes: {
+            '/': (context) => SplashScreen(),
+            HomePage.id: (context) => HomePage(),
+            SignupPage.id: (context) => SignupPage(),
+            LoginPage.id: (context) => LoginPage(),
+            WelcomePage.id: (context) => WelcomePage(),
+            MainPage.id: (context) => MainPage(),
+            ProfilePage.id: (context) => ProfilePage(),
+            DetectPage.id: (context) => DetectPage(),
+            LocatorPage.id: (context) => LocatorPage(),
+            'herpes_zoster': (context) => HerpesPage(),
+            'acne': (context) => AcnePage(),
+            'psoriasis': (context) => PsoriasisPage(),
+            'bruise': (context) => BruisePage(),
+            'eczema': (context) => EczemaPage(),
+            'warts': (context) => WartsPage(),
+            'urticaria': (context) => UrticariaPage(),
+            'vitiligo': (context) => VitiligoPage(),
+            'atopic_dermatitis': (context) => AtopicDermatitisPage(),
+            'basal_cell_carcinoma': (context) => BasalCellCarcinomaPage(),
+            'melanoma': (context) => MelanomaPage(),
+            'cancer': (context) => CancerPage(),
+          },
+        );
+      },
     );
   }
 }
