@@ -290,8 +290,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           isEditing: isEditing,
                           selectedValue: lan.defLan == 0 ? "Arabic" : "English", // Current language selection
                           items: [
-                            {"value": "Arabic", "label": lan.getTexts("arabic")},
-                            {"value": "English", "label": lan.getTexts("english")},
+                            {"value": "Arabic", "label": lan.getTexts("عربي")},
+                            {"value": "English", "label": lan.getTexts("English")},
                           ],
                           title: "Language",
                           fillColor: AppColor.TxtFieldColor,

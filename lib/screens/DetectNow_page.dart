@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import '../config/Provider/auth_provider.dart';
 import '../config/Provider/language_provider.dart';
+import 'Main_page.dart';
 
 class DetectNow_page extends StatefulWidget {
   static const String id = 'DetectNow_page';
@@ -233,6 +234,37 @@ Provide a professional dermatological consultation covering:
                           ),
                         ),
                       ),
+
+                    ),
+                    SizedBox(height: 10),
+                    Center(
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => MainPage())
+                          );
+                        },
+                        label: Text(
+                          lan.getTexts("Done !"),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF8E97FD),
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 14,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+
                     ),
                   ],
                 ),
