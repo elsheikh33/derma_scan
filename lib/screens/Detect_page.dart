@@ -40,7 +40,7 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   Future<Map<String, dynamic>?> detectDisease(File imageFile) async {
-    final uri = Uri.parse('http://192.168.100.110:8000/detect/'); //link locally
+    final uri = Uri.parse('http://192.168.1.4:8000/detect/');
     final request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('file', imageFile.path));
 
@@ -199,7 +199,6 @@ class _DetectPageState extends State<DetectPage> {
               ),
               Text(lan.getTexts("cameraNote"),style: TextStyle(fontSize: 11, color: Color(0XFF8B0000) ,fontWeight: FontWeight.bold,)),
               SizedBox(height: 20),
-              // Detect Now Button
               ElevatedButton(
                 onPressed: () async {
                   if (_image == null) {
@@ -225,17 +224,27 @@ class _DetectPageState extends State<DetectPage> {
                     'progress': progress,
                   };
 
-                  Navigator.push(
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => DetectNow_page(
                         detectedDisease: result['disease'],
                         userInputs: userInputs,
-                        uploadedImage: _image!, // ✅ add this
+                        uploadedImage: _image!,
                         annotatedImageBase64: result['imageBase64'],
                       ),
                     ),
-                  );
+                  ).then((_) {
+                    setState(() {
+                      symptom = null;
+                      duration = null;
+                      itchiness = null;
+                      painLevel = null;
+                      progress = null;
+                      _image = null;
+                    });
+                  });
+
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey.shade200,

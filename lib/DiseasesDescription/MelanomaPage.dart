@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class MelanomaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Melanoma'),
+        title: Text(lan.getTexts("melanoma_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +25,7 @@ class MelanomaPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Melanoma',
+              lan.getTexts("melanoma_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +33,12 @@ class MelanomaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Melanoma is a serious form of skin cancer that develops in the melanocytes — the cells responsible for producing pigment (melanin). It is more likely to grow and spread than other types of skin cancer, making early detection and treatment critical.',
+              lan.getTexts("melanoma_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Warning Signs (ABCDE Rule)',
+              lan.getTexts("melanoma_warning_signs_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,16 +46,12 @@ class MelanomaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• **A**symmetry: One half is unlike the other\n'
-                  '• **B**order: Irregular, scalloped, or poorly defined border\n'
-                  '• **C**olor: Varies from one area to another\n'
-                  '• **D**iameter: Usually greater than 6 mm (pencil eraser size)\n'
-                  '• **E**volving: Changes in size, shape, or color over time',
+              lan.getTexts("melanoma_warning_signs"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Risk Factors',
+              lan.getTexts("melanoma_risk_factors_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -59,12 +59,12 @@ class MelanomaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Risk factors include excessive UV exposure, fair skin, a family or personal history of melanoma, many moles, and weakened immune function.',
+              lan.getTexts("melanoma_risk_factors"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Diagnosis & Treatment',
+              lan.getTexts("melanoma_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class MelanomaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Diagnosis involves skin examination and biopsy. Treatment depends on the stage and may include surgical removal, immunotherapy, targeted therapy, chemotherapy, or radiation. When detected early, melanoma is highly treatable.',
+              lan.getTexts("melanoma_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),

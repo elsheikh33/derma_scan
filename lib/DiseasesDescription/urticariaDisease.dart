@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class UrticariaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Urticaria'),
+        title: Text(lan.getTexts("urticaria_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +25,7 @@ class UrticariaPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Urticaria (Hives)',
+              lan.getTexts("urticaria_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +33,12 @@ class UrticariaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Urticaria, commonly known as hives, is a skin reaction that causes itchy welts. These welts can vary in size and can appear anywhere on the body. They are often red, pink, or flesh-colored and can be painful or itchy.',
+              lan.getTexts("urticaria_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Symptoms',
+              lan.getTexts("urticaria_symptoms_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,16 +46,12 @@ class UrticariaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• Itchy, raised welts on the skin\n'
-                  '• Welts that vary in size and shape\n'
-                  '• Red, pink, or flesh-colored patches\n'
-                  '• Swelling or inflammation\n'
-                  '• Discomfort or pain',
+              lan.getTexts("urticaria_symptoms"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Causes',
+              lan.getTexts("urticaria_causes_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -59,12 +59,12 @@ class UrticariaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Urticaria can be triggered by allergic reactions, stress, infections, or environmental factors such as temperature changes or sun exposure. In some cases, the cause may be unknown (idiopathic urticaria).',
+              lan.getTexts("urticaria_causes"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Treatment',
+              lan.getTexts("urticaria_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class UrticariaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Treatment may include antihistamines to relieve itching and swelling, avoiding known triggers, and using topical soothing agents. In severe cases, corticosteroids or other medications may be prescribed.',
+              lan.getTexts("urticaria_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),

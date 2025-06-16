@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class AtopicDermatitisPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Atopic Dermatitis'),
+        title: Text(lan.getTexts("ad_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +25,7 @@ class AtopicDermatitisPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Atopic Dermatitis',
+              lan.getTexts("ad_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +33,12 @@ class AtopicDermatitisPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Atopic Dermatitis is a chronic skin condition characterized by dry, itchy, and inflamed skin. It is most common in children but can persist into adulthood. The condition often runs in families and is associated with allergies, asthma, or hay fever.',
+              lan.getTexts("ad_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Common Symptoms',
+              lan.getTexts("ad_symptoms_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,16 +46,12 @@ class AtopicDermatitisPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• Intense itching\n'
-                  '• Red to brownish-gray patches\n'
-                  '• Small raised bumps that may leak fluid\n'
-                  '• Thickened, cracked, or scaly skin\n'
-                  '• Raw or sensitive skin from scratching',
+              lan.getTexts("ad_symptoms"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Triggers & Causes',
+              lan.getTexts("ad_causes_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -59,12 +59,12 @@ class AtopicDermatitisPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Triggers include allergens, harsh soaps, stress, weather changes, and sweating. The condition is linked to genetic mutations that affect the skin\'s barrier function, allowing moisture out and germs in.',
+              lan.getTexts("ad_causes"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Management & Treatment',
+              lan.getTexts("ad_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class AtopicDermatitisPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Treatment focuses on relieving symptoms. It includes daily moisturizing, topical corticosteroids, avoiding known triggers, and using antihistamines or immunosuppressants in severe cases. Consistency in skincare is key.',
+              lan.getTexts("ad_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),

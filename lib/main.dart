@@ -11,7 +11,6 @@ import 'package:grad/DiseasesDescription/vitiligoDisease.dart';
 import 'package:grad/DiseasesDescription/wartsDisease.dart';
 import 'package:grad/screens/Detect_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:grad/screens/History_page.dart';
 import 'package:grad/screens/Home_page.dart';
 import 'package:grad/screens/Locator_page.dart';
 import 'package:grad/screens/Login_page.dart';
@@ -96,7 +95,7 @@ class MyApp extends StatelessWidget {
           },
           initialRoute: isLoggedIn ? MainPage.id : SplashScreen.id,
           routes: {
-            '/': (context) => SplashScreen(),
+            SplashScreen.id: (context) => SplashScreen(),
             HomePage.id: (context) => HomePage(),
             SignupPage.id: (context) => SignupPage(),
             LoginPage.id: (context) => LoginPage(),
@@ -113,8 +112,8 @@ class MyApp extends StatelessWidget {
             'warts': (context) => WartsPage(),
             'urticaria': (context) => UrticariaPage(),
             'vitiligo': (context) => VitiligoPage(),
-            'atopic_dermatitis': (context) => AtopicDermatitisPage(),
-            'basal_cell_carcinoma': (context) => BasalCellCarcinomaPage(),
+            'dermatitis': (context) => AtopicDermatitisPage(),
+            'basal_cell': (context) => BasalCellCarcinomaPage(),
             'melanoma': (context) => MelanomaPage(),
             'cancer': (context) => CancerPage(),
           },
