@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
               child: child!,
             );
           },
-          initialRoute: isLoggedIn ? MainPage.id : LoginPage.id,
+          initialRoute: isLoggedIn ? MainPage.id : SplashScreen.id,
           routes: {
             '/': (context) => SplashScreen(),
             HomePage.id: (context) => HomePage(),

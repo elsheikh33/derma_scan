@@ -90,7 +90,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     isEditing: true,
                     selectedValue: selectedSkinType,
                     items: [
-                      {"value": "none", "label": lan.getTexts("None_question")},
+                      // {"value": "none", "label": lan.getTexts("None_question")},
                       {"value": "oily", "label": lan.getTexts("Oily_question")},
                       {"value": "dry", "label": lan.getTexts("Dry_question")},
                       {"value": "combination", "label": lan.getTexts("Combination_question")},
