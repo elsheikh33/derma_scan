@@ -208,9 +208,9 @@ Provide a professional dermatological consultation covering:
                     Center(
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          Navigator.pushNamed(
+                          Navigator.push(
                             context,
-                            LocatorPage.id,
+                              MaterialPageRoute(builder: (context) => LocatorPage())
                           );
                         },
                         icon: Icon(Icons.place, color: Colors.white),

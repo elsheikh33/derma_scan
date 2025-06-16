@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../config/Provider/language_provider.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const String id = 'splashScreen';
   const SplashScreen({super.key});
 
   @override

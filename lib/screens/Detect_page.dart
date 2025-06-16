@@ -40,7 +40,7 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   Future<Map<String, dynamic>?> detectDisease(File imageFile) async {
-    final uri = Uri.parse('http://192.168.1.4:8000/detect/'); //link locally
+    final uri = Uri.parse('http://192.168.100.110:8000/detect/'); //link locally
     final request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('file', imageFile.path));
 
@@ -157,7 +157,7 @@ class _DetectPageState extends State<DetectPage> {
               _buildDropdown(
                 label: '',
                 value: progress,
-                items: [lan.getTexts("progressiveList"), lan.getTexts("RegressiveList")],
+                items: [lan.getTexts("progressiveList"), lan.getTexts("RegressiveList"),lan.getTexts("NoChangeList")],
                 onChanged: (value) => setState(() => progress = value),
               ),
               SizedBox(height: 10),
