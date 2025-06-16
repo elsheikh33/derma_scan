@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class EczemaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eczema'),
+        title: Text(lan.getTexts("eczema_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +25,7 @@ class EczemaPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Eczema (Atopic Dermatitis)',
+              lan.getTexts("eczema_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +33,12 @@ class EczemaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Eczema, also known as atopic dermatitis, is a chronic skin condition that causes red, itchy, and inflamed patches of skin. It is commonly found in children but can occur at any age. Eczema is long-lasting and tends to flare periodically.',
+              lan.getTexts("eczema_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Symptoms',
+              lan.getTexts("eczema_symptoms_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,18 +46,12 @@ class EczemaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• Dry, sensitive skin\n'
-                  '• Red, inflamed skin\n'
-                  '• Severe itching\n'
-                  '• Dark-colored patches of skin\n'
-                  '• Rough, leathery, or scaly patches\n'
-                  '• Oozing or crusting\n'
-                  '• Swelling',
+              lan.getTexts("eczema_symptoms"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Causes',
+              lan.getTexts("eczema_causes_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -61,12 +59,12 @@ class EczemaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'The exact cause of eczema is unknown, but it is believed to be linked to an overactive immune system response to irritants. Genetic and environmental factors also play a role.',
+              lan.getTexts("eczema_causes"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Treatment',
+              lan.getTexts("eczema_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -74,7 +72,7 @@ class EczemaPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Treatment includes moisturizing the skin, using anti-inflammatory medications, and avoiding triggers. In severe cases, oral medications or light therapy may be prescribed.',
+              lan.getTexts("eczema_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),

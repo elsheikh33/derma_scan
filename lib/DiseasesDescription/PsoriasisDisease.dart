@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class PsoriasisPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Psoriasis'),
+        title: Text(lan.getTexts("psoriasis_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +25,7 @@ class PsoriasisPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Psoriasis',
+              lan.getTexts("psoriasis_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +33,12 @@ class PsoriasisPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Psoriasis is a chronic skin condition that speeds up the life cycle of skin cells. It causes cells to build up rapidly on the surface of the skin, leading to scaly patches that are often itchy and sometimes painful.',
+              lan.getTexts("psoriasis_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Symptoms',
+              lan.getTexts("psoriasis_symptoms_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,16 +46,12 @@ class PsoriasisPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• Red patches of skin covered with thick, silvery scales\n'
-                  '• Dry, cracked skin that may bleed\n'
-                  '• Itching, burning, or soreness\n'
-                  '• Thickened, pitted, or ridged nails\n'
-                  '• Swollen and stiff joints (in psoriatic arthritis)',
+              lan.getTexts("psoriasis_symptoms"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Types',
+              lan.getTexts("psoriasis_types_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -59,17 +59,12 @@ class PsoriasisPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'There are several types of psoriasis, including:\n'
-                  '1. Plaque Psoriasis\n'
-                  '2. Guttate Psoriasis\n'
-                  '3. Inverse Psoriasis\n'
-                  '4. Pustular Psoriasis\n'
-                  '5. Erythrodermic Psoriasis',
+              lan.getTexts("psoriasis_types"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Treatment',
+              lan.getTexts("psoriasis_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -77,7 +72,7 @@ class PsoriasisPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'While there is no cure for psoriasis, treatments can help manage symptoms. These may include topical treatments, light therapy, and systemic medications.',
+              lan.getTexts("psoriasis_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),

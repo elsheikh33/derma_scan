@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class HerpesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Herpes Zoster'),
+        title: Text(lan.getTexts("herpes_zoster_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +25,7 @@ class HerpesPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Herpes Zoster (Shingles)',
+              lan.getTexts("herpes_zoster_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +33,12 @@ class HerpesPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Herpes Zoster, also known as shingles, is a viral infection that causes a painful rash. It is caused by the varicella-zoster virus, the same virus that causes chickenpox. After recovering from chickenpox, the virus can lie dormant in nerve tissue and reactivate later as shingles.',
+              lan.getTexts("herpes_zoster_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Symptoms',
+              lan.getTexts("herpes_zoster_symptoms_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,16 +46,12 @@ class HerpesPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• Pain, burning, numbness, or tingling\n'
-                  '• Sensitivity to touch\n'
-                  '• Red rash that begins a few days after the pain\n'
-                  '• Fluid-filled blisters that break open and crust over\n'
-                  '• Itching',
+              lan.getTexts("herpes_zoster_symptoms"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Causes',
+              lan.getTexts("herpes_zoster_causes_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -59,12 +59,12 @@ class HerpesPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Herpes Zoster is caused by the varicella-zoster virus. After a person has chickenpox, the virus remains dormant in the nervous system and can reactivate years later as shingles.',
+              lan.getTexts("herpes_zoster_causes"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Treatment',
+              lan.getTexts("herpes_zoster_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class HerpesPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Treatment may include antiviral medications, pain relievers, and topical ointments to alleviate symptoms. Vaccines are also available to reduce the risk of developing shingles.',
+              lan.getTexts("herpes_zoster_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
@@ -82,4 +82,3 @@ class HerpesPage extends StatelessWidget {
     );
   }
 }
-

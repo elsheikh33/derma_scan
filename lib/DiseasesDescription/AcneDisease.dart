@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class AcnePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Acne'),
+        title: Text(lan.getTexts("acne_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +24,7 @@ class AcnePage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Acne',
+              lan.getTexts("acne_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +32,12 @@ class AcnePage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Acne is a common skin condition that occurs when hair follicles become clogged with oil and dead skin cells. It can cause whiteheads, blackheads, or pimples. Acne is most common among teenagers, though it affects people of all ages.',
+              lan.getTexts("acne_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Symptoms',
+              lan.getTexts("acne_symptoms_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,17 +45,12 @@ class AcnePage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• Whiteheads (closed clogged pores)\n'
-                  '• Blackheads (open clogged pores)\n'
-                  '• Small red, tender bumps (papules)\n'
-                  '• Pimples (pustules), which are papules with pus at their tips\n'
-                  '• Large, solid, painful lumps beneath the skin (nodules)\n'
-                  '• Painful, pus-filled lumps beneath the skin (cystic lesions)',
+              lan.getTexts("acne_symptoms"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Causes',
+              lan.getTexts("acne_causes_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -60,16 +58,12 @@ class AcnePage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Four main factors cause acne:\n'
-                  '1. Excess oil production\n'
-                  '2. Hair follicles clogged by oil and dead skin cells\n'
-                  '3. Bacteria\n'
-                  '4. Inflammation',
+              lan.getTexts("acne_causes"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Treatment',
+              lan.getTexts("acne_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -77,7 +71,7 @@ class AcnePage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Treatment for acne depends on its severity and can include over-the-counter topical treatments, prescription medications, and lifestyle changes.',
+              lan.getTexts("acne_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),

@@ -49,6 +49,7 @@ class _LocatorPageState extends State<LocatorPage> {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(backgroundColor: Colors.white,),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
@@ -56,7 +57,7 @@ class _LocatorPageState extends State<LocatorPage> {
             children: [
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 5),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

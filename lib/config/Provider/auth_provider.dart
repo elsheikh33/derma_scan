@@ -37,13 +37,11 @@ class AuthProvider extends ChangeNotifier {
     final isLoggedIn = prefs.getBool(isLoggedInKey) ?? false;
 
     if (isLoggedIn) {
-      // If shared preferences says we're logged in, verify with Firebase
       _auth.authStateChanges().listen((User? user) async {
         _user = user;
         if (user != null) {
           await fetchUserDetails();
         } else {
-          // If Firebase says we're not logged in, clear shared preferences
           await _clearPreferences();
           _userDetails = null;
         }
@@ -171,7 +169,7 @@ class AuthProvider extends ChangeNotifier {
       Navigator.pushReplacementNamed(context, LoginPage.id);
       notifyListeners();
     } catch (e) {
-      Fluttertoast.showToast(msg: "Error during logout: ${e.toString()}");
+      print("Error during logout: ${e.toString()}");
     }
   }
 

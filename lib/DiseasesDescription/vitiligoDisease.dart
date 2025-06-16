@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class VitiligoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vitiligo'),
+        title: Text(lan.getTexts("vitiligo_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +25,7 @@ class VitiligoPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Vitiligo',
+              lan.getTexts("vitiligo_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +33,12 @@ class VitiligoPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Vitiligo is a long-term skin condition characterized by patches of skin losing their pigment. This occurs when melanocytes, the cells responsible for skin color, are destroyed. The affected skin becomes white, with sharp margins.',
+              lan.getTexts("vitiligo_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Symptoms',
+              lan.getTexts("vitiligo_symptoms_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,15 +46,12 @@ class VitiligoPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• Loss of skin color in patches\n'
-                  '• Premature graying of hair\n'
-                  '• Change in color of the retina\n'
-                  '• Loss of color in the tissues inside the mouth and nose',
+              lan.getTexts("vitiligo_symptoms"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Causes',
+              lan.getTexts("vitiligo_causes_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -58,12 +59,12 @@ class VitiligoPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'The exact cause of vitiligo is unknown, but it is believed to be an autoimmune condition where the body attacks its own melanocytes. Genetics and environmental factors may also play a role.',
+              lan.getTexts("vitiligo_causes"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Treatment',
+              lan.getTexts("vitiligo_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -71,7 +72,7 @@ class VitiligoPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'While there is no cure for vitiligo, treatments aim to restore skin color or even out skin tone. Options include topical corticosteroids, light therapy, and camouflage cosmetics.',
+              lan.getTexts("vitiligo_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),

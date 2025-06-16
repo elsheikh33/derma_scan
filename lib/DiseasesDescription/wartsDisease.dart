@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class WartsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Warts'),
+        title: Text(lan.getTexts("warts_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +25,7 @@ class WartsPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Warts',
+              lan.getTexts("warts_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +33,12 @@ class WartsPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Warts are small, grainy skin growths caused by the human papillomavirus (HPV). They commonly occur on the hands and feet but can appear anywhere on the body.',
+              lan.getTexts("warts_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Symptoms',
+              lan.getTexts("warts_symptoms_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,15 +46,12 @@ class WartsPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• Small, fleshy bumps on the skin\n'
-                  '• Rough to the touch\n'
-                  '• Black pinpoints (clotted blood vessels)\n'
-                  '• Pain or tenderness',
+              lan.getTexts("warts_symptoms"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Treatment',
+              lan.getTexts("warts_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -58,7 +59,7 @@ class WartsPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Treatment options include over-the-counter medications, cryotherapy (freezing), laser treatment, and surgical removal.',
+              lan.getTexts("warts_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),

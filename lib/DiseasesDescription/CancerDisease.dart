@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../config/Provider/language_provider.dart';
 
 class CancerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Skin Cancer'),
+        title: Text(lan.getTexts("skin_cancer_title")),
         backgroundColor: Color(0xFF8E97FD),
       ),
       body: SingleChildScrollView(
@@ -21,7 +25,7 @@ class CancerPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Skin Cancer',
+              lan.getTexts("skin_cancer_title"),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -29,12 +33,12 @@ class CancerPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Skin cancer is the abnormal growth of skin cells, often developing on areas of the skin exposed to the sun. It includes different types such as basal cell carcinoma, squamous cell carcinoma, and melanoma. Early detection is crucial for successful treatment.',
+              lan.getTexts("skin_cancer_description"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Symptoms',
+              lan.getTexts("skin_cancer_symptoms_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -42,16 +46,12 @@ class CancerPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '• A new growth or sore that doesn’t heal\n'
-                  '• Changes in an existing mole\n'
-                  '• A mole with irregular borders or multiple colors\n'
-                  '• Itching, tenderness, or bleeding on a skin spot\n'
-                  '• Flat, scaly patches that may be red or brown',
+              lan.getTexts("skin_cancer_symptoms"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Causes',
+              lan.getTexts("skin_cancer_causes_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -59,17 +59,12 @@ class CancerPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Skin cancer is primarily caused by prolonged exposure to ultraviolet (UV) radiation from the sun or tanning beds. Risk factors include:\n'
-                  '1. Fair skin\n'
-                  '2. Excessive sun exposure\n'
-                  '3. Family history of skin cancer\n'
-                  '4. History of sunburns\n'
-                  '5. Weakened immune system',
+              lan.getTexts("skin_cancer_causes"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
             Text(
-              'Treatment',
+              lan.getTexts("skin_cancer_treatment_title"),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -77,7 +72,7 @@ class CancerPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Treatment depends on the type and stage of cancer and may include surgical removal, radiation therapy, chemotherapy, or immunotherapy. Early-stage skin cancers are often treatable with outpatient procedures.',
+              lan.getTexts("skin_cancer_treatment"),
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
