@@ -10,6 +10,7 @@ import 'package:grad/DiseasesDescription/urticariaDisease.dart';
 import 'package:grad/DiseasesDescription/vitiligoDisease.dart';
 import 'package:grad/DiseasesDescription/wartsDisease.dart';
 import 'package:grad/screens/Detect_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:grad/screens/History_page.dart';
 import 'package:grad/screens/Home_page.dart';
 import 'package:grad/screens/Locator_page.dart';
@@ -20,6 +21,7 @@ import 'package:grad/screens/Signup_page.dart';
 import 'package:grad/screens/Splash_screen.dart';
 import 'package:grad/screens/Welcome_page.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Controller/dependency_injection.dart';
 import 'DiseasesDescription/AtopicDermatitisPage.dart';
 import 'DiseasesDescription/BasalCellCarcinomaPage.dart';
@@ -27,12 +29,9 @@ import 'DiseasesDescription/BruisePage.dart';
 import 'DiseasesDescription/MelanomaPage.dart';
 import 'config/Provider/auth_provider.dart';
 import 'config/Provider/language_provider.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
 
   try {
     await Firebase.initializeApp(
@@ -45,17 +44,17 @@ void main() async {
     );
 
     DependecyInjection().init(); // Initialize dependencies after Firebase
-
+    final prefs = await SharedPreferences.getInstance();
+    final isLoggedIn = prefs.getBool(AuthProvider.isLoggedInKey) ?? false;
     runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           ChangeNotifierProvider<LanguageProvider>(
             create: (ctx) => LanguageProvider(),
-
           ),
         ],
-        child: MyApp(),
+        child: MyApp(isLoggedIn: isLoggedIn),
       ),
     );
   } catch (e) {
@@ -64,27 +63,38 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
 
+  const MyApp({super.key, required this.isLoggedIn});
   @override
   Widget build(BuildContext context) {
     return Consumer<LanguageProvider>(
-      builder: (context, lan, child) {
-        final isArabic = lan.defLan != 1;
-
+      builder: (context, languageProvider, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          locale: isArabic ? const Locale('ar') : const Locale('en'),
-          supportedLocales: const [
-            Locale('en'),
-            Locale('ar'),
-          ],
-          localizationsDelegates: const [
+          locale:
+              languageProvider.defLan == 0
+                  ? const Locale('ar')
+                  : const Locale('en'),
+          localizationsDelegates:  [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          // REMOVE Directionality! Flutter handles it automatically now
+          supportedLocales: const [
+            Locale('en'), // English
+            Locale('ar'), // Arabic
+          ],
+          builder: (context, child) {
+            return Directionality(
+              textDirection:
+                  languageProvider.defLan == 0
+                      ? TextDirection.rtl
+                      : TextDirection.ltr,
+              child: child!,
+            );
+          },
+          initialRoute: isLoggedIn ? MainPage.id : LoginPage.id,
           routes: {
             '/': (context) => SplashScreen(),
             HomePage.id: (context) => HomePage(),
@@ -113,5 +123,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

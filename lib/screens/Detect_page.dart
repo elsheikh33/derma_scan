@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 
-
 import 'package:provider/provider.dart';
 
 import '../config/Provider/auth_provider.dart';
@@ -41,8 +40,7 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   Future<Map<String, dynamic>?> detectDisease(File imageFile) async {
-    //final uri = Uri.parse('https://553b-35-231-181-48.ngrok-free.app/detect/');//link public colab
-    final uri = Uri.parse('http://192.168.100.103:8000/detect/'); //link locally
+    final uri = Uri.parse('http://192.168.1.4:8000/detect/'); //link locally
     final request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('file', imageFile.path));
 
@@ -84,7 +82,7 @@ class _DetectPageState extends State<DetectPage> {
                   ),
                   SizedBox(width: 10),
                   Text(
-                    '$username ${lan.getTexts("hi")}',
+                    '${lan.getTexts("hi")}, $username',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
@@ -96,7 +94,7 @@ class _DetectPageState extends State<DetectPage> {
               SizedBox(height: 10),
               // Title
               Text(
-                lan.getTexts("questionReport"),
+                lan.getTexts("questionTitle"),
                 style: TextStyle(
                   color: Colors.amber,
                   fontSize: 21,
@@ -104,7 +102,6 @@ class _DetectPageState extends State<DetectPage> {
                 ),
                 textAlign: TextAlign.center,),
               SizedBox(height: 10),
-              // DropDown 1 - Symptoms
                Text(
                 lan.getTexts("questionSymptom"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
@@ -112,28 +109,19 @@ class _DetectPageState extends State<DetectPage> {
               _buildDropdown(
                 label: '',
                 value: symptom,
-                items: [
-                  lan.getTexts("rednessSymptom"),
-                  lan.getTexts("swellingSymptom"),
-                  lan.getTexts("ItchinessSymptom"),
-                  lan.getTexts("PainSymptom"),
-                ],
+                items: [lan.getTexts("rednessSymptom"), lan.getTexts("swellingSymptom"),lan.getTexts("ItchinessSymptom"),lan.getTexts("PainSymptom")],
                 onChanged: (value) => setState(() => symptom = value),
               ),
               SizedBox(height: 10),
               // DropDown 2 - Duration
                Text(
-                 lan.getTexts("questionHowLong"),
+                lan.getTexts("questionHowLong"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
               _buildDropdown(
                 label: '',
                 value: duration,
-                items: [
-                  lan.getTexts("daysList"),
-                  lan.getTexts("week1List"),
-                  lan.getTexts("week2List"),
-                  lan.getTexts("monthList"),],
+                items: [lan.getTexts("daysList"),lan.getTexts("week1List") , lan.getTexts("week2List"),lan.getTexts("monthList")],
                 onChanged: (value) => setState(() => duration = value),
               ),
               SizedBox(height: 10),
@@ -145,9 +133,7 @@ class _DetectPageState extends State<DetectPage> {
               _buildDropdown(
                 label: '',
                 value: itchiness,
-                items: [
-                  lan.getTexts("Agree"),
-                  lan.getTexts("Disagree")],
+                items: [lan.getTexts("Agree"), lan.getTexts("Disagree")],
                 onChanged: (value) => setState(() => itchiness = value),
               ),
               SizedBox(height: 10),
@@ -159,41 +145,28 @@ class _DetectPageState extends State<DetectPage> {
               _buildDropdown(
                 label: '',
                 value: painLevel,
-                items: [
-                  lan.getTexts("painList1"),
-                  lan.getTexts("painList2"),
-                  lan.getTexts("painList3"),
-                  lan.getTexts("painList4"),
-                  lan.getTexts("painList5"),
-                  lan.getTexts("painList6"),
-                  lan.getTexts("painList7"),
-                  lan.getTexts("painList8"),
-                  lan.getTexts("painList9"),
-                  lan.getTexts("painList10")],
+                items: [lan.getTexts("painList1"), lan.getTexts("painList2"), lan.getTexts("painList3"), lan.getTexts("painList4"), lan.getTexts("painList5"), lan.getTexts("painList6"), lan.getTexts("painList7"), lan.getTexts("painList8"), lan.getTexts("painList9"), lan.getTexts("painList10")],
                 onChanged: (value) => setState(() => painLevel = value),
               ),
               SizedBox(height: 10),
               // DropDown 5 - Progression
                Text(
-                 lan.getTexts("question_progressive"),
+                lan.getTexts("question_progressive"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
               _buildDropdown(
                 label: '',
                 value: progress,
-                items: [
-                  lan.getTexts("progressiveList"),
-                  lan.getTexts("RegressiveList"),
-                  lan.getTexts("UnchangeList"),
-                ],
+                items: [lan.getTexts("progressiveList"), lan.getTexts("RegressiveList")],
                 onChanged: (value) => setState(() => progress = value),
               ),
               SizedBox(height: 10),
               // Image Picker
                Text(
-                lan.getTexts("upload_photo"),
+                 lan.getTexts("upload_photo"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
+              // Replace the existing GestureDetector widget with this:
               GestureDetector(
                 onTap: _pickImage,
                 child: Container(
@@ -203,17 +176,24 @@ class _DetectPageState extends State<DetectPage> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Column(
+                  child: _image == null
+                      ? Column(
                     children: [
                       Icon(Icons.image, color: Colors.grey, size: 50),
                       SizedBox(height: 10),
                       Text(
-                        _image == null
-                            ? lan.getTexts("choose_photo")
-                            : lan.getTexts("selected_photo"),
+                        lan.getTexts("choose_photo"),
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
+                  )
+                      : ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.file(
+                      _image!,
+                      fit: BoxFit.cover,
+                      height: 200, // Adjust height as needed
+                    ),
                   ),
                 ),
               ),
@@ -224,7 +204,7 @@ class _DetectPageState extends State<DetectPage> {
                 onPressed: () async {
                   if (_image == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(lan.getTexts("snackBarNoteImg"))),
+                      SnackBar(content: Text("Please select an image first")),
                     );
                     return;
                   }
@@ -232,7 +212,7 @@ class _DetectPageState extends State<DetectPage> {
                   final result = await detectDisease(_image!);
                   if (result == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(lan.getTexts("snackBarNoteDetect"))),
+                      SnackBar(content: Text("Detection failed. Please try again.")),
                     );
                     return;
                   }

@@ -100,7 +100,6 @@ Provide a professional dermatological consultation covering:
         final data = jsonDecode(utf8.decode(res.bodyBytes));
         String result = data['choices'][0]['message']['content'];
 
-        // Clean Arabic text if needed
         if (lan.defLan != 1) {
           result = _cleanArabicText(result);
         }
