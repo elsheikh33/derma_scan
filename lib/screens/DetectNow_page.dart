@@ -56,9 +56,9 @@ class _DetectNowPageState extends State<DetectNow_page> {
     final Uri url = Uri.parse('https://api.openai.com/v1/chat/completions');
 
     String languageInstruction =
-        lan.defLan == 1
-            ? 'Respond in English using professional medical terminology. Use clear section titles. Avoid markdown formatting. Do NOT include the phrase "detection report" at the beginning.'
-            : '''الرد باللغة العربية الفصحى فقط باستخدام المصطلحات الطبية الدقيقة.
+    lan.defLan == 1
+        ? 'Respond in English using professional medical terminology. Use clear section titles. Avoid markdown formatting. Do NOT include the phrase "detection report" at the beginning.'
+        : '''الرد باللغة العربية الفصحى فقط باستخدام المصطلحات الطبية الدقيقة.
 استخدم عناوين واضحة للأقسام.
 تجنب تماماً استخدام أي رموز أو تنسيقات غير معتادة.
 أكتب النص العربي بشكل واضح دون أي تشوهات.''';
@@ -148,127 +148,127 @@ Provide a professional dermatological consultation covering:
         foregroundColor: Colors.white,
       ),
       body:
-          isLoading
-              ? Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Color(0xFF8E97FD),
-                      ),
-                    ),
-                    SizedBox(), // Properly placed SizedBox
-                    Text(
-                      lan.getTexts("waitText"),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+      isLoading
+          ? Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Color(0xFF8E97FD),
+              ),
+            ),
+            SizedBox(), // Properly placed SizedBox
+            Text(
+              lan.getTexts("waitText"),
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      )
+          : SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.annotatedImageBase64 != null &&
+                widget.annotatedImageBase64!.isNotEmpty)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.memory(
+                  base64Decode(widget.annotatedImageBase64!),
+                  height: 350,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
               )
-              : SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (widget.annotatedImageBase64 != null &&
-                        widget.annotatedImageBase64!.isNotEmpty)
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.memory(
-                          base64Decode(widget.annotatedImageBase64!),
-                          height: 350,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                    else
-                      Text(
-                        lan.getTexts("No annotated image available"),
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    SizedBox(height: 20),
-                    Text(
-                      responseText ?? lan.getTexts("No data available"),
-                      style: TextStyle(
-                        fontSize: 16,
-                        height: 1.6,
-                        color: Colors.black87,
-                        fontFamily: lan.defLan == 1 ? 'Roboto' : 'Tajawal',
-                      ),
-                      textDirection:
-                          lan.defLan == 1
-                              ? TextDirection.ltr
-                              : TextDirection.rtl,
-                    ),
-                    SizedBox(height: 30),
-                    Center(
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                              MaterialPageRoute(builder: (context) => LocatorPage())
-                          );
-                        },
-                        icon: Icon(Icons.place, color: Colors.white),
-                        label: Text(
-                          lan.getTexts("findNearestButton"),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF8E97FD),
-                          foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 14,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                      ),
-
-                    ),
-                    SizedBox(height: 10),
-                    Center(
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => MainPage())
-                          );
-                        },
-                        label: Text(
-                          lan.getTexts("Done !"),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF8E97FD),
-                          foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 14,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                      ),
-
-                    ),
-                  ],
+            else
+              Text(
+                lan.getTexts("No annotated image available"),
+                style: TextStyle(color: Colors.red),
+              ),
+            SizedBox(height: 20),
+            Text(
+              responseText ?? lan.getTexts("No data available"),
+              style: TextStyle(
+                fontSize: 16,
+                height: 1.6,
+                color: Colors.black87,
+                fontFamily: lan.defLan == 1 ? 'Roboto' : 'Tajawal',
+              ),
+              textDirection:
+              lan.defLan == 1
+                  ? TextDirection.ltr
+                  : TextDirection.rtl,
+            ),
+            SizedBox(height: 30),
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LocatorPage())
+                  );
+                },
+                icon: Icon(Icons.place, color: Colors.white),
+                label: Text(
+                  lan.getTexts("findNearestButton"),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF8E97FD),
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 14,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
+
+            ),
+            SizedBox(height: 10),
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage())
+                  );
+                },
+                label: Text(
+                  lan.getTexts("Done !"),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF8E97FD),
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 14,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

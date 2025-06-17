@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/User_details.dart';
@@ -273,7 +276,14 @@ class AuthProvider extends ChangeNotifier {
   }) async {
     if (_user == null) return;
 
-    try {
+      try {
+        // Limit image size to 1MB (adjust as needed)
+        if (imageBase64 != null && imageBase64.length > 1 * 1024 * 1024) {
+          // Compress the base64 image
+          imageBase64 = await _compressBase64Image(imageBase64);
+        }
+
+
       await _historyCollection.add({
         'userId': _user!.uid,
         'disease': disease,
@@ -289,6 +299,18 @@ class AuthProvider extends ChangeNotifier {
         msg: "Couldn't save report to history",
         toastLength: Toast.LENGTH_LONG,
       );
+    }
+  }
+  Future<String> _compressBase64Image(String base64Image) async {
+    try {
+      final bytes = base64Decode(base64Image);
+      final image = img.decodeImage(bytes);
+      final resized = img.copyResize(image!, width: 800);
+      final compressedBytes = img.encodeJpg(resized, quality: 80);
+      return base64Encode(compressedBytes);
+    } catch (e) {
+      print('Compression error: $e');
+      return base64Image; // Return original if compression fails
     }
   }
 

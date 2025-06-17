@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../config/Provider/language_provider.dart';
@@ -102,7 +103,7 @@ class _DetectPageState extends State<DetectPage> {
                 ),
                 textAlign: TextAlign.center,),
               SizedBox(height: 10),
-               Text(
+              Text(
                 lan.getTexts("questionSymptom"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
@@ -114,7 +115,7 @@ class _DetectPageState extends State<DetectPage> {
               ),
               SizedBox(height: 10),
               // DropDown 2 - Duration
-               Text(
+              Text(
                 lan.getTexts("questionHowLong"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
@@ -126,7 +127,7 @@ class _DetectPageState extends State<DetectPage> {
               ),
               SizedBox(height: 10),
               // DropDown 3 - Itchiness
-               Text(
+              Text(
                 lan.getTexts("questionItch"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
@@ -138,7 +139,7 @@ class _DetectPageState extends State<DetectPage> {
               ),
               SizedBox(height: 10),
               // DropDown 4 - Pain Level
-               Text(
+              Text(
                 lan.getTexts("Pain level"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
@@ -150,7 +151,7 @@ class _DetectPageState extends State<DetectPage> {
               ),
               SizedBox(height: 10),
               // DropDown 5 - Progression
-               Text(
+              Text(
                 lan.getTexts("question_progressive"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
@@ -162,8 +163,8 @@ class _DetectPageState extends State<DetectPage> {
               ),
               SizedBox(height: 10),
               // Image Picker
-               Text(
-                 lan.getTexts("upload_photo"),
+              Text(
+                lan.getTexts("upload_photo"),
                 style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold),
               ),
               // Replace the existing GestureDetector widget with this:

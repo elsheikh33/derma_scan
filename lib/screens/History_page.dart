@@ -36,83 +36,83 @@ class _HistoryPageState extends State<HistoryPage> {
     String username = authProvider.userDetails?.username ?? "User";
 
     return Scaffold(
-        backgroundColor: const Color(0xFFF5F5F5),
-    body: RefreshIndicator(
-    onRefresh: () async {
-    setState(() {
-    _historyFuture = Provider.of<AuthProvider>(context, listen: false)
-        .getDetectionHistory();
-    });
-    },
-    child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Center(
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        'DERMA',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 20,
+      backgroundColor: const Color(0xFFF5F5F5),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          setState(() {
+            _historyFuture = Provider.of<AuthProvider>(context, listen: false)
+                .getDetectionHistory();
+          });
+        },
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Center(
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          'DERMA',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                      Image.asset('assets/logo.png'),
-                      const Text(
-                        'SCAN',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 20,
+                        Image.asset('assets/logo.png'),
+                        const Text(
+                          'SCAN',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              child: Row(
-                children: [
-                  Text(
-                    '$username\'s ,${lan.getTexts("historyToggle")} ' ,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 20,
+              const SizedBox(height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: Row(
+                  children: [
+                    Text(
+                      '$username\'s ,${lan.getTexts("historyToggle")} ' ,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 4),
-              child: Row(
-                children: [
-                  Text(
-                    lan.getTexts("VIEW YOUR PREVIOUS DETECTIONS"),
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey,
-                      letterSpacing: 0.8,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 4),
+                child: Row(
+                  children: [
+                    Text(
+                      lan.getTexts("VIEW YOUR PREVIOUS DETECTIONS"),
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey,
+                        letterSpacing: 0.8,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25,vertical:4 ),
-              child: Row(
-                children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25,vertical:4 ),
+                child: Row(
+                  children: [
                     ElevatedButton(
                       onPressed: () => setState(() {
                         _historyFuture = Provider.of<AuthProvider>(context, listen: false)
@@ -120,128 +120,128 @@ class _HistoryPageState extends State<HistoryPage> {
                       }),
                       child: Text(lan.getTexts("Refresh")),
                     ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: FutureBuilder<List<DetectionHistory>>(
-                future: _historyFuture,
-                builder: (context, snapshot) {
+              const SizedBox(height: 20),
+              Expanded(
+                child: FutureBuilder<List<DetectionHistory>>(
+                  future: _historyFuture,
+                  builder: (context, snapshot) {
 
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
 
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('Error loading history'),
-                          Text(snapshot.error.toString()),
-                        ],
-                      ),
-                    );
-                  }
-
-                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(lan.getTexts("No detection history found")),
-                        ],
-                      ),
-                    );
-                  }
-
-                  final detections = snapshot.data!;
-
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: GridView.builder(
-                      itemCount: detections.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        childAspectRatio: 0.65,
-                      ),
-                      itemBuilder: (context, index) {
-                        final item = detections[index];
-                        final formattedDate = '${item.date.day}/${item.date.month}/${item.date.year}';
-
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: _getColorForIndex(index),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                          Expanded(
-                          child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: item.imageBase64 != null && item.imageBase64!.isNotEmpty
-                              ? Image.memory(
-                            base64Decode(item.imageBase64!),
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            errorBuilder: (ctx, error, stack) => _buildPlaceholder(), // Fallback on error
-                          )
-                              : _buildPlaceholder(), // Fallback if null/empty
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('Error loading history'),
+                            Text(snapshot.error.toString()),
+                          ],
                         ),
-                        ),
+                      );
+                    }
 
-                              const SizedBox(height: 8),
-                              Text(
-                                item.disease,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                formattedDate,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                              const SizedBox(height: 8),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    _showDetailsDialog(context, item);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 8),
-                                    backgroundColor: Colors.white,
-                                    foregroundColor: Colors.black,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    textStyle: const TextStyle(fontSize: 14),
+                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(lan.getTexts("No detection history found")),
+                          ],
+                        ),
+                      );
+                    }
+
+                    final detections = snapshot.data!;
+
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: GridView.builder(
+                        itemCount: detections.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
+                          childAspectRatio: 0.65,
+                        ),
+                        itemBuilder: (context, index) {
+                          final item = detections[index];
+                          final formattedDate = '${item.date.day}/${item.date.month}/${item.date.year}';
+
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: _getColorForIndex(index),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            padding: const EdgeInsets.all(12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: item.imageBase64 != null && item.imageBase64!.isNotEmpty
+                                        ? Image.memory(
+                                      base64Decode(item.imageBase64!),
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                      errorBuilder: (ctx, error, stack) => _buildPlaceholder(), // Fallback on error
+                                    )
+                                        : _buildPlaceholder(), // Fallback if null/empty
                                   ),
-                                  child:  Text(lan.getTexts("View")),
                                 ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
+
+                                const SizedBox(height: 8),
+                                Text(
+                                  item.disease,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  formattedDate,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                const SizedBox(height: 8),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      _showDetailsDialog(context, item);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      backgroundColor: Colors.white,
+                                      foregroundColor: Colors.black,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      textStyle: const TextStyle(fontSize: 14),
+                                    ),
+                                    child:  Text(lan.getTexts("View")),
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 
@@ -313,5 +313,3 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 }
-
-

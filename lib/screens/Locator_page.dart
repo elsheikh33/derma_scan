@@ -6,7 +6,8 @@ import '../Constants/Design.dart';
 import '../config/Provider/language_provider.dart';
 
 class LocatorPage extends StatefulWidget {
-  const LocatorPage({super.key});
+  final bool showBackButton;
+  const LocatorPage({super.key, this.showBackButton = false});
   static const String id = "Locator_page";
 
   @override
@@ -17,6 +18,24 @@ class _LocatorPageState extends State<LocatorPage> {
   Position? _currentPosition;
   List<Map<String, dynamic>> _hospitals = [];
   final LocationService _locationService = LocationService();
+  bool _showBackButton = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args =
+    ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    if (args != null && args['showBackButton'] == true) {
+      setState(() {
+        _showBackButton = true;
+      });
+    } else {
+      setState(() {
+        _showBackButton = widget.showBackButton;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -31,9 +50,8 @@ class _LocatorPageState extends State<LocatorPage> {
         _currentPosition = position;
       });
 
-      // Fetch hospitals after getting location
-      List<Map<String, dynamic>> hospitals =
-      await _locationService.fetchNearbyHospitals(position.latitude, position.longitude);
+      List<Map<String, dynamic>> hospitals = await _locationService
+          .fetchNearbyHospitals(position.latitude, position.longitude);
 
       setState(() {
         _hospitals = hospitals;
@@ -45,10 +63,13 @@ class _LocatorPageState extends State<LocatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    var lan =Provider.of<LanguageProvider>(context, listen: true);
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(backgroundColor: Colors.white,),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: _showBackButton,
+        ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
@@ -84,12 +105,12 @@ class _LocatorPageState extends State<LocatorPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   lan.getTexts("nearestLocation"),
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -98,18 +119,16 @@ class _LocatorPageState extends State<LocatorPage> {
               ),
               _currentPosition == null
                   ? const Center(child: CircularProgressIndicator())
-                  : SizedBox(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: _hospitals.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: locCard(hospitals: _hospitals, index: index),
-                    );
-                  },
-                ),
+                  : ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: _hospitals.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: locCard(hospitals: _hospitals, index: index),
+                  );
+                },
               ),
             ],
           ),
