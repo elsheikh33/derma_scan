@@ -37,30 +37,33 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           // Centered Logo Row
           Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'DERMA',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28,
-                    color: Colors.black,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'DERMA',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                Image.asset(
-                  'assets/logo.png',
-                 width: w * 0.1,
-                ),
-                const Text(
-                  'SCAN',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28,
-                    color: Colors.black,
+                  Image.asset(
+                    'assets/logo.png',
+                   width: w * 0.1,
                   ),
-                ),
-              ],
+                  const Text(
+                    'SCAN',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 

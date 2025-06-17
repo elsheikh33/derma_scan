@@ -6,6 +6,7 @@ import '../Constants/Colors.dart';
 import '../Constants/Design.dart';
 import '../config/Provider/auth_provider.dart';
 import '../config/Provider/language_provider.dart';
+import 'dart:ui' as ui;
 
 class ProfilePage extends StatefulWidget {
   static const String id = 'Profile_page';
@@ -92,30 +93,33 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          'DERMA',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 20,
-                          ),
+                      child: Directionality(
+                        textDirection: ui.TextDirection.ltr,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              'DERMA',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Image.asset('assets/logo.png'),
+                            const Text(
+                              'SCAN',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
                         ),
-                        Image.asset('assets/logo.png'),
-                        const Text(
-                          'SCAN',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
                 //======================================================
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 25, right: 25),

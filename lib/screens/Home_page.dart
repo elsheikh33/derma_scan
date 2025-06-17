@@ -30,19 +30,22 @@ class HomePage extends StatelessWidget {
                 child: Hero(
                   tag: 'logo',
                   child: SizedBox(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          'DERMA',
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black,fontSize: 20),
-                        ),
-                        Image.asset('assets/logoo.png',width: 20,height: 20,),
-                        const Text(
-                          'SCAN',
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black,fontSize: 20),
-                        ),
-                      ],
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            'DERMA',
+                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black,fontSize: 20),
+                          ),
+                          Image.asset('assets/logoo.png',width: 20,height: 20,),
+                          const Text(
+                            'SCAN',
+                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black,fontSize: 20),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

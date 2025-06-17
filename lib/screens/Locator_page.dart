@@ -46,7 +46,6 @@ class _LocatorPageState extends State<LocatorPage> {
   @override
   Widget build(BuildContext context) {
     var lan =Provider.of<LanguageProvider>(context, listen: true);
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(backgroundColor: Colors.white,),
@@ -58,27 +57,30 @@ class _LocatorPageState extends State<LocatorPage> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        'DERMA',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 24,
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          'DERMA',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 24,
+                          ),
                         ),
-                      ),
-                      Image.asset('assets/logoo.png', width: 28),
-                      const Text(
-                        'SCAN',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 24,
+                        Image.asset('assets/logoo.png', width: 28),
+                        const Text(
+                          'SCAN',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 24,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
