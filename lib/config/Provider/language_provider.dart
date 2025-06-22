@@ -299,6 +299,8 @@ class LanguageProvider extends ChangeNotifier{
         '5. ضعف الجهاز المناعي',
     'skin_cancer_treatment_title': 'العلاج',
     'skin_cancer_treatment': 'يعتمد العلاج على نوع ومرحلة السرطان وقد يشمل الاستئصال الجراحي، العلاج الإشعاعي، العلاج الكيميائي، أو العلاج المناعي. غالبًا ما يمكن علاج سرطانات الجلد في المراحل المبكرة بإجراءات العيادات الخارجية.',
+    "Done":"انتهيت"
+
   };
 
 
@@ -335,7 +337,7 @@ class LanguageProvider extends ChangeNotifier{
     "locatorToggle": "Locator",
     "detectToggle": "DETECT",
     "historyToggle": "History",
-    "profileToggle": ",Profile",
+    "profileToggle": "Profile",
       "herpes_zoster": "Herpes Zoster",
       "psoriasis": "Psoriasis",
       "eczema": "Eczema",
@@ -565,5 +567,6 @@ class LanguageProvider extends ChangeNotifier{
         '5. Weakened immune system',
     'skin_cancer_treatment_title': 'Treatment',
     'skin_cancer_treatment': 'Treatment depends on the type and stage of cancer and may include surgical removal, radiation therapy, chemotherapy, or immunotherapy. Early-stage skin cancers are often treatable with outpatient procedures.',
+    "Done":"Done"
   };
 }

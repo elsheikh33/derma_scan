@@ -35,7 +35,6 @@ class AuthProvider extends ChangeNotifier {
   UserDetails? get userDetails => _userDetails;
 
   Future<void> initialize() async {
-    // Check shared preferences first
     final prefs = await SharedPreferences.getInstance();
     final isLoggedIn = prefs.getBool(isLoggedInKey) ?? false;
 
@@ -310,7 +309,7 @@ class AuthProvider extends ChangeNotifier {
       return base64Encode(compressedBytes);
     } catch (e) {
       print('Compression error: $e');
-      return base64Image; // Return original if compression fails
+      return base64Image;
     }
   }
 
@@ -354,7 +353,7 @@ class AuthProvider extends ChangeNotifier {
       case 'email-already-in-use':
         return 'An account already exists with this email.';
       case 'weak-password':
-        return 'The password provided is too weak.';
+        return 'The password provided is too short must be 8 characters.';
       case 'invalid-email':
         return 'The email address is invalid.';
       default:

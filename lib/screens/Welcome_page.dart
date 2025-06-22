@@ -22,13 +22,14 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context, listen: false);
     final username = authProvider.userDetails?.username ?? "User";
-    var lan =Provider.of<LanguageProvider>(context, listen: true);
+    var lan = Provider.of<LanguageProvider>(context, listen: true);
 
     return SafeArea(
-        child: Scaffold(
-          backgroundColor: AppColor.mainColor,
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
+      child: Scaffold(
+        backgroundColor: AppColor.mainColor,
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Expanded(
             child: Column(
               children: [
                 Padding(
@@ -41,7 +42,9 @@ class _WelcomePageState extends State<WelcomePage> {
                         child: Text(
                           '$username',
                           style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Spacer(),
@@ -49,15 +52,16 @@ class _WelcomePageState extends State<WelcomePage> {
                         child: Text(
                           lan.getTexts("Skip"),
                           style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         onTap: () {
-                            selectedSkinType = null;
-                            selectedAllergies = null;
-                            Navigator.pushReplacementNamed(context, MainPage.id);
-                          },
-
-                      )
+                          selectedSkinType = null;
+                          selectedAllergies = null;
+                          Navigator.pushReplacementNamed(context, MainPage.id);
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -68,9 +72,10 @@ class _WelcomePageState extends State<WelcomePage> {
                     child: Text(
                       '${lan.getTexts("Hi")}, $username',
                       style: TextStyle(
-                          color: Color(0xFFFFBF53),
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
+                        color: Color(0xFFFFBF53),
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -78,9 +83,10 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: Text(
                     lan.getTexts("Help_question"),
                     style: TextStyle(
-                        color: Color(0xFFFFB73E),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400),
+                      color: Color(0xFFFFB73E),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
                 SizedBox(height: 30),
@@ -93,7 +99,10 @@ class _WelcomePageState extends State<WelcomePage> {
                       // {"value": "none", "label": lan.getTexts("None_question")},
                       {"value": "oily", "label": lan.getTexts("Oily_question")},
                       {"value": "dry", "label": lan.getTexts("Dry_question")},
-                      {"value": "combination", "label": lan.getTexts("Combination_question")},
+                      {
+                        "value": "combination",
+                        "label": lan.getTexts("Combination_question"),
+                      },
                     ],
                     title: lan.getTexts("skin_type"),
                     fillColor: AppColor.TxtFieldColor,
@@ -114,7 +123,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       {"value": "nuts", "label": lan.getTexts("Nuts")},
                       {"value": "pollen", "label": lan.getTexts("Pollen")},
                       {"value": "dust", "label": lan.getTexts("Dust")},
-                     {"value": "others", "label": lan.getTexts("Others")},
+                      {"value": "others", "label": lan.getTexts("Others")},
                     ],
                     title: lan.getTexts("Allergies"),
                     fillColor: AppColor.TxtFieldColor,
@@ -133,17 +142,23 @@ class _WelcomePageState extends State<WelcomePage> {
                     color: AppColor.TxtFieldColor,
                     txtcolor: Colors.black,
                     onPressed: () async {
-                      if (selectedSkinType != null && selectedAllergies != null) {
-                        await authProvider.addAdditionalUserDetails(selectedSkinType,selectedAllergies);
+                      if (selectedSkinType != null &&
+                          selectedAllergies != null) {
+                        await authProvider.addAdditionalUserDetails(
+                          selectedSkinType,
+                          selectedAllergies,
+                        );
                       }
                       Navigator.pushReplacementNamed(context, MainPage.id);
                     },
                     context: context,
                   ),
-                )
+                ),
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

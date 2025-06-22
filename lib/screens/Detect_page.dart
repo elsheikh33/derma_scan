@@ -223,6 +223,8 @@ class _DetectPageState extends State<DetectPage> {
                     'itchiness': itchiness,
                     'painLevel': painLevel,
                     'progress': progress,
+                    'skinType':authProvider.userDetails?.skinType,
+                    'allergies':authProvider.userDetails?.allergies,
                   };
 
                   await Navigator.push(

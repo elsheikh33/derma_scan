@@ -127,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Expanded(
                         child: Text(
-                          '$username ${lan.getTexts("profileToggle")}',
+                          '$username , \n${lan.getTexts("profileToggle")}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,

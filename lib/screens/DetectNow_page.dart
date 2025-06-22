@@ -31,11 +31,14 @@ class DetectNow_page extends StatefulWidget {
 class _DetectNowPageState extends State<DetectNow_page> {
   String? responseText;
   bool isLoading = true;
+  late AuthProvider authProvider;
+
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      authProvider = Provider.of<AuthProvider>(context, listen: false);
       final lan = Provider.of<LanguageProvider>(context, listen: false);
       _fetchReportFromGPT(lan);
     });
@@ -71,6 +74,8 @@ Patient Diagnosis Report Request:
 - Itchiness: ${widget.userInputs['itchiness']}
 - Pain Level: ${widget.userInputs['painLevel']}
 - Progression: ${widget.userInputs['progress']}
+- Skin Type: ${authProvider.userDetails?.skinType}
+- Allergies:${authProvider.userDetails?.allergies}
 
 $languageInstruction
 
@@ -211,7 +216,7 @@ Provide a professional dermatological consultation covering:
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LocatorPage())
+                      MaterialPageRoute(builder: (context) => LocatorPage(showBackButton: true,))
                   );
                 },
                 icon: Icon(Icons.place, color: Colors.white),
@@ -246,7 +251,7 @@ Provide a professional dermatological consultation covering:
                   );
                 },
                 label: Text(
-                  lan.getTexts("Done !"),
+                  lan.getTexts("Done"),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
