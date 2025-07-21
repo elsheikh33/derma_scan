@@ -54,8 +54,7 @@ class _DetectNowPageState extends State<DetectNow_page> {
   }
 
   Future<void> _fetchReportFromGPT(LanguageProvider lan) async {
-    const apiKey =
-        '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';
+    const apiKey ='Yourkey' //Add your key
     final Uri url = Uri.parse('https://api.openai.com/v1/chat/completions');
 
     String languageInstruction =
